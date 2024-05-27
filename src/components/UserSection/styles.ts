@@ -55,3 +55,11 @@ export const RegisterWrapper = styled.div`
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
 `;
+
+export const MenuLogInButton = styled.button`
+  width: 150px;
+  height: 30px;
+  border: 0;
+  background-color: orange;
+  border-radius: 8px;
+`;
