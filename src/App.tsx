@@ -1,7 +1,9 @@
+import { Header } from './components/Header/Header'
+
 
 const App = () => {
   return (
-    <>Hello Redux</>
+    <Header />
   )
 }
 
