@@ -1,17 +1,12 @@
-import { Header } from './components/Header/Header'
-import LoginRegForms from './components/LoginRegForms/LoginRegForms'
-import InfoBlock from "./components/InfoBlock/InfoBlock"
-
-
+import { Landing } from './sections/Landing/Landing'
 
 const App = () => {
   return (
-    <> 
-      <Header />
-      <LoginRegForms />
-      <InfoBlock />
-    </>
-  )
-}
+    <>
+      <Landing />
 
-export default App
+    </>
+  );
+};
+
+export default App;
