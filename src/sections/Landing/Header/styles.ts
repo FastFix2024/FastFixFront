@@ -26,6 +26,7 @@ export const HeaderText = styled.div`
   font-size: 3vh;
   width: fit-content;
   color: white;
+  white-space: nowrap ;
 `;
 
 export const NavMenu = styled.div`

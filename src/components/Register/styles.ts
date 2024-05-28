@@ -8,7 +8,7 @@ export const RegisterContent = styled.div`
   height: 100%;
 `;
 
-export const RegisterContainer = styled.div`
+export const RegisterForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -17,5 +17,22 @@ export const RegisterContainer = styled.div`
 
 export const ButtonContainer = styled.div`
     display: flex;
+    gap:20px;
     justify-content: center;
-`;
+`
+export const Checkbox = styled.input`
+  width: 20px;
+  height: 20px;
+`
+export const CheckboxLabel = styled.label`
+ font-size: 14px;
+ white-space: nowrap ;
+`
+export const CheckboxContainer = styled.div`
+  display: flex;
+  flex:1;
+  width:fit-content;
+  align-items: center;
+  gap: 10px;
+
+  `

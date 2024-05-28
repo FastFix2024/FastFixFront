@@ -32,9 +32,9 @@ const LoginRegForms = () => {
             <RegisterWrapper>
               <StepLoginContainer onClick={() => setSignContent("login")}>Login</StepLoginContainer>
               <StepRegisterContainer onClick={() => setSignContent("register")}>Register</StepRegisterContainer>
-              <Register>
-                <button onClick={() => setUserProfile(true)}>Register</button>
-              </Register>
+              <Register />
+                {/* <button onClick={() => setUserProfile(true)}>Register</button>
+              </Register> */}
             </RegisterWrapper>
           )}
 
