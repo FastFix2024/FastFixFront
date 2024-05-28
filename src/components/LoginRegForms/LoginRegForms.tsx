@@ -5,21 +5,26 @@ import {
   StepRegisterContainer,
   RegisterWrapper,
   UserContainer,
-  MenuLogInButton
-} from "./styles"
+  } from "./styles"
 import Login from "../Login/Login"
 import Register from "../Register/Register"
 import UserProfile from "../UserProfile/UserProfile"
+import { useAppSelector } from '../../store/hooks'
+import { loginVisibilitySelectors } from '../../store/redux/loginSlice/loginSlice'
 
-const UserSection = () => {
-  const [showLogin, setShowLogin] = useState(false);
+const LoginRegForms = () => {
+
   const [signContent, setSignContent] = useState("login");
   const [userProfile, setUserProfile] = useState(false);
 
+  const visibilityState = useAppSelector(loginVisibilitySelectors.loginVisibilityState  
+)
+
+console.log('visibilityState',visibilityState)
+  
   return (
     <>
-    <MenuLogInButton onClick={() => setShowLogin(!showLogin)}>Log in</MenuLogInButton>
-      {showLogin === true && (
+    {visibilityState.isVisible && (
         <UserContainer>
           {signContent === "login" && (
             <LoginWrapper>
@@ -59,4 +64,4 @@ const UserSection = () => {
   )
 }
 
-export default UserSection;
+export default LoginRegForms;
