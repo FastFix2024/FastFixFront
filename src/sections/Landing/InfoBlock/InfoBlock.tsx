@@ -1,4 +1,4 @@
-import { InfoImg } from "../../assets";
+import { InfoImg } from '../../../assets';
 import {
   InfoImgStyle,
   InfoAndImgWrapper,
