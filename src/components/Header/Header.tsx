@@ -4,6 +4,7 @@ export const Header = () => {
     
 
     return (
+        <>
         <HeaderComponent>
             <HeaderMotto>
             Text in Header
@@ -13,7 +14,8 @@ export const Header = () => {
             <HeaderText>USER AREA</HeaderText>
             <HeaderText>LOGIN</HeaderText>
             </NavMenu> 
-            <SeparationLine />
         </HeaderComponent>
+        <SeparationLine />
+        </>
     )
 }
