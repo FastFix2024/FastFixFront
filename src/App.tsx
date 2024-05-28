@@ -1,13 +1,15 @@
-
-import UserSection from "./components/UserSection/UserSection"
+import UserSection from "./components/LoginRegForms/LoginRegForms"
 import { Header } from './components/Header/Header'
+import LoginRegForms from './components/LoginRegForms/LoginRegForms'
+
 
 
 const App = () => {
   return (
     <> 
       <Header />
-      <UserSection />
+      <LoginRegForms />
+      {/* <UserSection /> */}
     </>
   )
 }

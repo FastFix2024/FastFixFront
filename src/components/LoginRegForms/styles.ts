@@ -9,6 +9,8 @@ export const UserContainer = styled.div`
 
 export const LoginWrapper = styled.div`
   position: relative;
+  top: -150px;
+  left: 40%;
   width: 400px;
   height: 500px;
   background-color: rgba(0, 123, 175, 1);
@@ -47,9 +49,11 @@ export const StepRegisterContainer = styled.button`
 
 export const RegisterWrapper = styled.div`
   position: relative;
+  top: -150px;
+  left: 40%;
   width: 400px;
   height: 500px;
-  background-color: rgba(213,105,0,1);
+  background-color: rgba(213,105,0, 1);
   border-radius: 0 0 8px 8px ;
   display: flex;
   align-items: center;
