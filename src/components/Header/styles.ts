@@ -34,10 +34,14 @@ export const NavMenu = styled.div`
   justify-content: space-evenly;
   gap: 5vw; 
   padding: 29.7vh 2vw 0 0; 
+  font-size: 30px;
+  color: white;
 `
+
 
 export const SeparationLine = styled.div`
   width: 100%;
   height: 1vh; 
   background-color: orange;
+
 `

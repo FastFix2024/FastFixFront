@@ -1,6 +1,6 @@
-import UserSection from "./components/LoginRegForms/LoginRegForms"
 import { Header } from './components/Header/Header'
 import LoginRegForms from './components/LoginRegForms/LoginRegForms'
+import InfoBlock from "./components/InfoBlock/InfoBlock"
 
 
 
@@ -9,7 +9,7 @@ const App = () => {
     <> 
       <Header />
       <LoginRegForms />
-      {/* <UserSection /> */}
+      <InfoBlock />
     </>
   )
 }

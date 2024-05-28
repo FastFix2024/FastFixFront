@@ -13,6 +13,7 @@ import Button from "../Button/Button"
 export const Header = () => {
   const dispatch = useAppDispatch()
 
+
   const visibilityState = useAppSelector(
     loginVisibilitySelectors.loginVisibilityState,
   )
@@ -42,3 +43,4 @@ export const Header = () => {
     </HeaderWrapper>
   )
 }
+
