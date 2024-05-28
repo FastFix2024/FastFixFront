@@ -1,7 +1,10 @@
+import UserSection from "./components/UserSection/UserSection"
 
 const App = () => {
   return (
-    <>Hello Redux</>
+    <>
+      <UserSection />
+    </>
   )
 }
 
