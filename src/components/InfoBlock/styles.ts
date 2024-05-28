@@ -20,6 +20,25 @@ export const InfoImgStyle = styled.img`
   height: 500px;
 `;
 
+export const ImgTitleBlock = styled.div`
+background-color: orange;
+transform: rotate(270deg);
+display: flex;
+justify-content: center;
+align-items: center;
+height: 40px;
+width: 400px;
+position: relative;
+right: 200px;
+top: 320px;
+`;
+
+export const ImgTitle = styled.p`
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+`;
+
 export const MissionText = styled.div`
   width: 555px;
 `;
