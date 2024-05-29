@@ -5,7 +5,7 @@ const loginVisibilityInitialState: loginVisibilityInitialStateSclice = {
   isVisible: undefined,
 }
 
-export const LoginVisibilityAppSlice = createAppSlice({
+export const userAreaVisibilityAppSlice = createAppSlice({
   name: "LOGIN_VISIBILITY",
   initialState: loginVisibilityInitialState,
   reducers: create => ({
@@ -23,5 +23,5 @@ export const LoginVisibilityAppSlice = createAppSlice({
 })
 console.log('SLICE LOG',loginVisibilityInitialState.isVisible)
 
-export const loginVisibilityActions = LoginVisibilityAppSlice.actions
-export const loginVisibilitySelectors = LoginVisibilityAppSlice.selectors
+export const loginVisibilityActions = userAreaVisibilityAppSlice.actions
+export const loginVisibilitySelectors = userAreaVisibilityAppSlice.selectors
