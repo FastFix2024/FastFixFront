@@ -1,18 +1,21 @@
 import styled from "@emotion/styled";
+import { Sections1Bg } from "../../../assets";
 
 export const InfoAndImgWrapper = styled.div`
   display: flex;
   justify-content: center;
+  height: 65vh;
   gap: 30px;
-  margin-top: 40px;
   font-family: Arial, Helvetica, sans-serif;
+  background-image: url('${Sections1Bg}');
+  background-repeat: no-repeat;
 `;
 
 export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  justify-content: center;
+  margin-top: 70px;
 `;
 
 export const InfoImgStyle = styled.img`

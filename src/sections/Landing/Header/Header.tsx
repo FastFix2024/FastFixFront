@@ -1,4 +1,4 @@
-import { HeaderComponent, HeaderMotto, HeaderText, HeaderWrapper, NavMenu, SeparationLine } from "./styles";
+import { HeaderComponent, HeaderLogo, HeaderLogoContainer, HeaderMotto, HeaderText, HeaderWrapper, NavMenu, SeparationLine } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { loginVisibilityActions, loginVisibilitySelectors } from "../../../store/redux/loginSlice/loginSlice";
 import Button from "../../../components/Button/Button";
@@ -26,7 +26,12 @@ export const Header = () => {
           <Button onButtonClick={changeVisibility} name="LOGIN" />
         </NavMenu>
       </HeaderComponent>
-      <SeparationLine />
+      <SeparationLine>
+        <HeaderLogoContainer>
+          <HeaderLogo />
+        </HeaderLogoContainer>
+      </SeparationLine>
+      
     </HeaderWrapper>
   );
 };
