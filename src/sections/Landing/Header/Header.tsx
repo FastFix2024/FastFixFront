@@ -1,6 +1,6 @@
 import { HeaderComponent, HeaderLogo, HeaderLogoContainer, HeaderMotto, HeaderText, HeaderWrapper, NavMenu, SeparationLine } from "./styles";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { loginVisibilityActions, loginVisibilitySelectors } from "../../../store/redux/loginSlice/loginSlice";
+import { loginVisibilityActions, loginVisibilitySelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 import Button from "../../../components/Button/Button";
 
 export const Header = () => {
@@ -31,7 +31,6 @@ export const Header = () => {
           <HeaderLogo />
         </HeaderLogoContainer>
       </SeparationLine>
-      
     </HeaderWrapper>
   );
 };

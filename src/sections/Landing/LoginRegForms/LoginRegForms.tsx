@@ -4,7 +4,7 @@ import Login from "../../../components/Login/Login";
 import Register from "../../../components/Register/Register";
 import UserProfile from "../../../components/UserProfile/UserProfile";
 import { useAppSelector } from "../../../store/hooks";
-import { loginVisibilitySelectors } from "../../../store/redux/loginSlice/loginSlice";
+import { loginVisibilitySelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 
 const LoginRegForms = () => {
   const [signContent, setSignContent] = useState("login");
@@ -33,7 +33,7 @@ const LoginRegForms = () => {
               <StepLoginContainer onClick={() => setSignContent("login")}>Login</StepLoginContainer>
               <StepRegisterContainer onClick={() => setSignContent("register")}>Register</StepRegisterContainer>
               <Register />
-                {/* <button onClick={() => setUserProfile(true)}>Register</button>
+              {/* <button onClick={() => setUserProfile(true)}>Register</button>
               </Register> */}
             </RegisterWrapper>
           )}
