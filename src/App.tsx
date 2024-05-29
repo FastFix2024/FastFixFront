@@ -1,11 +1,13 @@
 import { Landing } from './sections/Landing/Landing'
-import Geolocation from './components/Geolocation/Geolocation';
+import SectionMap from './sections/SectionMap/SectionMap';
+import SectionProfile from './sections/SectionProflile/SectionProfile';
 
 const App = () => {
   return (
     <>
       <Landing />
-      <Geolocation />
+      <SectionMap />
+      <SectionProfile />
     </>
   );
 };
