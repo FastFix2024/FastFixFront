@@ -1,6 +1,6 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
-import { LoginVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
+import { userAreaVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 import { registerFormSlice } from "./redux/registerFormSlice/registerFormSlice";
 
 // `combineSlices` automatically combines the reducers using
