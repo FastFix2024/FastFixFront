@@ -1,11 +1,7 @@
-import { UserProfileWrapper } from './styles';
+import { UserProfileWrapper } from "./styles";
 
 const UserProfile = () => {
-    return (
-        <UserProfileWrapper>
-            Profile
-        </UserProfileWrapper>
-    )
-}
+  return <UserProfileWrapper>Profile</UserProfileWrapper>;
+};
 
 export default UserProfile;

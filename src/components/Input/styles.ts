@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const InputComponentContainer = styled.div`
   display: flex;
@@ -8,7 +8,7 @@ export const InputComponentContainer = styled.div`
 `;
 
 export const InputComponentLabel = styled.label`
-  font-size: 16px;  
+  font-size: 16px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 600;
   height: auto;
@@ -25,7 +25,7 @@ export const InputComponent = styled.input`
   background-color: #7ba6ba;
   font-size: 16px;
   color: black;
-  
+
   &::placeholder {
     color: #243f2b;
     opacity: 0.8;
@@ -33,13 +33,13 @@ export const InputComponent = styled.input`
 `;
 
 export const ErrorMessage = styled.p`
-color:#e11452;
-font-size: 16px;
-height:18px;
-@keyframes blink {
-  50% { opacity: 0; }
-}
-animation: blink 1s infinite;
-
-`
-
+  color: #e11452;
+  font-size: 16px;
+  height: 18px;
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  animation: blink 1s infinite;
+`;

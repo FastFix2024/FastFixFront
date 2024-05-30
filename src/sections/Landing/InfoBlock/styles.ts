@@ -7,7 +7,7 @@ export const InfoAndImgWrapper = styled.div`
   height: 65vh;
   gap: 30px;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url('${Sections1Bg}');
+  background-image: url("${Sections1Bg}");
   background-repeat: no-repeat;
 `;
 
@@ -24,22 +24,22 @@ export const InfoImgStyle = styled.img`
 `;
 
 export const ImgTitleBlock = styled.div`
-background-color: orange;
-transform: rotate(270deg);
-display: flex;
-justify-content: center;
-align-items: center;
-height: 40px;
-width: 400px;
-position: relative;
-right: 200px;
-top: 320px;
+  background-color: orange;
+  transform: rotate(270deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 400px;
+  position: relative;
+  right: 200px;
+  top: 320px;
 `;
 
 export const ImgTitle = styled.p`
-    font-size: 20px;
-    color: white;
-    font-weight: 700;
+  font-size: 20px;
+  color: white;
+  font-weight: 700;
 `;
 
 export const MissionText = styled.div`

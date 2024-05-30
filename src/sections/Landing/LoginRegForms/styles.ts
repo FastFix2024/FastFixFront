@@ -13,7 +13,7 @@ export const LoginWrapper = styled.div`
   width: 400px;
   height: 500px;
   background-color: rgba(0, 123, 175, 1);
-  border-radius: 0 0 8px 8px ;
+  border-radius: 0 0 8px 8px;
   display: flex;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
@@ -38,7 +38,7 @@ export const StepRegisterContainer = styled.button`
   width: 50%;
   height: 30px;
   right: 0;
-  background-color: rgba(213,105,0,1);
+  background-color: rgba(213, 105, 0, 1);
   border: 0;
   border-radius: 8px 8px 0 0;
   display: flex;
@@ -50,8 +50,8 @@ export const RegisterWrapper = styled.div`
   position: relative;
   width: 400px;
   height: 500px;
-  background-color: rgba(213,105,0, 1);
-  border-radius: 0 0 8px 8px ;
+  background-color: rgba(213, 105, 0, 1);
+  border-radius: 0 0 8px 8px;
   display: flex;
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;

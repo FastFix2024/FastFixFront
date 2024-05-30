@@ -1,4 +1,4 @@
-import { InfoImg } from '../../../assets';
+import { InfoImg } from "../../../assets";
 import {
   InfoImgStyle,
   InfoAndImgWrapper,
@@ -20,7 +20,7 @@ const InfoBlock = () => {
     <InfoAndImgWrapper>
       <div>
         <ImgTitleBlock>
-        <ImgTitle>More than Just Experience</ImgTitle>
+          <ImgTitle>More than Just Experience</ImgTitle>
         </ImgTitleBlock>
         <InfoImgStyle src={InfoImg} />
       </div>
