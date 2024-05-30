@@ -10,10 +10,19 @@ import { useAppDispatch } from '../../store/hooks'
 import { registerNewuserSliceActions } from '../../store/redux/registerFormSlice/registerFormSlice'
 
 const schema = Yup.object().shape({
-  [REGISTER_FORM_NAMES.USERNAME]: Yup.string().required("name required"),
-  [REGISTER_FORM_NAMES.EMAIL]: Yup.string().required("email required"),
-  [REGISTER_FORM_NAMES.PASSWORD]: Yup.string().required("password required"),
-  [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: Yup.string().required("password required"),
+  [REGISTER_FORM_NAMES.USERNAME]: Yup.string()
+    .required("Userame required")
+    .min(3, "Username must be at least 3 characters")
+    .max(20, "Username must not exceed 20 characters"),
+  [REGISTER_FORM_NAMES.EMAIL]: Yup.string()
+    .required("email required")
+    .email("Invalid email format"),
+  [REGISTER_FORM_NAMES.PASSWORD]: Yup.string()
+    .required("password required")
+    .min(8, "Password must be at least 8 characters")
+    .matches(/(?=.*[0-9])/, "Password must contain a number")
+  ,
+  [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: Yup.string().oneOf([Yup.ref(REGISTER_FORM_NAMES.PASSWORD)], 'Passwords dont match') .required("password required"),
 });
 
 const Register = ({ children }: any) => {
@@ -29,6 +38,7 @@ const Register = ({ children }: any) => {
       [REGISTER_FORM_NAMES.AGREEMENT]: false,
     } as RegisterFormValues,
     validationSchema: schema,
+    validateOnBlur: true,
     validateOnChange: false,
     onSubmit: (values: RegisterFormValues) => {
       dispatch(registerNewuserSliceActions.addUser({...values, id:v4()}))

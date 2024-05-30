@@ -4,13 +4,13 @@ import Login from "../../../components/Login/Login";
 import Register from "../../../components/Register/Register";
 import UserProfile from "../../../components/UserProfile/UserProfile";
 import { useAppSelector } from "../../../store/hooks";
-import { loginVisibilitySelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
+import { userAreaVisibilitySliceSelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 
 const LoginRegForms = () => {
   const [signContent, setSignContent] = useState("login");
   const [userProfile, setUserProfile] = useState(false);
 
-  const visibilityState = useAppSelector(loginVisibilitySelectors.loginVisibilityState);
+  const visibilityState = useAppSelector(userAreaVisibilitySliceSelectors.loginVisibilityState);
 
   console.log("visibilityState", visibilityState);
 

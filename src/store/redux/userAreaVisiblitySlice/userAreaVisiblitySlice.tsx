@@ -1,27 +1,27 @@
 import { createAppSlice } from "../../createAppSlice"
-import { loginVisibilityInitialStateSclice } from "./types"
+import { userAreaVisibilitySliceState } from "./types"
 
-const loginVisibilityInitialState: loginVisibilityInitialStateSclice = {
+const userAreaVisibilityState: userAreaVisibilitySliceState = {
   isVisible: undefined,
 }
 
 export const userAreaVisibilityAppSlice = createAppSlice({
   name: "LOGIN_VISIBILITY",
-  initialState: loginVisibilityInitialState,
+  initialState: userAreaVisibilityState,
   reducers: create => ({
-    makeFormsInvisible: create.reducer(() => loginVisibilityInitialState),
+    makeFormsInvisible: create.reducer(() => userAreaVisibilityState),
     makeFormsVisible: create.reducer(
-      (state: loginVisibilityInitialStateSclice) => {
+      (state: userAreaVisibilitySliceState) => {
         state.isVisible = true
       },
     ),
     }),
     selectors: {
-        loginVisibilityState: (state: loginVisibilityInitialStateSclice) => state,
+        loginVisibilityState: (state: userAreaVisibilitySliceState) => state,
         
   }
 })
-console.log('SLICE LOG',loginVisibilityInitialState.isVisible)
+console.log('SLICE LOG',userAreaVisibilityState.isVisible)
 
-export const loginVisibilityActions = userAreaVisibilityAppSlice.actions
-export const loginVisibilitySelectors = userAreaVisibilityAppSlice.selectors
+export const userAreaVisibilitySliceActions = userAreaVisibilityAppSlice.actions
+export const userAreaVisibilitySliceSelectors = userAreaVisibilityAppSlice.selectors

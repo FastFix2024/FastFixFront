@@ -33,7 +33,7 @@ export const InputComponent = styled.input`
 `;
 
 export const ErrorMessage = styled.p`
-color:#e11452;
+color:blue;
 font-size: 16px;
 height:18px;
 @keyframes blink {
