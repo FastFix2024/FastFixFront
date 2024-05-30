@@ -1,10 +1,10 @@
-import { createAppSlice } from '../../createAppSlice'
-import { PayloadAction } from '@reduxjs/toolkit'
-import { NewUserData, UsersSliceState } from './types'
+import { createAppSlice } from "../../createAppSlice";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { NewUserData, UsersSliceState } from "./types";
 
 const usersInitialState: UsersSliceState = {
-    users : []
-}
+  users: [],
+};
 
 export const registerFormSlice = createAppSlice({
     name: "NEW_USER",

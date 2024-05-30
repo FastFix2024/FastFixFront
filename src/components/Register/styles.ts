@@ -16,23 +16,22 @@ export const RegisterForm = styled.form`
 `;
 
 export const ButtonContainer = styled.div`
-    display: flex;
-    gap:20px;
-    justify-content: center;
-`
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+`;
 export const Checkbox = styled.input`
   width: 20px;
   height: 20px;
-`
+`;
 export const CheckboxLabel = styled.label`
- font-size: 14px;
- white-space: nowrap ;
-`
+  font-size: 14px;
+  white-space: nowrap;
+`;
 export const CheckboxContainer = styled.div`
   display: flex;
-  flex:1;
-  width:fit-content;
+  flex: 1;
+  width: fit-content;
   align-items: center;
   gap: 10px;
-
-  `
+`;

@@ -3,13 +3,12 @@ import { HeaderBg } from "../../../assets";
 import { FastFixLogo } from "../../../assets";
 
 export const HeaderWrapper = styled.div`
-  height: 25vh;
+  margin-bottom: 50px;
 `;
 
 export const HeaderComponent = styled.header`
   display: flex;
   width: 100%;
-  height: 60%;
   background-image: url(${HeaderBg});
   background-repeat: no-repeat;
   background-size: cover;
@@ -21,13 +20,14 @@ export const HeaderMotto = styled.div`
   display: flex;
   font-size: 2.8vh;
   padding: 10vh 0 0 30vw;
+  color: white;
 `;
 
 export const HeaderText = styled.div`
   font-size: 3vh;
   width: fit-content;
   color: white;
-  white-space: nowrap ;
+  white-space: nowrap;
 `;
 
 export const NavMenu = styled.div`
@@ -42,8 +42,8 @@ export const NavMenu = styled.div`
 `;
 
 export const SeparationLine = styled.div`
-position: absolute;
-right: 0;
+  position: absolute;
+  right: 0;
   width: 80%;
   height: 1vh;
   background-color: orange;
@@ -54,12 +54,12 @@ export const HeaderLogoContainer = styled.div`
   height: 150px;
   //------------------------
   position: relative;
-  right: 250px;
-  bottom: 200px;
-`
+  right: 150px;
+  bottom: 160px;
+`;
 
 export const HeaderLogo = styled.img`
-  width: 300px;
-  height: 300px;
-`
-HeaderLogo.defaultProps = { src: FastFixLogo }
+  width: 250px;
+  height: 250px;
+`;
+HeaderLogo.defaultProps = { src: FastFixLogo };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LoginWrapper, StepLoginContainer, StepRegisterContainer, RegisterWrapper, UserContainer } from "./styles";
 import Login from "../../../components/Login/Login";
 import Register from "../../../components/Register/Register";
-import UserProfile from "../../../components/UserProfile/UserProfile";
+// import UserProfile from "../../../components/UserProfile/UserProfile";
 import { useAppSelector } from "../../../store/hooks";
 import { userAreaVisibilitySliceSelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 
@@ -38,7 +38,7 @@ const LoginRegForms = () => {
             </RegisterWrapper>
           )}
 
-          {userProfile === true && <UserProfile />}
+          {/* {userProfile === true && <UserProfile />} */}
         </UserContainer>
       )}
     </>
