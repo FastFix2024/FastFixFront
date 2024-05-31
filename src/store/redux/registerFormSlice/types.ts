@@ -7,6 +7,6 @@ export interface NewUserData {
   username: string;
   email: string;
   password: string;
-  passwordRetype: string;
+  // passwordRetype: string;
   agreement?: boolean;
 }
