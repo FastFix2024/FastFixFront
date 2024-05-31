@@ -20,12 +20,13 @@ const schema = Yup.object().shape({
   [REGISTER_FORM_NAMES.PASSWORD]: Yup.string()
     .required("password required")
     .min(8, "Password must be at least 8 characters")
+    .max(15, "Must be not longer than 15 characters")
     .matches(/(?=.*[0-9])/, "Password must contain a number")
   ,
   [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: Yup.string().oneOf([Yup.ref(REGISTER_FORM_NAMES.PASSWORD)], 'Passwords dont match') .required("password required"),
 });
 
-const Register = ({ children }: any) => {
+const Register = () => {
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
@@ -33,11 +34,10 @@ const Register = ({ children }: any) => {
       [REGISTER_FORM_NAMES.USERNAME]: "",
       [REGISTER_FORM_NAMES.EMAIL]: "",
       [REGISTER_FORM_NAMES.PASSWORD]: "",
-      [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: "",
-      [REGISTER_FORM_NAMES.AGREEMENT]: false,
+      // [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: "",
+      [REGISTER_FORM_NAMES.HAS_AGREED]: false,
     } as RegisterFormValues,
     validationSchema: schema,
-    validateOnBlur: true,
     validateOnChange: false,
     onSubmit: (values: RegisterFormValues) => {
       dispatch(registerNewuserSliceActions.addUser({ ...values, id: v4() }));
@@ -81,18 +81,18 @@ const Register = ({ children }: any) => {
           placeholder="KENNWORT WIEDERHOLEN"
           label="Kennwort wiederholen"
           onInputChange={formik.handleChange}
-          value={formik.values.passwordRetype}
-          error={formik.errors.passwordRetype}
+          // value={formik.values.passwordRetype}
+          // error={formik.errors.passwordRetype}
         />
         <ButtonContainer>
-          <Button name="SUBMIT" type="submit" disabled={!formik.values.agreement} />
+          <Button name="SUBMIT" type="submit" disabled={!formik.values.hasAgreed} />
           <CheckboxContainer>
             <Checkbox
               id="agreement-id"
-              name={REGISTER_FORM_NAMES.AGREEMENT}
+              name={REGISTER_FORM_NAMES.HAS_AGREED}
               type="checkbox"
               onChange={formik.handleChange}
-              checked={formik.values[REGISTER_FORM_NAMES.AGREEMENT]}
+              checked={formik.values[REGISTER_FORM_NAMES.HAS_AGREED]}
             />
             <CheckboxLabel htmlFor="agreement-id">I Agree</CheckboxLabel>
           </CheckboxContainer>
