@@ -37,21 +37,4 @@ export const Header = () => {
     </HeaderWpapper>
   );
 
-  // return (
-  //   <HeaderWrapper>
-  //     <HeaderComponent>
-  //       <HeaderMotto>One Very nice the moto about service</HeaderMotto>
-  //       <NavMenu>
-  //         <HeaderText>MAP</HeaderText>
-  //         <HeaderText>USER AREA</HeaderText>
-  //         <Button onButtonClick={changeVisibility} name="LOGIN" />
-  //       </NavMenu>
-  //     </HeaderComponent>
-  //     <SeparationLine>
-  //       <HeaderLogoContainer>
-  //         <HeaderLogo />
-  //       </HeaderLogoContainer>
-  //     </SeparationLine>
-  //   </HeaderWrapper>
-  // );
 };
