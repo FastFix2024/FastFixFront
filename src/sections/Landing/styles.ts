@@ -9,3 +9,7 @@ export const LoginRegFormsContainer = styled.div`
   display: flex;
   justify-content: center;
 `;
+
+export const GeolocationContainer = styled.div`
+  
+`;

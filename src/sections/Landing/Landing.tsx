@@ -1,7 +1,7 @@
 import { Header } from "./Header/Header";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import LoginRegForms from "./LoginRegForms/LoginRegForms";
-import { LandingComponent, LoginRegFormsContainer } from "./styles";
+import { GeolocationContainer, LandingComponent, LoginRegFormsContainer } from "./styles";
 import Geolocation from "../../components/Geolocation/Geolocation";
 
 export const Landing = () => {
@@ -12,7 +12,9 @@ export const Landing = () => {
         <LoginRegForms />
       </LoginRegFormsContainer>
       <InfoBlock />
-      <Geolocation />
+      <GeolocationContainer>
+        <Geolocation />
+      </GeolocationContainer>
     </LandingComponent>
   );
 };
