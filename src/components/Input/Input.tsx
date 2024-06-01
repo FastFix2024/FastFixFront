@@ -17,8 +17,6 @@ function Input({
   error
 }: InputProps) {
   
-  console.log('inputRender')
-  
   return (
     <InputComponentContainer>
       <InputComponentLabel>

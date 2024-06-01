@@ -1,11 +1,22 @@
-import { Footer, ProfileBackground, Section3Background, SectionContainer } from "./styles";
+import CarInfo from "../../components/CarInfo/CarInfo";
+import UserInfo from "../../components/UserInfo/UserInfo";
+import { Footer, ProfileBackground, ProfileContainer, Section3Background, SectionContainer, SectionWrapper } from "./styles";
 
 const SectionProfile = () => {
   return (
-    <SectionContainer>
-      <Section3Background>
-        <ProfileBackground />
-      </Section3Background>
+    <SectionWrapper>
+      <SectionContainer>
+        <Section3Background>
+          <ProfileBackground>
+            <ProfileContainer>
+              <UserInfo />
+            </ProfileContainer>
+            <ProfileContainer>
+              <CarInfo />
+            </ProfileContainer>
+          </ProfileBackground>
+        </Section3Background>
+      </SectionContainer>
       <Footer>
         <h1>Контакты:</h1>
         <h3>Email: delatMneNeh@elban.com</h3>
@@ -13,7 +24,7 @@ const SectionProfile = () => {
         <h3>Автор: Ночная Сова🦉</h3>
         <h3>P.S: Всем спокойного утра 😂😝</h3>
       </Footer>
-    </SectionContainer>
+    </SectionWrapper>
   );
 };
 
