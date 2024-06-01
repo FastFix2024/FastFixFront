@@ -1,14 +1,10 @@
 import styled from "@emotion/styled";
-import { Sections1Bg } from "../../../assets";
 
 export const InfoAndImgWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 900px;
   gap: 30px;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("${Sections1Bg}");
-  background-repeat: no-repeat;
 `;
 
 export const InfoWrapper = styled.div`
@@ -40,6 +36,20 @@ export const ImgTitle = styled.p`
   font-size: 20px;
   color: white;
   font-weight: 700;
+`;
+
+export const ImgContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const GeoContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-top: 20px;
+  width: 360px;
+  height: 100px;
 `;
 
 export const MissionText = styled.div`
