@@ -35,13 +35,17 @@ export const NavMenu = styled.div`
   display: flex;
   justify-content: end;
   align-items: center;
-  gap: 50px;
-  width: 550px;
   height: 60px;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 100%, transparent 70%);
   padding: 10px 30px;
   position: relative;
   clip-path: polygon(8% 0, 100% 0, 100% 100%, 0 100%);
+`;
+
+export const NavMenuButtonContainer = styled.div`
+  display: flex;
+  gap: 50px;
+  margin-left: 30px;
 `;
 
 export const HeaderText = styled.div`

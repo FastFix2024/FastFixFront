@@ -1,27 +1,28 @@
 import { Header } from "./Header/Header";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import LoginRegForms from "./LoginRegForms/LoginRegForms";
-import { GeolocationContainer, LandingComponent, LoginRegFormsContainer, YTWrapper } from "./styles";
-import Geolocation from "../../components/Geolocation/Geolocation";
+import { LandingComponent, LoginRegFormsContainer, YTWrapper, LandingComponentWrapper } from "./styles";
 import YoutubeEmbed from "../../components/YoutubeEmbed/YoutubeEmbed";
 
 export const Landing = () => {
   return (
-    <LandingComponent>
+    <LandingComponentWrapper>
+      
       <Header />
-      <LoginRegFormsContainer>
-        <LoginRegForms />
-      </LoginRegFormsContainer>
-      <InfoBlock />
 
-      <GeolocationContainer>
-        <Geolocation />
-      </GeolocationContainer>
+      <LandingComponent>
 
-      <Geolocation />
+        <LoginRegFormsContainer>
+          <LoginRegForms />
+        </LoginRegFormsContainer>
+
+        <InfoBlock />
+
+      </LandingComponent>
+
       <YTWrapper>
         <YoutubeEmbed />
       </YTWrapper>
-    </LandingComponent>
+    </LandingComponentWrapper>
   );
 };

@@ -2,7 +2,7 @@
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { userAreaVisibilitySliceActions, userAreaVisibilitySliceSelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 import Button from "../../../components/Button/Button";
-import { HeaderComponent, HeaderComponentContainer, HeaderLogo, HeaderLogoContainer, HeaderMotto, HeaderText, HeaderWpapper, NavMenu, SeparationLine } from "./styles";
+import { HeaderComponent, HeaderComponentContainer, HeaderLogo, HeaderLogoContainer, HeaderMotto, HeaderText, HeaderWpapper, NavMenu, NavMenuButtonContainer, SeparationLine } from "./styles";
 
 export const Header = () => {
   const dispatch = useAppDispatch();
@@ -23,9 +23,11 @@ export const Header = () => {
         <HeaderComponentContainer>
           <HeaderMotto>One Very nice the moto about service</HeaderMotto>
           <NavMenu>
-            <HeaderText>MAP</HeaderText>
-            <HeaderText>USER AREA</HeaderText>
-            <Button onButtonClick={changeVisibility} name="LOGIN" />
+            <NavMenuButtonContainer>
+              <HeaderText>MAP</HeaderText>
+              <HeaderText>USER AREA</HeaderText>
+              <Button onButtonClick={changeVisibility} name="LOGIN" />
+            </NavMenuButtonContainer>
           </NavMenu>
         </HeaderComponentContainer>
       </HeaderComponent>

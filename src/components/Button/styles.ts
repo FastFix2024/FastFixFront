@@ -6,7 +6,7 @@ interface ButtonComponentProps {
 
 export const ButtonComponent = styled.button<ButtonComponentProps>`
   width: 150px;
-  height: 90%;
+  height: 30px;
   font-size: 20px;
   font-weight: 500;
   backdrop-filter: blur(10px);

@@ -14,14 +14,12 @@ const Geolocation = () => {
     });
   }
 
-  console.log(positionLongitude);
-
   return (
     <>
       {searchGeolocation && (
         <>
-          <p>latitude: {positionLatitude}</p>
-          <p>longitude: {positionLongitude}</p>
+          <p>lat: {positionLatitude}</p>
+          <p>long: {positionLongitude}</p>
         </>
       )}
       <Button type="button" onButtonClick={() => setSearchGeolocation(!searchGeolocation)} name="Geolocation" />

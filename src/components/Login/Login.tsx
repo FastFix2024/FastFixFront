@@ -14,7 +14,7 @@ const schema = Yup.object().shape({
     .min(8, "Password must be at least 8 characters")
     });
 
-const Login = ({ children }: any) => {
+const Login = () => {
   const dispatch = useAppDispatch();
 
   const formik = useFormik({
@@ -51,14 +51,14 @@ const Login = ({ children }: any) => {
           value={formik.values.password}
           error={formik.errors.password}
         />
+
+        <div>Forgot your password?</div>
+        
         <ButtonsContainer>
-          <ButtonWrapper>
-            <div>Forgot your password?</div>
-          </ButtonWrapper> 
           <ButtonWrapper>
             <Button name="SUBMIT" type="submit" />
           </ButtonWrapper>    
-          </ButtonsContainer>
+        </ButtonsContainer>
       </LoginForm>
     </LoginContent>
   );

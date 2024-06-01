@@ -13,17 +13,25 @@ import {
   MiniInfoWrapper,
   ImgTitleBlock,
   ImgTitle,
+  ImgContainer,
+  GeoContainer
 } from "./styles";
+import Geolocation from "../../../components/Geolocation/Geolocation";
 
 const InfoBlock = () => {
   return (
     <InfoAndImgWrapper>
-      <div>
+      <ImgContainer>
         <ImgTitleBlock>
           <ImgTitle>More than Just Experience</ImgTitle>
         </ImgTitleBlock>
         <InfoImgStyle src={InfoImg} />
-      </div>
+        <GeoContainer>
+          <div>
+            <Geolocation />
+          </div>
+        </GeoContainer>
+      </ImgContainer>
       <InfoWrapper>
         <MissionText>
           <MissionTitle>Our Company Mission</MissionTitle>
