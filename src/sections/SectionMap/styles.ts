@@ -3,8 +3,6 @@ import { Sections2Bg } from "../../assets";
 
 export const Section2 = styled.div`
   position: relative;
-  top: 150px;
-  width: 100%;
   height: 700px;
   background-color: rgba(9, 105, 184, 1);
 `;

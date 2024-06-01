@@ -1,36 +1,44 @@
 import styled from "@emotion/styled";
 
+export const SectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const SectionContainer = styled.div`
   position: relative;
   display: flex;
   justify-content: center;
-  top: 150px;
+  align-items: center;
   width: 100%;
-  height: 1200px;
+  height: 300px;
 `;
 
 export const Section3Background = styled.div`
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  top: 150px;
   width: 100%;
-  height: 700px;
+`;
+
+export const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
 `;
 
 export const ProfileBackground = styled.div`
+  display: flex;
+  justify-content: space-evenly;
   background-color: lightgrey;
-  height: 800px;
+  height: auto;
   width: 80%;
   border-radius: 20px;
 `;
 
 export const Footer = styled.footer`
-  position: absolute;
+  position: relative;
   bottom: 0;
-  height: 200px;
+  height: auto;
   width: 100%;
   background-color: aqua;
 `;
