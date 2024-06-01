@@ -10,6 +10,11 @@ export const LoginRegFormsContainer = styled.div`
   justify-content: center;
 `;
 
+
+export const GeolocationContainer = styled.div`
+`;
+  
+
 export const YTWrapper = styled.div`
   display: flex;
   justify-content: right;
@@ -19,6 +24,4 @@ export const YTWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -70%);
   width: 80%;
-  height: 80%;
-  border-radius: 10px;
 `;

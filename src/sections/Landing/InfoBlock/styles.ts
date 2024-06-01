@@ -4,7 +4,7 @@ import { Sections1Bg } from "../../../assets";
 export const InfoAndImgWrapper = styled.div`
   display: flex;
   justify-content: center;
-  height: 65vh;
+  height: 900px;
   gap: 30px;
   font-family: Arial, Helvetica, sans-serif;
   background-image: url("${Sections1Bg}");
