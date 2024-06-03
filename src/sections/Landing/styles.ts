@@ -47,5 +47,6 @@ export const YTWrapper = styled.div`
   left: 50%;
   transform: translate(-50%, -70%);
   width: 80%;
-  z-index: -1;
+  padding-bottom: 200px;
+  z-index: 1;
 `;

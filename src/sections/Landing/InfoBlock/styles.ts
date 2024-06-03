@@ -50,6 +50,7 @@ export const GeoContainer = styled.div`
   margin-top: 20px;
   width: 360px;
   height: 100px;
+  z-index: 2;
 `;
 
 export const MissionText = styled.div`
