@@ -3,7 +3,7 @@ import UserInput from "../UserInput/UserInput";
 
 const UserInfo = () => {
 
-    const [email, setEmail] = useState('delatMneNehui@elban.com');
+    const [email, setEmail] = useState('delatMneNetchego@skutchno.com');
     const [username, setUsername] = useState('defaultUsername');
     const [password, setPassword] = useState('defaultPassword');
 

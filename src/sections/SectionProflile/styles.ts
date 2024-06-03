@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  background-color: orange;
 `;
 
 export const SectionContainer = styled.div`
@@ -11,7 +12,7 @@ export const SectionContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 300px;
+  height: 350px;
 `;
 
 export const Section3Background = styled.div`
@@ -29,9 +30,10 @@ export const ProfileContainer = styled.div`
 export const ProfileBackground = styled.div`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   background-color: lightgrey;
-  height: auto;
-  width: 80%;
+  height: 320px;
+  width: 60%;
   border-radius: 20px;
 `;
 

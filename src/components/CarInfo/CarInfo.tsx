@@ -3,9 +3,9 @@ import UserInput from "../UserInput/UserInput";
 
 const CarInfo = () => {
 
-    const [insurance, setInsurance] = useState('delatMneNehui@elban.com');
-    const [fuelType, setFuelType] = useState('defaultUsername');
-    const [inspectionDate, setInspectionDate] = useState('defaultPassword');
+    const [insurance, setInsurance] = useState('ADAC');
+    const [fuelType, setFuelType] = useState('E10');
+    const [inspectionDate, setInspectionDate] = useState('06.06.2025');
 
     return (
         <>
