@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect, useCallback } from 'react';
 import {
   useJsApiLoader,
@@ -7,6 +6,7 @@ import {
   Autocomplete,
   DirectionsRenderer,
   InfoWindow,
+  Libraries,
 } from '@react-google-maps/api';
 import {
   SearchContainer,
@@ -28,9 +28,9 @@ import {
   CloseResultsButton,
   Container
 } from './styles';
-import { Place } from './types';
+import { Place, PlaceResultWithGeometry } from './types';
 
-const libraries = ["places"];
+const libraries = ['places'] as Libraries;
 
 const MapWrapperTest: React.FC = () => {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
@@ -39,7 +39,7 @@ const MapWrapperTest: React.FC = () => {
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<Place | null>(null);
-  const [places, setPlaces] = useState<Place[]>([]);
+  const [places, setPlaces] = useState<Place>([]);
   const [placeDetails, setPlaceDetails] = useState<google.maps.places.PlaceResult | null>(null);
   const [filter, setFilter] = useState({ minRating: 0, openNow: 'any' });
   const [showFilter, setShowFilter] = useState(false);
@@ -93,10 +93,11 @@ const MapWrapperTest: React.FC = () => {
         destination: destination,
         travelMode: google.maps.TravelMode.DRIVING,
       });
-      if(!results.routes[0] && results.routes[0].legs[0]){
-      setDirectionsResponse(results);
-      setDistance(results.routes[0].legs[0].distance.text || '');
-      setDuration(results.routes[0].legs[0].duration.text);
+
+      if (results.routes[0] && results.routes[0].legs[0]) {
+        setDirectionsResponse(results);
+        setDistance(results.routes[0].legs[0].distance?.text || '');
+        setDuration(results.routes[0].legs[0].duration?.text || '');
       }
     } catch (error) {
       console.error('Error calculating route:', error);
@@ -114,13 +115,38 @@ const MapWrapperTest: React.FC = () => {
         type: type,
       },
       (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          const filteredResults = results.filter((place) => {
-            const meetsRating = place.rating >= filter.minRating;
-            const isOpenNow = filter.openNow === 'any' || place.opening_hours?.isOpen() === (filter.openNow === 'true');
-            return meetsRating && isOpenNow;
-          }) as Place[];
-          setPlaces(filteredResults);
+        if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+          const filteredResults = results.filter((place): place is PlaceResultWithGeometry => {
+            const meetsRating = place.rating && place.rating >= filter.minRating;
+            const isOpenNow = filter.openNow === 'any' || (place.opening_hours?.isOpen() === (filter.openNow === 'true'));
+            return !!meetsRating && isOpenNow && location !== undefined;
+          });
+
+          const places: Place[] = filteredResults.map((place) => {
+            const location = place.geometry!.location as google.maps.LatLng;
+            const latLngLiteral: google.maps.LatLngLiteral = {
+              lat: location.lat(),
+              lng: location.lng()
+            };
+
+            return {
+              place_id: place.place_id || '',
+              name: place.name || 'No Name',
+              geometry: {
+                location: latLngLiteral
+              },
+              photos: place.photos || [],
+              formatted_address: place.formatted_address || 'No Address',
+              vicinity: place.vicinity || 'No Vicinity',
+              rating: place.rating || 0,
+              user_ratings_total: place.user_ratings_total || 0,
+              opening_hours: place.opening_hours,
+              formatted_phone_number: place.formatted_phone_number || 'No Phone',
+              website: place.website || 'No Website'
+            };
+          });
+
+          setPlaces(places);
           setShowResults(true);
         } else {
           console.error('Error fetching places:', status);
@@ -200,7 +226,7 @@ const MapWrapperTest: React.FC = () => {
           <InputContainer>
             <Input type="text" placeholder="Введите место" />
             <Button onClick={handleSearchClick}>🔍</Button>
-            <Button onClick={() => { searchRef.current.value = ''; setSelectedPlace(null); clearRoute(); }}>X</Button>
+            <Button onClick={() => { searchRef.current.value = ''; setSelectedPlace(null); clearRoute(); }}>✕</Button>
           </InputContainer>
         </Autocomplete>
         <ButtonsContainer>
@@ -216,12 +242,12 @@ const MapWrapperTest: React.FC = () => {
           onUnmount={onUnmount}
           center={userLocation || defaultCenter}
           zoom={14}
-          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px' borderRadius: '20px'}}
+          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px', borderRadius: '20px'}}
           options={{
-            streetViewControl: true,
-            zoomControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
+          streetViewControl: true,
+          zoomControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
           }}
         >
           {userLocation && (
@@ -272,7 +298,7 @@ const MapWrapperTest: React.FC = () => {
           </CloseResultsButtonContainer>
           {places.map((place, idx) => (
             <PlaceItem key={idx} onClick={() => handlePlaceSelect(place)}>
-              <PlacePhoto src={place.photos ? place.photos[0].getUrl() : 'placeholder.png'} alt={place.name} />
+              <PlacePhoto src={place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : 'placeholder.png'} alt={place.name} />
               <PlaceItemContent>
                 <PlaceName>{place.name}</PlaceName>
                 <PlaceInfo>{place.vicinity}</PlaceInfo>
