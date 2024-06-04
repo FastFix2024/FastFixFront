@@ -39,7 +39,7 @@ const MapWrapperTest: React.FC = () => {
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<Place | null>(null);
-  const [places, setPlaces] = useState<Place[]>([]);
+  const [places, setPlaces] = useState<Place>([]);
   const [placeDetails, setPlaceDetails] = useState<google.maps.places.PlaceResult | null>(null);
   const [filter, setFilter] = useState({ minRating: 0, openNow: 'any' });
   const [showFilter, setShowFilter] = useState(false);
@@ -119,7 +119,7 @@ const MapWrapperTest: React.FC = () => {
           const filteredResults = results.filter((place): place is PlaceResultWithGeometry => {
             const meetsRating = place.rating && place.rating >= filter.minRating;
             const isOpenNow = filter.openNow === 'any' || (place.opening_hours?.isOpen() === (filter.openNow === 'true'));
-            return meetsRating && isOpenNow && place.geometry?.location;
+            return !!meetsRating && isOpenNow && location !== undefined;
           });
 
           const places: Place[] = filteredResults.map((place) => {
