@@ -3,15 +3,15 @@ import UserInput from "../UserInput/UserInput";
 
 const UserInfo = () => {
 
-    const [email, setEmail] = useState('delatMneNetchego@skutchno.com');
-    const [username, setUsername] = useState('defaultUsername');
-    const [password, setPassword] = useState('defaultPassword');
+    const [insurance, setInsurance] = useState('ADAC');
+    const [fuelType, setFuelType] = useState('E10');
+    const [inspectionDate, setInspectionDate] = useState('06.06.2025');
 
     return (
         <>
-            <UserInput label="Email" value={email} onSave={setEmail} type="email" />
-            <UserInput label="User name" value={username} onSave={setUsername} />
-            <UserInput label="Password" value={password} onSave={setPassword} type="password" />
+            <UserInput label="Insurance" value={insurance} onSave={setInsurance}/>
+            <UserInput label="Fuel type" value={fuelType} onSave={setFuelType} />
+            <UserInput label="Inspection date" value={inspectionDate} onSave={setInspectionDate}/>
         </>
     )
 }

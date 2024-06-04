@@ -1,15 +1,18 @@
 import styled from '@emotion/styled';
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const SearchContainer = styled.div`
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+  top: -140px;
+  width: 700px;
   z-index: 1;
   background-color: #fff;
   padding: 10px 20px;
   display: flex;
-  align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
 `;
@@ -57,8 +60,11 @@ export const ServiceButton = styled(Button)`
 `;
 
 export const MapContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  /* width: 100vw; */
+  /* height: 100vh; */
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
 `;
 
 export const UserMarkerToggle = styled.button`

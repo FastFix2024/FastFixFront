@@ -3,5 +3,6 @@ export { default as HeaderBg } from "./headerBg.png";
 export { default as InfoImg } from "./InfoImg.png";
 export { default as Sections1Bg } from "./Section1Bg.png";
 export { default as Sections2Bg } from "./Section2Bg.png";
+export { default as Section3Bg} from "./Seaction3Bg.png"
 export { default as FastFixLogo } from "./FastFixLogo.png";
 export { default as Pencil } from "./pencil.svg";

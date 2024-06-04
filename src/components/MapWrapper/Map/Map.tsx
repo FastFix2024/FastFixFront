@@ -10,7 +10,7 @@ function Map({ userLocation, defaultCenter, places, selectedMarker, placeDetails
         onUnmount={onMapUnmount}
         center={userLocation || defaultCenter}
         zoom={14}
-        mapContainerStyle={{ width: '60%', height: '100%', borderRadius: '20px' }}
+        mapContainerStyle={{ width: '60%', height: '95%', borderRadius: '20px' }}
         options={{
           streetViewControl: true,
           zoomControl: false,
