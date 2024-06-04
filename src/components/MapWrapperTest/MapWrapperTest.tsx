@@ -30,7 +30,7 @@ import {
 } from './styles';
 import { Place } from './types';
 
-const libraries = ['places'];
+const libraries = ["places"];
 
 const MapWrapperTest: React.FC = () => {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
@@ -80,7 +80,7 @@ const MapWrapperTest: React.FC = () => {
   }, []);
 
   const onUnmount = useCallback(() => {
-    mapRef.current = null;
+    mapRef.current = undefined;
   }, []);
 
   const calculateRoute = async (destination: google.maps.LatLngLiteral) => {
@@ -93,9 +93,11 @@ const MapWrapperTest: React.FC = () => {
         destination: destination,
         travelMode: google.maps.TravelMode.DRIVING,
       });
+      if(!results.routes[0] && results.routes[0].legs[0]){
       setDirectionsResponse(results);
-      setDistance(results.routes[0].legs[0].distance.text);
+      setDistance(results.routes[0].legs[0].distance.text || '');
       setDuration(results.routes[0].legs[0].duration.text);
+      }
     } catch (error) {
       console.error('Error calculating route:', error);
     }
@@ -214,7 +216,7 @@ const MapWrapperTest: React.FC = () => {
           onUnmount={onUnmount}
           center={userLocation || defaultCenter}
           zoom={14}
-          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px'}}
+          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px' borderRadius: '20px'}}
           options={{
             streetViewControl: true,
             zoomControl: false,

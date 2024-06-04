@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
-import { v4 } from "uuid";
 import * as Yup from "yup";
-import Input from "../Input/Input";
 
+import Input from "../Input/Input";
 import { ButtonContainer, Checkbox, CheckboxContainer, CheckboxLabel, RegisterContent, RegisterForm } from "./styles";
 import { REGISTER_FORM_NAMES, RegisterFormValues } from "./types";
 import Button from "../Button/Button";
 import { useAppDispatch } from "../../store/hooks";
-import { registerNewuserSliceActions } from "../../store/redux/registerFormSlice/registerFormSlice";
+import { authSliceActions } from '../../store/redux/authSlice/authSlice'
+
 
 const schema = Yup.object().shape({
   [REGISTER_FORM_NAMES.USERNAME]: Yup.string()
@@ -39,9 +39,13 @@ const Register = () => {
     } as RegisterFormValues,
     validationSchema: schema,
     validateOnChange: false,
-    onSubmit: (values: RegisterFormValues) => {
-      dispatch(registerNewuserSliceActions.addUser({ ...values, id: v4() }));
-      console.table(values);
+    onSubmit: async (values: RegisterFormValues) => {
+      dispatch(authSliceActions.register({
+        username: values.username,
+        email: values.email,
+        password: values.password
+      
+      }));
     },
   });
 

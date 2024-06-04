@@ -60,12 +60,13 @@ export const ServiceButton = styled(Button)`
 `;
 
 export const MapContainer = styled.div`
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* position: relative; */
+  height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
+
+
 
 export const UserMarkerToggle = styled.button`
   position: absolute;
