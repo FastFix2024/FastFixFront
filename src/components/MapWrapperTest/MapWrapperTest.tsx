@@ -6,6 +6,7 @@ import {
   Autocomplete,
   DirectionsRenderer,
   InfoWindow,
+  Libraries,
 } from '@react-google-maps/api';
 import {
   SearchContainer,
@@ -29,7 +30,7 @@ import {
 } from './styles';
 import { Place, PlaceResultWithGeometry } from './types';
 
-const libraries = ['places'];
+const libraries = ['places'] as Libraries;
 
 const MapWrapperTest: React.FC = () => {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
@@ -79,7 +80,7 @@ const MapWrapperTest: React.FC = () => {
   }, []);
 
   const onUnmount = useCallback(() => {
-    mapRef.current = null;
+    mapRef.current = undefined;
   }, []);
 
   const calculateRoute = async (destination: google.maps.LatLngLiteral) => {
@@ -225,7 +226,7 @@ const MapWrapperTest: React.FC = () => {
           <InputContainer>
             <Input type="text" placeholder="Введите место" />
             <Button onClick={handleSearchClick}>🔍</Button>
-            <Button onClick={() => { searchRef.current.value = ''; setSelectedPlace(null); clearRoute(); }}>X</Button>
+            <Button onClick={() => { searchRef.current.value = ''; setSelectedPlace(null); clearRoute(); }}>✕</Button>
           </InputContainer>
         </Autocomplete>
         <ButtonsContainer>
@@ -241,12 +242,12 @@ const MapWrapperTest: React.FC = () => {
           onUnmount={onUnmount}
           center={userLocation || defaultCenter}
           zoom={14}
-          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px' borderRadius: '20px'}}
+          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px', borderRadius: '20px'}}
           options={{
-            streetViewControl: true,
-            zoomControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
+          streetViewControl: true,
+          zoomControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
           }}
         >
           {userLocation && (

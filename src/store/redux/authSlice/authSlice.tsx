@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAppSlice } from "../../createAppSlice";
-import { AuthState, RegistrationDto } from "./types";
+import { AuthState, LoginDto, RegistrationDto } from "./types";
 
 const initialState: AuthState = {};
 
@@ -11,7 +11,7 @@ export const authSlice = createAppSlice({
     register: create.asyncThunk(
       async (registrationDto: RegistrationDto, { rejectWithValue }) => {
         try {
-          const response = await axios.post("/api/auth/register", registrationDto);
+          const response = await axios.post("/api/register", registrationDto);
 
           return response.data;
         } catch (error: any) {
@@ -27,9 +27,9 @@ export const authSlice = createAppSlice({
       }
     ),
     login: create.asyncThunk(
-      async (registrationDto: RegistrationDto, { rejectWithValue }) => {
+      async (loginDto: LoginDto, { rejectWithValue }) => {
         try {
-          const response = await axios.post("/api/auth/login", registrationDto);
+          const response = await axios.post("/api/auth/login", loginDto);
 
           return response.data;
         } catch (error: any) {
@@ -38,7 +38,9 @@ export const authSlice = createAppSlice({
       },
       {
         pending: (state) => {},
-        fulfilled: (state, action) => {},
+        fulfilled: (state, action) => {
+          
+        },
         rejected: (state, action) => {
           state.registrationErrorMessage = "Registration error";
         },

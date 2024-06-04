@@ -34,7 +34,6 @@ const Register = () => {
       [REGISTER_FORM_NAMES.USERNAME]: "",
       [REGISTER_FORM_NAMES.EMAIL]: "",
       [REGISTER_FORM_NAMES.PASSWORD]: "",
-      // [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: "",
       [REGISTER_FORM_NAMES.HAS_AGREED]: false,
     } as RegisterFormValues,
     validationSchema: schema,
@@ -85,8 +84,6 @@ const Register = () => {
           placeholder="KENNWORT WIEDERHOLEN"
           label="Kennwort wiederholen"
           onInputChange={formik.handleChange}
-          // value={formik.values.passwordRetype}
-          // error={formik.errors.passwordRetype}
         />
         <ButtonContainer>
           <Button name="SUBMIT" type="submit" disabled={!formik.values.hasAgreed} />

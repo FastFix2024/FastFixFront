@@ -5,8 +5,7 @@ import { LOGIN_FORM_NAMES, LoginFormValues } from "./types";
 import Input from "../Input/Input";
 import Button from '../Button/Button'
 import { useAppDispatch } from '../../store/hooks'
-import { loginUserSliceActions } from '../../store/redux/loginFormSlice/loginFormSlice'
-import { authSlice } from '../../store/redux/authSlice/authSlice'
+import { authSlice, authSliceActions } from '../../store/redux/authSlice/authSlice'
 
 const schema = Yup.object().shape({
   [LOGIN_FORM_NAMES.EMAIL]: Yup.string().required("email required").email("Invalid email format"),
@@ -26,9 +25,8 @@ const Login = () => {
     validationSchema: schema,
     validateOnChange: false,
     onSubmit: (values: LoginFormValues) => {
-      dispatch(authSlice.lo({...values}))
-      console.log(values);
-    },
+      dispatch(authSliceActions.login(values))
+      },
   });
 
   return (
