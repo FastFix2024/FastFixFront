@@ -24,7 +24,8 @@ import {
   PlaceInfo,
   RouteButton,
   CloseResultsButtonContainer,
-  CloseResultsButton
+  CloseResultsButton,
+  Container
 } from './styles';
 import { Place, PlaceResultWithGeometry } from './types';
 
@@ -215,6 +216,7 @@ const MapWrapperTest: React.FC = () => {
 
   return (
     <>
+    <Container>
       <SearchContainer>
         <Autocomplete
           onLoad={(autocomplete) => (searchRef.current = autocomplete)}
@@ -232,13 +234,14 @@ const MapWrapperTest: React.FC = () => {
           <ServiceButton disabled>Фильтры</ServiceButton>
         </ButtonsContainer>
       </SearchContainer>
+      </Container>
       <MapContainer>
         <GoogleMap
           onLoad={onLoad}
           onUnmount={onUnmount}
           center={userLocation || defaultCenter}
           zoom={14}
-          mapContainerStyle={{ width: '100%', height: '100vh' }}
+          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px' borderRadius: '20px'}}
           options={{
             streetViewControl: true,
             zoomControl: false,

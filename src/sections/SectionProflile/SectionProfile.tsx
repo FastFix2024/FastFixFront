@@ -12,18 +12,18 @@ const SectionProfile = () => {
               <UserInfo />
             </ProfileContainer>
             <ProfileContainer>
-              <CarInfo />
+              <h2>Fuel</h2>
             </ProfileContainer>
           </ProfileBackground>
         </Section3Background>
       </SectionContainer>
-      <Footer>
+      {/* <Footer>
         <h1>Контакты:</h1>
         <h3>Email: delatMneNetchego@skutchno.com</h3>
         <h3>Телефон: 087823 6294691488 (лучше никогда не звонить этому человеку)</h3>
         <h3>Автор: Ночная Сова🦉</h3>
         <h3>P.S: Всем спокойного утра 😂😝</h3>
-      </Footer>
+      </Footer> */}
     </SectionWrapper>
   );
 };
