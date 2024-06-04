@@ -1,19 +1,31 @@
 import { useState } from "react";
-import UserInput from "../UserInput/UserInput";
+import SelectInput from "../SelectInput/SelectInput";
+import { DateContainer, DateInput } from "./styles";
 
 const UserInfo = () => {
+  const [insurance, setInsurance] = useState<string>("ADAC");
+  const [fuelType, setFuelType] = useState<string>("E10");
+  const [inspectionDate, setInspectionDate] = useState<string>("2025-06-06");
 
-    const [insurance, setInsurance] = useState('ADAC');
-    const [fuelType, setFuelType] = useState('E10');
-    const [inspectionDate, setInspectionDate] = useState('06.06.2025');
+  const insuranceOptions: string[] = ["ADAC", "Allianz", "HUK"];
+  const fuelTypeOptions: string[] = ["E10", "Diesel", "Electric"];
 
-    return (
-        <>
-            <UserInput label="Insurance" value={insurance} onSave={setInsurance}/>
-            <UserInput label="Fuel type" value={fuelType} onSave={setFuelType} />
-            <UserInput label="Inspection date" value={inspectionDate} onSave={setInspectionDate}/>
-        </>
-    )
-}
+  const handleInsuranceChange = (evt: React.ChangeEvent<HTMLSelectElement>) => setInsurance(evt.target.value);
+  const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => setFuelType(evt.target.value);
+  const handleInspectionDateChange = (evt: React.ChangeEvent<HTMLInputElement>) => setInspectionDate(evt.target.value);
+
+  return (
+    <>
+      <SelectInput id="insurance" label="Insurance" value={insurance} options={insuranceOptions} onChange={handleInsuranceChange} />
+
+      <SelectInput id="fuelType" label="Fuel Type" value={fuelType} options={fuelTypeOptions} onChange={handleFuelTypeChange} />
+
+      <DateContainer>
+        <label htmlFor="inspectionDate">Inspection Date:</label>
+        <DateInput type="date" id="inspectionDate" value={inspectionDate} onChange={handleInspectionDateChange} />
+      </DateContainer>
+    </>
+  );
+};
 
 export default UserInfo;

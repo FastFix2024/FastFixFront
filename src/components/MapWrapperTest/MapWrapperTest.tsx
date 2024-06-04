@@ -216,7 +216,7 @@ const MapWrapperTest: React.FC = () => {
           onUnmount={onUnmount}
           center={userLocation || defaultCenter}
           zoom={14}
-          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px' borderRadius: '20px'}}
+          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px', borderRadius: '20px'}}
           options={{
             streetViewControl: true,
             zoomControl: false,
