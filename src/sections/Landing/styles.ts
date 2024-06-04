@@ -1,12 +1,8 @@
 import styled from "@emotion/styled";
-import { Sections1Bg } from "../../assets";
 
 export const LandingComponent = styled.div`
   display: flex;
   flex-direction: column;
-  height: 850px;
-  background-image: url("${Sections1Bg}");
-  background-repeat: no-repeat;
 `;
 
 export const LandingComponentWrapper = styled.div`
@@ -45,7 +41,7 @@ export const YTWrapper = styled.div`
   gap: 100px;
   position: relative;
   left: 50%;
-  transform: translate(-50%, -70%);
+  transform: translate(-50%, -30%);
   width: 80%;
   padding-bottom: 200px;
   z-index: 1;
