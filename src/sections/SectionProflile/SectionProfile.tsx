@@ -1,4 +1,5 @@
 import CarInfo from "../../components/CarInfo/CarInfo";
+import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { Footer, ProfileBackground, ProfileContainer, Section3Background, SectionContainer, SectionWrapper } from "./styles";
 
@@ -12,7 +13,7 @@ const SectionProfile = () => {
               <UserInfo />
             </ProfileContainer>
             <ProfileContainer>
-              <h2>Fuel</h2>
+              <FuelCard />
             </ProfileContainer>
           </ProfileBackground>
         </Section3Background>
