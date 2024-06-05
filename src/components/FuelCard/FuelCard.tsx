@@ -1,3 +1,4 @@
+import { FuelCardContainer, Price } from './styles';
 import { FuelStation } from './type';
 
 const FuelCard = () => {
@@ -25,15 +26,17 @@ const FuelCard = () => {
     ];
 
     return (
-        <div>
+        <>
             {fuelStations.map((station, index) => (
-                <div key={index} style={{ border: '1px solid black', margin: '10px', padding: '10px' }}>
-                    <h3>Type: {station.fuelType}</h3>
+                <FuelCardContainer key={index}>
+                    <Price>{station.price.toFixed(2)} €</Price>
+                    <div>
+                        <h3>Type: {station.fuelType}</h3>
                     <p>Address: {station.address}</p>
-                    <p>Price: {station.price.toFixed(2)} €</p>
-                </div>
+                    </div>
+                </FuelCardContainer>
             ))}
-        </div>
+        </>
     );
 }
 
