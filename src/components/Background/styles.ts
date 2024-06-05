@@ -37,7 +37,7 @@ export const Background3 = styled.div`
     background-repeat: no-repeat;
     height: 450px;
     position: relative;
-    z-index: -1;
+    z-index: -2;
 `;
 
 export const ProfileContainer = styled.div`
