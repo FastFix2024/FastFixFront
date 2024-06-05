@@ -60,7 +60,7 @@ export const SeparationLine = styled.div`
   right: 0;
   width: 80%;
   height: 10px;
-  background-color: orange;
+  background-color: #f59a31;
 `;
 
 export const HeaderLogoContainer = styled.div`

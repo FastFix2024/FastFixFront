@@ -10,3 +10,5 @@ export { default as up } from "./Up.svg";
 export { default as Logout } from "./logout.svg";
 export { default as DeleteUser } from "./delete_user_profile.svg";
 export { default as Notifications } from "./notifications.svg";
+export { default as GitHub } from "./github.svg";
+export { default as Mail } from "./mail.svg";

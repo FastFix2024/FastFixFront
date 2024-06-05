@@ -79,7 +79,7 @@ export const UserMarkerToggle = styled.button`
 
 export const PlacesList = styled.div`
   position: absolute;
-  top: -149px;
+  top: -147px;
   left: 10%;
   width: 300px;
   height: 800px;

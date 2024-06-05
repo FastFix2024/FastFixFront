@@ -43,9 +43,20 @@ export const ProfileBackground = styled.div`
   border-radius: 20px;
 `;
 
+export const FooterIcons = styled.img`
+  width: 40px;
+  position: relative;
+  bottom: 20px;
+  cursor: pointer;
+`;
+
 export const Footer = styled.footer`
   position: relative;
   bottom: 0;
-  height: auto;
+  height: 445;
   width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 100px;
+  gap: 20px;
 `;
