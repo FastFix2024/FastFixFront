@@ -1,13 +1,5 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
-import {
-  useJsApiLoader,
-  GoogleMap,
-  Marker,
-  Autocomplete,
-  DirectionsRenderer,
-  InfoWindow,
-  Libraries,
-} from '@react-google-maps/api';
+import { useState, useRef, useEffect, useCallback } from "react";
+import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, InfoWindow, Libraries } from "@react-google-maps/api";
 import {
   SearchContainer,
   InputContainer,
@@ -27,22 +19,22 @@ import {
   CloseResultsButtonContainer,
   CloseResultsButton,
   Container,
-  MapWindowContainer
-} from './styles';
-import { Place, PlaceResultWithGeometry } from './types';
+  MapWindowContainer,
+} from "./styles";
+import { Place, PlaceResultWithGeometry } from "./types";
 
-const libraries = ['places'] as Libraries;
+const libraries = ["places"] as Libraries;
 
 const MapWrapperTest: React.FC = () => {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
-  const [distance, setDistance] = useState('');
-  const [duration, setDuration] = useState('');
+  const [distance, setDistance] = useState("");
+  const [duration, setDuration] = useState("");
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<Place | null>(null);
   const [places, setPlaces] = useState<Place>([]);
   const [placeDetails, setPlaceDetails] = useState<google.maps.places.PlaceResult | null>(null);
-  const [filter, setFilter] = useState({ minRating: 0, openNow: 'any' });
+  const [filter, setFilter] = useState({ minRating: 0, openNow: "any" });
   const [showFilter, setShowFilter] = useState(false);
   const [showResults, setShowResults] = useState(false);
 
@@ -66,12 +58,12 @@ const MapWrapperTest: React.FC = () => {
           });
         },
         (error) => {
-          console.error('Error getting geolocation', error);
+          console.error("Error getting geolocation", error);
           setUserLocation(defaultCenter);
         }
       );
     } else {
-      console.warn('Geolocation not supported');
+      console.warn("Geolocation not supported");
       setUserLocation(defaultCenter);
     }
   }, []);
@@ -97,11 +89,11 @@ const MapWrapperTest: React.FC = () => {
 
       if (results.routes[0] && results.routes[0].legs[0]) {
         setDirectionsResponse(results);
-        setDistance(results.routes[0].legs[0].distance?.text || '');
-        setDuration(results.routes[0].legs[0].duration?.text || '');
+        setDistance(results.routes[0].legs[0].distance?.text || "");
+        setDuration(results.routes[0].legs[0].duration?.text || "");
       }
     } catch (error) {
-      console.error('Error calculating route:', error);
+      console.error("Error calculating route:", error);
     }
   };
 
@@ -119,7 +111,7 @@ const MapWrapperTest: React.FC = () => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
           const filteredResults = results.filter((place): place is PlaceResultWithGeometry => {
             const meetsRating = place.rating && place.rating >= filter.minRating;
-            const isOpenNow = filter.openNow === 'any' || (place.opening_hours?.isOpen() === (filter.openNow === 'true'));
+            const isOpenNow = filter.openNow === "any" || place.opening_hours?.isOpen() === (filter.openNow === "true");
             return !!meetsRating && isOpenNow && location !== undefined;
           });
 
@@ -127,30 +119,30 @@ const MapWrapperTest: React.FC = () => {
             const location = place.geometry!.location as google.maps.LatLng;
             const latLngLiteral: google.maps.LatLngLiteral = {
               lat: location.lat(),
-              lng: location.lng()
+              lng: location.lng(),
             };
 
             return {
-              place_id: place.place_id || '',
-              name: place.name || 'No Name',
+              place_id: place.place_id || "",
+              name: place.name || "No Name",
               geometry: {
-                location: latLngLiteral
+                location: latLngLiteral,
               },
               photos: place.photos || [],
-              formatted_address: place.formatted_address || 'No Address',
-              vicinity: place.vicinity || 'No Vicinity',
+              formatted_address: place.formatted_address || "No Address",
+              vicinity: place.vicinity || "No Vicinity",
               rating: place.rating || 0,
               user_ratings_total: place.user_ratings_total || 0,
               opening_hours: place.opening_hours,
-              formatted_phone_number: place.formatted_phone_number || 'No Phone',
-              website: place.website || 'No Website'
+              formatted_phone_number: place.formatted_phone_number || "No Phone",
+              website: place.website || "No Website",
             };
           });
 
           setPlaces(places);
           setShowResults(true);
         } else {
-          console.error('Error fetching places:', status);
+          console.error("Error fetching places:", status);
         }
       }
     );
@@ -162,7 +154,7 @@ const MapWrapperTest: React.FC = () => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         setPlaceDetails(place);
       } else {
-        console.error('Error fetching place details:', status);
+        console.error("Error fetching place details:", status);
       }
     });
   };
@@ -174,8 +166,8 @@ const MapWrapperTest: React.FC = () => {
 
   const clearRoute = () => {
     setDirectionsResponse(null);
-    setDistance('');
-    setDuration('');
+    setDistance("");
+    setDuration("");
     setSelectedPlace(null);
   };
 
@@ -199,7 +191,7 @@ const MapWrapperTest: React.FC = () => {
       setSelectedPlace(place);
       mapRef.current!.panTo(place.geometry.location);
     } else {
-      console.warn('Selected place does not have geometry data');
+      console.warn("Selected place does not have geometry data");
     }
   };
 
@@ -209,7 +201,7 @@ const MapWrapperTest: React.FC = () => {
       new window.google.maps.Marker({
         position: userLocation,
         map: mapRef.current!,
-        title: 'Your Location',
+        title: "Your Location",
       });
     }
   };
@@ -218,25 +210,30 @@ const MapWrapperTest: React.FC = () => {
 
   return (
     <MapWindowContainer>
-    <Container>
-      <SearchContainer id="section-map">
-        <Autocomplete
-          onLoad={(autocomplete) => (searchRef.current = autocomplete)}
-          onPlaceChanged={handleSearchClick}
-        >
-          <InputContainer>
-            <Input type="text" placeholder="Введите место" />
-            <Button onClick={handleSearchClick}>🔍</Button>
-            <Button onClick={() => { searchRef.current.value = ''; setSelectedPlace(null); clearRoute(); }}>✕</Button>
-          </InputContainer>
-        </Autocomplete>
-        <ButtonsContainer>
-          <ServiceButton onClick={() => findNearestPlaces('car_repair')}>Автосервисы</ServiceButton>
-          <ServiceButton onClick={() => findNearestPlaces('gas_station')}>АЗС</ServiceButton>
-          <ServiceButton disabled>Фильтры</ServiceButton>
-          <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
-        </ButtonsContainer>
-      </SearchContainer>
+      <Container>
+        <SearchContainer id="section-map">
+          <Autocomplete onLoad={(autocomplete) => (searchRef.current = autocomplete)} onPlaceChanged={handleSearchClick}>
+            <InputContainer>
+              <Input type="text" placeholder="Введите место" />
+              <Button onClick={handleSearchClick}>🔍</Button>
+              <Button
+                onClick={() => {
+                  searchRef.current.value = "";
+                  setSelectedPlace(null);
+                  clearRoute();
+                }}
+              >
+                ✕
+              </Button>
+            </InputContainer>
+          </Autocomplete>
+          <ButtonsContainer>
+            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>Автосервисы</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>АЗС</ServiceButton>
+            <ServiceButton disabled>Фильтры</ServiceButton>
+            <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
+          </ButtonsContainer>
+        </SearchContainer>
       </Container>
       <MapContainer>
         <GoogleMap
@@ -244,44 +241,41 @@ const MapWrapperTest: React.FC = () => {
           onUnmount={onUnmount}
           center={userLocation || defaultCenter}
           zoom={14}
-          mapContainerStyle={{ width: '80%', height: '800px', position: 'relative', top: '-200px', borderRadius: '20px'}}
+          mapContainerStyle={{ width: "80%", height: "800px", position: "relative", top: "-200px", borderRadius: "20px" }}
           options={{
-          streetViewControl: true,
-          zoomControl: false,
-          mapTypeControl: false,
-          fullscreenControl: false,
+            streetViewControl: true,
+            zoomControl: false,
+            mapTypeControl: false,
+            fullscreenControl: false,
           }}
         >
           {userLocation && (
             <Marker
               position={userLocation}
               icon={{
-                url: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
               }}
             />
           )}
           {places.map((place, idx) => (
-            <Marker
-              key={idx}
-              position={place.geometry.location}
-              onClick={() => handleMarkerClick(place)}
-            />
+            <Marker key={idx} position={place.geometry.location} onClick={() => handleMarkerClick(place)} />
           ))}
           {selectedMarker && placeDetails && (
-            <InfoWindow
-              position={selectedMarker.geometry.location}
-              onCloseClick={() => setSelectedMarker(null)}
-            >
+            <InfoWindow position={selectedMarker.geometry.location} onCloseClick={() => setSelectedMarker(null)}>
               <div>
                 <h2>{placeDetails.name}</h2>
                 {placeDetails.photos && placeDetails.photos.length > 0 && (
-                  <img src={placeDetails.photos[0].getUrl()} alt={placeDetails.name} style={{ width: '200px', height: '200px', objectFit: 'cover' }} />
+                  <img
+                    src={placeDetails.photos[0].getUrl()}
+                    alt={placeDetails.name}
+                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
+                  />
                 )}
                 <p>{placeDetails.formatted_address}</p>
                 {placeDetails.opening_hours && (
                   <div>
-                    <p>Время работы: {placeDetails.opening_hours.weekday_text.join(', ')}</p>
-                    <p>{placeDetails.opening_hours.isOpen() ? 'Открыто' : 'Закрыто'}</p>
+                    <p>Время работы: {placeDetails.opening_hours.weekday_text.join(", ")}</p>
+                    <p>{placeDetails.opening_hours.isOpen() ? "Открыто" : "Закрыто"}</p>
                   </div>
                 )}
                 <p>Рейтинг: {placeDetails.rating} звезд</p>
@@ -299,14 +293,20 @@ const MapWrapperTest: React.FC = () => {
           </CloseResultsButtonContainer>
           {places.map((place, idx) => (
             <PlaceItem key={idx} onClick={() => handlePlaceSelect(place)}>
-              <PlacePhoto src={place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : 'placeholder.png'} alt={place.name} />
+              <PlacePhoto src={place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : "placeholder.png"} alt={place.name} />
               <PlaceItemContent>
                 <PlaceName>{place.name}</PlaceName>
                 <PlaceInfo>{place.vicinity}</PlaceInfo>
-                <PlaceInfo>Рейтинг: {place.rating} ({place.user_ratings_total} отзывов)</PlaceInfo>
-                <PlaceInfo>{place.opening_hours?.isOpen() ? 'Открыто' : 'Закрыто'}</PlaceInfo>
+                <PlaceInfo>
+                  Рейтинг: {place.rating} ({place.user_ratings_total} отзывов)
+                </PlaceInfo>
+                <PlaceInfo>{place.opening_hours?.isOpen() ? "Открыто" : "Закрыто"}</PlaceInfo>
                 {place.formatted_phone_number && <PlaceInfo>Телефон: {place.formatted_phone_number}</PlaceInfo>}
-                {place.website && <a href={place.website} target="_blank" rel="noopener noreferrer">Сайт</a>}
+                {place.website && (
+                  <a href={place.website} target="_blank" rel="noopener noreferrer">
+                    Сайт
+                  </a>
+                )}
                 <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Проложить маршрут</RouteButton>
               </PlaceItemContent>
             </PlaceItem>
@@ -315,6 +315,6 @@ const MapWrapperTest: React.FC = () => {
       )}
     </MapWindowContainer>
   );
-}
+};
 
 export default MapWrapperTest;
