@@ -202,6 +202,9 @@ const MapWrapperTest: React.FC = () => {
         position: userLocation,
         map: mapRef.current!,
         title: "Your Location",
+        icon: {
+          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        }
       });
     }
   };
@@ -228,9 +231,11 @@ const MapWrapperTest: React.FC = () => {
             </InputContainer>
           </Autocomplete>
           <ButtonsContainer>
-            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>Автосервисы</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>АЗС</ServiceButton>
-            <ServiceButton disabled>Фильтры</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>Mechanic</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>Gas Station</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("waschanlage")}>Car wash</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("parking")}>Parking</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("restaurant")}>Food Point</ServiceButton>
             <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
           </ButtonsContainer>
         </SearchContainer>
@@ -279,7 +284,7 @@ const MapWrapperTest: React.FC = () => {
                   </div>
                 )}
                 <p>Рейтинг: {placeDetails.rating} звезд</p>
-                <button onClick={() => calculateRoute(placeDetails.geometry.location)}>Проложить маршрут</button>
+                <button onClick={() => calculateRoute(placeDetails.geometry.location)}>Show route</button>
               </div>
             </InfoWindow>
           )}

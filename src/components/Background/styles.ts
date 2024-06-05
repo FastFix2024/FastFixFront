@@ -17,7 +17,7 @@ export const MapContainer = styled.div`
 `;
 
 export const Background2Container = styled.div`
-    background-color: rgba(0,92,208,1);
+    background-color: #3d799b;
     height: 690px;
     position: relative;
     z-index: -1;
