@@ -12,7 +12,7 @@ export const HeaderComponent = styled.header`
   align-items: end;
   width: 100%;
   height: 170px;
-  background-image: url(${HeaderBg});
+  background-image: url('${HeaderBg}');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
@@ -51,6 +51,7 @@ export const NavMenuButtonContainer = styled.div`
 export const HeaderText = styled.div`
   font-size: 25px;
   color: white;
+  cursor: pointer;
 `;
 
 export const SeparationLine = styled.div`
@@ -75,3 +76,20 @@ export const HeaderLogo = styled.img`
   height: 250px;
 `;
 HeaderLogo.defaultProps = { src: FastFixLogo };
+
+export const BackToTopButton = styled.img`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  z-index: 10;
+  opacity: 0.7;
+  width: 80px;
+
+  &:hover {
+    opacity: 1;
+  }
+`;

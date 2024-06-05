@@ -26,7 +26,8 @@ import {
   RouteButton,
   CloseResultsButtonContainer,
   CloseResultsButton,
-  Container
+  Container,
+  MapWindowContainer
 } from './styles';
 import { Place, PlaceResultWithGeometry } from './types';
 
@@ -216,9 +217,9 @@ const MapWrapperTest: React.FC = () => {
   if (!isLoaded) return <div>Loading...</div>;
 
   return (
-    <>
+    <MapWindowContainer>
     <Container>
-      <SearchContainer>
+      <SearchContainer id="section-map">
         <Autocomplete
           onLoad={(autocomplete) => (searchRef.current = autocomplete)}
           onPlaceChanged={handleSearchClick}
@@ -233,6 +234,7 @@ const MapWrapperTest: React.FC = () => {
           <ServiceButton onClick={() => findNearestPlaces('car_repair')}>Автосервисы</ServiceButton>
           <ServiceButton onClick={() => findNearestPlaces('gas_station')}>АЗС</ServiceButton>
           <ServiceButton disabled>Фильтры</ServiceButton>
+          <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
         </ButtonsContainer>
       </SearchContainer>
       </Container>
@@ -289,7 +291,6 @@ const MapWrapperTest: React.FC = () => {
           )}
           {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
         </GoogleMap>
-        <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
       </MapContainer>
       {showResults && (
         <PlacesList>
@@ -312,7 +313,7 @@ const MapWrapperTest: React.FC = () => {
           ))}
         </PlacesList>
       )}
-    </>
+    </MapWindowContainer>
   );
 }
 

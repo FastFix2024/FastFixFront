@@ -21,10 +21,16 @@ export const Section3Background = styled.div`
   width: 100%;
 `;
 
+export const ProfileIcons = styled.img`
+  width: 50px;
+  cursor: pointer;
+`;
+
 export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 30px;
+  gap: 30px;
 `;
 
 export const ProfileBackground = styled.div`

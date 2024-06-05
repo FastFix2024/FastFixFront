@@ -44,10 +44,9 @@ export const ImgContainer = styled.div`
 `;
 
 export const GeoContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: end;
-  margin-top: 20px;
+position: relative;
+top: 20px;
+left: 25%;
   width: 360px;
   height: 100px;
   z-index: 2;
