@@ -14,9 +14,9 @@ import {
   ImgTitleBlock,
   ImgTitle,
   ImgContainer,
-  GeoContainer
+  GeoContainer,
 } from "./styles";
-import Geolocation from "../../../components/Geolocation/Geolocation";
+import Emergency from "../../../components/Emergency/Emergency";
 
 const InfoBlock = () => {
   return (
@@ -28,7 +28,7 @@ const InfoBlock = () => {
         <InfoImgStyle src={InfoImg} />
         <GeoContainer>
           <div>
-            <Geolocation />
+            <Emergency />
           </div>
         </GeoContainer>
       </ImgContainer>

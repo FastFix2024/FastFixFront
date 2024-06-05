@@ -6,3 +6,7 @@ export { default as Sections2Bg } from "./Section2Bg.png";
 export { default as Section3Bg} from "./Seaction3Bg.png"
 export { default as FastFixLogo } from "./FastFixLogo.png";
 export { default as Pencil } from "./pencil.svg";
+export { default as up } from "./Up.svg";
+export { default as Logout } from "./logout.svg";
+export { default as DeleteUser } from "./delete_user_profile.svg";
+export { default as Notifications } from "./notifications.svg";

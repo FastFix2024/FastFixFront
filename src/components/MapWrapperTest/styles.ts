@@ -8,7 +8,7 @@ export const Container = styled.div`
 export const SearchContainer = styled.div`
   position: relative;
   top: -140px;
-  width: 700px;
+  width: auto;
   z-index: 1;
   background-color: #fff;
   padding: 10px 20px;
@@ -68,9 +68,6 @@ export const MapContainer = styled.div`
 
 
 export const UserMarkerToggle = styled.button`
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
@@ -82,10 +79,10 @@ export const UserMarkerToggle = styled.button`
 
 export const PlacesList = styled.div`
   position: absolute;
-  top: 60px;
-  left: 10px;
+  top: -149px;
+  left: 10%;
   width: 300px;
-  height: calc(100vh - 120px);
+  height: 800px;
   overflow-y: auto;
   background-color: #fff;
   z-index: 1;
@@ -150,4 +147,9 @@ export const CloseResultsButton = styled.button`
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
+`;
+
+
+export const MapWindowContainer = styled.div`
+  position: relative;
 `;

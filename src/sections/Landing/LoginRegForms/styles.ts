@@ -3,9 +3,35 @@ import styled from "@emotion/styled";
 export const UserContainer = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 50px;
   gap: 30px;
   position: absolute;
+  right: -450px;
+
+  &.slide-in {
+    animation: slide-in 0.5s forwards;
+  }
+
+  &.slide-out {
+    animation: slide-out 0.5s forwards;
+  }
+
+  @keyframes slide-in {
+    from {
+      right: -450px;
+    }
+    to {
+      right: 0;
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      right: 0;
+    }
+    to {
+      right: -450px;
+    }
+  }
 `;
 
 export const LoginWrapper = styled.div`

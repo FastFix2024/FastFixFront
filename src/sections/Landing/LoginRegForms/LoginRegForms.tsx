@@ -1,30 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LoginWrapper, StepLoginContainer, StepRegisterContainer, RegisterWrapper, UserContainer } from "./styles";
 import Login from "../../../components/Login/Login";
 import Register from "../../../components/Register/Register";
-// import UserProfile from "../../../components/UserProfile/UserProfile";
 import { useAppSelector } from "../../../store/hooks";
 import { userAreaVisibilitySliceSelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 
 const LoginRegForms = () => {
   const [signContent, setSignContent] = useState("login");
-  const [userProfile, setUserProfile] = useState(false);
-
   const visibilityState = useAppSelector(userAreaVisibilitySliceSelectors.loginVisibilityState);
+  const [isVisible, setIsVisible] = useState(visibilityState.isVisible);
 
-  console.log("visibilityState", visibilityState);
+  useEffect(() => {
+    if (visibilityState.isVisible) {
+      setIsVisible(true);
+    } else {
+      setTimeout(() => setIsVisible(false), 500);
+    }
+  }, [visibilityState.isVisible]);
 
   return (
     <>
-      {visibilityState.isVisible && (
-        <UserContainer>
+      {isVisible && (
+        <UserContainer className={visibilityState.isVisible ? "slide-in" : "slide-out"}>
           {signContent === "login" && (
             <LoginWrapper>
               <StepLoginContainer onClick={() => setSignContent("login")}>Login</StepLoginContainer>
               <StepRegisterContainer onClick={() => setSignContent("register")}>Register</StepRegisterContainer>
-              <Login>
-                <button onClick={() => setUserProfile(true)}>Login</button>
-              </Login>
+              <Login />
             </LoginWrapper>
           )}
 
@@ -33,12 +35,8 @@ const LoginRegForms = () => {
               <StepLoginContainer onClick={() => setSignContent("login")}>Login</StepLoginContainer>
               <StepRegisterContainer onClick={() => setSignContent("register")}>Register</StepRegisterContainer>
               <Register />
-              {/* <button onClick={() => setUserProfile(true)}>Register</button>
-              </Register> */}
             </RegisterWrapper>
           )}
-
-          {/* {userProfile === true && <UserProfile />} */}
         </UserContainer>
       )}
     </>
@@ -46,3 +44,4 @@ const LoginRegForms = () => {
 };
 
 export default LoginRegForms;
+

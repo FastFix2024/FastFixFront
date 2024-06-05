@@ -10,8 +10,7 @@ export const LandingComponentWrapper = styled.div`
 `;
 
 export const LoginRegFormsContainer = styled.div`
-  display: flex;
-  justify-content: center;
+  z-index: 2;
 `;
 
 export const InfoBlockWrapper = styled.div`

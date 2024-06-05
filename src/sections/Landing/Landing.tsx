@@ -1,4 +1,3 @@
-import { Header } from "./Header/Header";
 import InfoBlock from "./InfoBlock/InfoBlock";
 import LoginRegForms from "./LoginRegForms/LoginRegForms";
 import { LandingComponent, LoginRegFormsContainer, YTWrapper, LandingComponentWrapper } from "./styles";
