@@ -35,7 +35,7 @@ export const usersSlice = createAppSlice({
         },
       }
     ),
-    updatteUser: create.asyncThunk(
+    updateUser: create.asyncThunk(
       async (updateCredentials: UpdateCredentials, { rejectWithValue }) => {
         try {
           const response = await axios.put("api/users/", updateCredentials);

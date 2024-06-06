@@ -12,8 +12,8 @@ import { authSliceActions } from '../../store/redux/authSlice/authSlice'
 const schema = Yup.object().shape({
   [REGISTER_FORM_NAMES.USERNAME]: Yup.string()
     .required("Userame required")
-    .min(3, "Username must be at least 3 characters")
-    .max(20, "Username must not exceed 20 characters"),
+    .min(5, "Username must be at least 5 characters")
+    .max(15, "Username must not exceed 15 characters"),
   [REGISTER_FORM_NAMES.EMAIL]: Yup.string()
     .required("email required")
     .email("Invalid email format"),
@@ -21,7 +21,10 @@ const schema = Yup.object().shape({
     .required("password required")
     .min(8, "Password must be at least 8 characters")
     .max(15, "Must be not longer than 15 characters")
-    .matches(/(?=.*[0-9])/, "Password must contain a number")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .matches(/[@$!%*?&]/, "Password must contain at least one special character (@$!%*?&)")
+    .matches(/\d/, "Password must contain a number")
   ,
   [REGISTER_FORM_NAMES.PASSWORD_RETYPE]: Yup.string().oneOf([Yup.ref(REGISTER_FORM_NAMES.PASSWORD)], 'Passwords dont match') .required("password required"),
 });
