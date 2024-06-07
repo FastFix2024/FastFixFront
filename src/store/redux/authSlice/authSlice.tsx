@@ -1,8 +1,10 @@
 import axios from "axios";
 import { createAppSlice } from "../../createAppSlice";
-import { AuthState, LoginDto, RegistrationDto } from "./types";
+import { AuthState, LoginDto, RegistrationDto, User } from "./types";
 
-const initialState: AuthState = {};
+const initialState: AuthState = {
+  isAuthenticated: false,
+};
 
 export const authSlice = createAppSlice({
   name: "AUTH_SLICE",
@@ -11,7 +13,7 @@ export const authSlice = createAppSlice({
     register: create.asyncThunk(
       async (registrationDto: RegistrationDto, { rejectWithValue }) => {
         try {
-          const response = await axios.post("/api/register", registrationDto, { headers : {   }});
+          const response = await axios.post("/api/register", registrationDto, { headers: {} });
 
           return response.data;
         } catch (error: any) {
@@ -39,15 +41,36 @@ export const authSlice = createAppSlice({
       {
         pending: (state) => {},
         fulfilled: (state, action) => {
-          
+          state.isAuthenticated = true;
         },
         rejected: (state, action) => {
           state.registrationErrorMessage = "Registration error";
         },
       }
     ),
+    currentUser: create.asyncThunk(
+      async (arg: void, { rejectWithValue }) => {
+        try {
+          const response = await axios.get<User>("/api/users/my/profile");
+
+          return response.data;
+        } catch (error: any) {
+          return rejectWithValue(error.response.data);
+        }
+      },
+      {
+        pending: (state) => {},
+        fulfilled: (state, action) => {
+          state.user = action.payload;
+        },
+        rejected: (state, action) => {
+          state.isAuthenticated = false;
+        },
+      }
+    ),
   }),
   selectors: {
+    selectIsAuthenticated: (state) => state.isAuthenticated,
     selectCurrentUser: (state) => state.user,
     selectRegistrationError: (state) => state.registrationErrorMessage,
   },
