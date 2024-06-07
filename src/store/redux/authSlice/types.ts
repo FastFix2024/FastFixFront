@@ -1,5 +1,6 @@
 export interface AuthState {
   user?: User;
+  isAuthenticated: boolean;
   registrationErrorMessage?: string
 }
 
@@ -18,6 +19,7 @@ export interface User {
   id: number;
   username: string;
   email: string;
-  password: string;
+ 
 
 }
+

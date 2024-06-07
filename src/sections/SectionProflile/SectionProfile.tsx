@@ -1,12 +1,18 @@
 import { DeleteUser, GitHub, Logout, Mail, Notifications } from "../../assets";
 import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
+import { useAppSelector } from '../../store/hooks'
+import { authSliceSlectors } from '../../store/redux/authSlice/authSlice'
 import { Footer, FooterIcons, ProfileBackground, ProfileContainer, ProfileIcons, Section3Background, SectionContainer, SectionWrapper } from "./styles";
 
 const SectionProfile = () => {
+  const user = useAppSelector(authSliceSlectors.selectCurrentUser);
+
+
+  
   return (
     <SectionWrapper>
-      <SectionContainer>
+      { !user && <SectionContainer>
         <Section3Background>
           <ProfileBackground>
             <ProfileContainer>
@@ -22,7 +28,7 @@ const SectionProfile = () => {
             </ProfileContainer>
           </ProfileBackground>
         </Section3Background>
-      </SectionContainer>
+      </SectionContainer>}
       <Footer>
         <FooterIcons src={GitHub} />
         <FooterIcons src={Mail} />
