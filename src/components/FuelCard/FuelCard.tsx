@@ -1,43 +1,36 @@
-import { FuelCardContainer, Price } from './styles';
-import { FuelStation } from './type';
+import { FuelCardContainer, Price } from "./styles";
+import { FuelStation } from "./type";
+
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { fuelSliceAction, fuelSliceSelectors } from "../../store/redux/fuelSlice/fuelSlice";
+import { FuelData } from "../../store/redux/fuelSlice/types";
+import { useEffect } from "react";
 
 const FuelCard = () => {
-    const fuelStations: FuelStation[] = [
-        {
-            fuelType: 'Petrol',
-            address: '123 Main St, Cityville',
-            price: 1.25
-        },
-        {
-            fuelType: 'Diesel',
-            address: '456 Elm St, Townsville',
-            price: 1.15
-        },
-        {
-            fuelType: 'Electric',
-            address: '789 Oak St, Villageville',
-            price: 0.30
-        },
-        {
-            fuelType: 'Hybrid',
-            address: '101 Pine St, Hamletville',
-            price: 1.05
-        }
-    ];
+  const dispatch = useAppDispatch();
+  const { data, error } = useAppSelector(fuelSliceSelectors.fuel);
 
+  useEffect(() => {
+    dispatch(fuelSliceAction.getFuelInfo());
+  }, [])
+
+  const fuel = data.map((fuelObj: FuelData) => {
     return (
-        <>
-            {fuelStations.map((station, index) => (
-                <FuelCardContainer key={index}>
-                    <Price>{station.price.toFixed(2)} €</Price>
-                    <div>
-                        <h3>Type: {station.fuelType}</h3>
-                    <p>Address: {station.address}</p>
-                    </div>
-                </FuelCardContainer>
-            ))}
-        </>
-    );
-}
+        <FuelCardContainer key={fuelObj.id}>
+          <Price>{fuelObj.price.toFixed(2)} €</Price>
+          <div>
+            <h3>Type: diesel</h3>
+            <p>Address: {fuelObj.street + fuelObj.houseNumber}</p>
+          </div>
+        </FuelCardContainer>
+    )
+  })
+
+  return (
+    <>
+      {fuel}
+    </>
+  );
+};
 
 export default FuelCard;
