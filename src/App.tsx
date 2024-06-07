@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import Background from "./components/Background/Background";
 import { Header } from "./sections/Landing/Header/Header";
@@ -22,9 +23,6 @@ const App = () => {
     <>
       <Header />
       <Background />
-      {/* <Landing /> */}
-      {/* <SectionMap /> */}
-      {/* <SectionProfile /> */}
     </>
   );
 };
