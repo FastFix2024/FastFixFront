@@ -32,17 +32,19 @@ const MapWrapperTest: React.FC = () => {
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
   const [selectedMarker, setSelectedMarker] = useState<Place | null>(null);
-  const [places, setPlaces] = useState<Place>([]);
+  const [places, setPlaces] = useState<Place[]>([]);
   const [placeDetails, setPlaceDetails] = useState<google.maps.places.PlaceResult | null>(null);
   const [filter, setFilter] = useState({ minRating: 0, openNow: "any" });
   const [showFilter, setShowFilter] = useState(false);
   const [showResults, setShowResults] = useState(false);
-
+  
+  console.log('userLocation GOOGLE', userLocation)
   const searchRef = useRef<google.maps.places.Autocomplete>();
   const mapRef = useRef<google.maps.Map>();
 
-  const defaultCenter = { lat: 43.2567, lng: 76.9286 };
-
+  const defaultCenter = { lat: 52.50796391454193, lng: 13.375055429296202 };
+  
+  
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
     libraries: libraries,
@@ -115,8 +117,8 @@ const MapWrapperTest: React.FC = () => {
             return !!meetsRating && isOpenNow && location !== undefined;
           });
 
-          const places: Place[] = filteredResults.map((place) => {
-            const location = place.geometry!.location as google.maps.LatLng;
+          const places = filteredResults.map((place) => {
+            const location = place.geometry.location as google.maps.LatLng;
             const latLngLiteral: google.maps.LatLngLiteral = {
               lat: location.lat(),
               lng: location.lng(),
@@ -136,7 +138,8 @@ const MapWrapperTest: React.FC = () => {
               opening_hours: place.opening_hours,
               formatted_phone_number: place.formatted_phone_number || "No Phone",
               website: place.website || "No Website",
-            };
+              map: () => {},
+            } as Place;
           });
 
           setPlaces(places);
@@ -189,7 +192,9 @@ const MapWrapperTest: React.FC = () => {
     const place = searchRef.current!.getPlace();
     if (place.geometry) {
       setSelectedPlace(place);
-      mapRef.current!.panTo(place.geometry.location);
+      if (place.geometry.location) {
+        mapRef.current!.panTo(place.geometry.location)
+      }
     } else {
       console.warn("Selected place does not have geometry data");
     }
@@ -202,6 +207,9 @@ const MapWrapperTest: React.FC = () => {
         position: userLocation,
         map: mapRef.current!,
         title: "Your Location",
+        icon: {
+          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+        }
       });
     }
   };
@@ -228,9 +236,11 @@ const MapWrapperTest: React.FC = () => {
             </InputContainer>
           </Autocomplete>
           <ButtonsContainer>
-            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>Автосервисы</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>АЗС</ServiceButton>
-            <ServiceButton disabled>Фильтры</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>Mechanic</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>Gas Station</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("waschanlage")}>Car wash</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("parking")}>Parking</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("restaurant")}>Food Point</ServiceButton>
             <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
           </ButtonsContainer>
         </SearchContainer>
@@ -274,12 +284,15 @@ const MapWrapperTest: React.FC = () => {
                 <p>{placeDetails.formatted_address}</p>
                 {placeDetails.opening_hours && (
                   <div>
-                    <p>Время работы: {placeDetails.opening_hours.weekday_text.join(", ")}</p>
+                    <p>Opening hours: {placeDetails.opening_hours.weekday_text?.join(", ")}</p>
                     <p>{placeDetails.opening_hours.isOpen() ? "Открыто" : "Закрыто"}</p>
                   </div>
                 )}
-                <p>Рейтинг: {placeDetails.rating} звезд</p>
-                <button onClick={() => calculateRoute(placeDetails.geometry.location)}>Проложить маршрут</button>
+                <p>Rating: {placeDetails.rating} звезд</p>
+                <button onClick={() => {
+                  if (placeDetails?.geometry?.location 
+                  
+                ){calculateRoute(placeDetails.geometry.location)}}}>Show route</button>
               </div>
             </InfoWindow>
           )}
@@ -307,7 +320,7 @@ const MapWrapperTest: React.FC = () => {
                     Сайт
                   </a>
                 )}
-                <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Проложить маршрут</RouteButton>
+                <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
             </PlaceItem>
           ))}

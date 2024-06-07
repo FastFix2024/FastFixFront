@@ -11,7 +11,7 @@ export const authSlice = createAppSlice({
     register: create.asyncThunk(
       async (registrationDto: RegistrationDto, { rejectWithValue }) => {
         try {
-          const response = await axios.post("/api/register", registrationDto);
+          const response = await axios.post("/api/register", registrationDto, { headers : {   }});
 
           return response.data;
         } catch (error: any) {

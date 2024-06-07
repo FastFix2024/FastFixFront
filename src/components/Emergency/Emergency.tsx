@@ -8,6 +8,9 @@ const Emergency = () => {
   const [positionLongitude, setLongitude] = useState<null | number>(null);
   const [background, setBackground] = useState<boolean>(false);
 
+  console.log('positionLatitude react',positionLatitude)
+  console.log('positionLongitude react', positionLongitude)
+  
   if (searchGeolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
