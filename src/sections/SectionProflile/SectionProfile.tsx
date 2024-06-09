@@ -2,11 +2,11 @@ import { DeleteUser, GitHub, Logout, Mail, Notifications } from "../../assets";
 import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { useAppSelector } from '../../store/hooks'
-import { authSliceSlectors } from '../../store/redux/authSlice/authSlice'
+import { authSliceSelectors } from '../../store/redux/authSlice/authSlice'
 import { Footer, FooterIcons, ProfileBackground, ProfileContainer, ProfileIcons, Section3Background, SectionContainer, SectionWrapper } from "./styles";
 
 const SectionProfile = () => {
-  const user = useAppSelector(authSliceSlectors.selectCurrentUser);
+  const user = useAppSelector(authSliceSelectors.selectCurrentUser);
 
 
   

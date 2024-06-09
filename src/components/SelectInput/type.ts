@@ -1,7 +1,12 @@
+export interface InsuranceTypes {
+    id: number,
+    name: string
+}
+
 export interface SelectInputProps {
-    id: string;
+    name: string;
     label: string;
-    value: string;
-    options: string[];
+    value: number | undefined;
+    options: InsuranceTypes[] | string[];
     onChange: (evt: React.ChangeEvent<HTMLSelectElement>) => void;
 }

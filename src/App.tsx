@@ -6,10 +6,10 @@ import { Landing } from "./sections/Landing/Landing";
 import SectionMap from "./sections/SectionMap/SectionMap";
 import SectionProfile from "./sections/SectionProflile/SectionProfile";
 import { useAppDispatch, useAppSelector } from "./store/hooks";
-import { authSliceActions, authSliceSlectors } from "./store/redux/authSlice/authSlice";
+import { authSliceActions, authSliceSelectors } from "./store/redux/authSlice/authSlice";
 
 const App = () => {
-  const isAuthenticated = useAppSelector(authSliceSlectors.selectIsAuthenticated);
+  const isAuthenticated = useAppSelector(authSliceSelectors.selectIsAuthenticated);
 
   const dispatch = useAppDispatch();
 

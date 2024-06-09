@@ -1,13 +1,13 @@
 import { Select, SelectContainer } from "./styles";
 import { SelectInputProps } from "./type";
 
-const SelectInput = ({ id, label, value, options, onChange }: SelectInputProps) => {
+const SelectInput = ({ name, label, value, options, onChange }: SelectInputProps) => {
     return (
         <SelectContainer>
-            <label htmlFor={id}>{label}:</label>
-            <Select id={id} value={value} onChange={onChange}>
-                {options.map((option) => (
-                    <option key={option} value={option}>{option}</option>
+            <label htmlFor={name}>{label}:</label>
+            <Select name={name} value={value} onChange={onChange}>
+                {options.map((option: any) => (
+                    <option key={option} value={value}>{option}</option>
                 ))}
             </Select>
         </SelectContainer>
