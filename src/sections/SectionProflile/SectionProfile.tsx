@@ -1,9 +1,9 @@
-import { DeleteUser, GitHub, Logout, Mail, Notifications } from "../../assets";
+import { DeleteUser, GitHub, Logout, Mail } from "../../assets";
 import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { useAppSelector } from '../../store/hooks'
-import { authSliceSelectors } from '../../store/redux/authSlice/authSlice'
-import { Footer, FooterIcons, ProfileBackground, ProfileContainer, ProfileIcons, Section3Background, SectionContainer, SectionWrapper } from "./styles";
+import { authSliceSlectors } from '../../store/redux/authSlice/authSlice'
+import { Footer, FooterIcons, ProfileBackground, ProfileButtons, ProfileContainer, ProfileIcons, Section3Background, SectionContainer, SectionWrapper } from "./styles";
 
 const SectionProfile = () => {
   const user = useAppSelector(authSliceSelectors.selectCurrentUser);
@@ -15,16 +15,18 @@ const SectionProfile = () => {
       { !user && <SectionContainer>
         <Section3Background>
           <ProfileBackground>
-            <ProfileContainer>
-              <UserInfo />
-            </ProfileContainer>
+          <ProfileButtons>
+              <ProfileIcons src={Logout} />
+              <ProfileIcons src={DeleteUser} />
+            </ProfileButtons>
             <ProfileContainer>
               <FuelCard />
             </ProfileContainer>
             <ProfileContainer>
-              <ProfileIcons src={Notifications} />
-              <ProfileIcons src={Logout} />
-              <ProfileIcons src={DeleteUser} />
+              Здесь контет напоминания
+            </ProfileContainer>
+            <ProfileContainer>
+              <UserInfo />
             </ProfileContainer>
           </ProfileBackground>
         </Section3Background>

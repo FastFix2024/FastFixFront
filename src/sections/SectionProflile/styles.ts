@@ -33,6 +33,16 @@ export const ProfileContainer = styled.div`
   gap: 30px;
 `;
 
+export const ProfileButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: -45%;
+  right: 10%;
+  margin: 30px;
+  gap: 20px;
+`;
+
 export const ProfileBackground = styled.div`
   display: flex;
   justify-content: space-evenly;

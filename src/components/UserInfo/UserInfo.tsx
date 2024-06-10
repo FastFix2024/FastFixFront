@@ -11,6 +11,7 @@ interface InsuranceTypes {
   name: string
 }
 
+
 const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("ADAC");
   const [fuelType, setFuelType] = useState<string>("E10");
@@ -21,7 +22,7 @@ const UserInfo = () => {
 
   const [insuranceOptions, setInsuranceOptions] = useState<InsuranceTypes[]>([]);
   const [insuranceOptionID, setInsuranceOptionID] = useState<number>();
-  console.log('insuranceOptionID',insuranceOptionID)
+
 
   useEffect(() => {
     axios
@@ -44,12 +45,15 @@ const UserInfo = () => {
   const handleInsuranceChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
       const insuranceName = evt.target.value;
       setInsurance(insuranceName);
+
     const insuranceId = insuranceOptions.find(opt => insuranceName === opt.name);
     console.log('insuranceIdINSIDE',insuranceId)
     if (insuranceId) {
 
         dispatch(usersSliceActions.updateUser(insuranceId.id))
         setInsuranceOptionID(insuranceId.id);
+
+        
       }
     };
   const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => setFuelType(evt.target.value);
@@ -57,9 +61,11 @@ const UserInfo = () => {
 
   return (
     <>
+
         
 
       <SelectInput name="insurance" label="Insurance" value={insuranceOptionID} options={insuranceOptions.map(opt => opt.name)} onChange={handleInsuranceChange} />
+
 
       <SelectInput name="fuelType" label="Fuel Type" value={0} options={fuelTypeOptions} onChange={handleFuelTypeChange} />
 
