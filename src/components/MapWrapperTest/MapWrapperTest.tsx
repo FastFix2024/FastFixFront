@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, InfoWindow, Libraries } from "@react-google-maps/api";
+import { MdSearch, MdClose, MdLocationOn, MdBuild, MdLocalGasStation, MdLocalCarWash, MdLocalParking, MdRestaurant, MdStar, MdDirections, MdComment, MdPlace } from "react-icons/md";
 import {
   SearchContainer,
   InputContainer,
@@ -20,10 +21,32 @@ import {
   CloseResultsButton,
   Container,
   MapWindowContainer,
+  ReviewsContainer,
+  ReviewItem,
+  ReviewAuthor,
+  ReviewText,
+  ReviewRating,
 } from "./styles";
 import { Place, PlaceResultWithGeometry } from "./types";
 
 const libraries = ["places"] as Libraries;
+
+const getDefaultIcon = (type: string) => {
+  switch (type) {
+    case 'restaurant':
+      return <MdRestaurant style={{ width: "100px", height: "100px" }} />;
+    case 'gas_station':
+      return <MdLocalGasStation style={{ width: "100px", height: "100px" }} />;
+    case 'car_wash':
+      return <MdLocalCarWash style={{ width: "100px", height: "100px" }} />;
+    case 'parking':
+      return <MdLocalParking style={{ width: "100px", height: "100px" }} />;
+    case 'car_repair':
+      return <MdBuild style={{ width: "100px", height: "100px" }} />;
+    default:
+      return <MdPlace style={{ width: "100px", height: "100px" }} />;
+  }
+};
 
 const MapWrapperTest: React.FC = () => {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
@@ -37,14 +60,14 @@ const MapWrapperTest: React.FC = () => {
   const [filter, setFilter] = useState({ minRating: 0, openNow: "any" });
   const [showFilter, setShowFilter] = useState(false);
   const [showResults, setShowResults] = useState(false);
-  
-  console.log('userLocation GOOGLE', userLocation)
+  const [showReviews, setShowReviews] = useState(false);
+  const [reviews, setReviews] = useState<google.maps.places.PlaceReview[]>([]);
+
   const searchRef = useRef<google.maps.places.Autocomplete>();
   const mapRef = useRef<google.maps.Map>();
 
   const defaultCenter = { lat: 52.50796391454193, lng: 13.375055429296202 };
-  
-  
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
     libraries: libraries,
@@ -107,14 +130,14 @@ const MapWrapperTest: React.FC = () => {
       {
         location: userLocation,
         radius: 5000,
-        type: type,
+        type: type === 'waschanlage' ? 'car_wash' : type,
       },
       (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
           const filteredResults = results.filter((place): place is PlaceResultWithGeometry => {
             const meetsRating = place.rating && place.rating >= filter.minRating;
             const isOpenNow = filter.openNow === "any" || place.opening_hours?.isOpen() === (filter.openNow === "true");
-            return !!meetsRating && isOpenNow && location !== undefined;
+            return !!meetsRating && isOpenNow && place.geometry?.location;
           });
 
           const places = filteredResults.map((place) => {
@@ -142,6 +165,8 @@ const MapWrapperTest: React.FC = () => {
             } as Place;
           });
 
+          console.log('Fetched places:', places); // Debugging line
+
           setPlaces(places);
           setShowResults(true);
         } else {
@@ -156,6 +181,7 @@ const MapWrapperTest: React.FC = () => {
     placesService.getDetails({ placeId }, (place, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         setPlaceDetails(place);
+        setReviews(place.reviews || []);
       } else {
         console.error("Error fetching place details:", status);
       }
@@ -208,7 +234,7 @@ const MapWrapperTest: React.FC = () => {
         map: mapRef.current!,
         title: "Your Location",
         icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+          url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
         }
       });
     }
@@ -223,24 +249,27 @@ const MapWrapperTest: React.FC = () => {
           <Autocomplete onLoad={(autocomplete) => (searchRef.current = autocomplete)} onPlaceChanged={handleSearchClick}>
             <InputContainer>
               <Input type="text" placeholder="Введите место" />
-              {/* <Button onClick={handleSearchClick}>🔍</Button> */}
+             {/* <Button onClick={handleSearchClick}>🔍</Button> */}
+
+
+
               <Button
                 onClick={() => {
                   setSelectedPlace(null);
                   clearRoute();
                 }}
               >
-                ✕
+                <MdClose />
               </Button>
             </InputContainer>
           </Autocomplete>
           <ButtonsContainer>
-            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>Mechanic</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>Gas Station</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("waschanlage")}>Car wash</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("parking")}>Parking</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("restaurant")}>Food Point</ServiceButton>
-            <UserMarkerToggle onClick={handlePanToUserLocation}>Мое местоположение</UserMarkerToggle>
+            <ServiceButton onClick={() => findNearestPlaces("car_repair")}><MdBuild /> Mechanic</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("gas_station")}><MdLocalGasStation /> Gas Station</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("car_wash")}><MdLocalCarWash /> Car wash</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("parking")}><MdLocalParking /> Parking</ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("restaurant")}><MdRestaurant /> Food Point</ServiceButton>
+            <UserMarkerToggle onClick={handlePanToUserLocation}><MdLocationOn /> Мое местоположение</UserMarkerToggle>
           </ButtonsContainer>
         </SearchContainer>
       </Container>
@@ -262,7 +291,7 @@ const MapWrapperTest: React.FC = () => {
             <Marker
               position={userLocation}
               icon={{
-                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
               }}
             />
           )}
@@ -273,25 +302,35 @@ const MapWrapperTest: React.FC = () => {
             <InfoWindow position={selectedMarker.geometry.location} onCloseClick={() => setSelectedMarker(null)}>
               <div>
                 <h2>{placeDetails.name}</h2>
-                {placeDetails.photos && placeDetails.photos.length > 0 && (
+                {placeDetails.photos && placeDetails.photos.length > 0 ? (
                   <img
                     src={placeDetails.photos[0].getUrl()}
                     alt={placeDetails.name}
                     style={{ width: "200px", height: "200px", objectFit: "cover" }}
                   />
+                ) : (
+                  getDefaultIcon(placeDetails.types ? placeDetails.types[0] : "")
                 )}
-                <p>{placeDetails.formatted_address}</p>
+                <p><MdLocationOn /> {placeDetails.formatted_address}</p>
                 {placeDetails.opening_hours && (
                   <div>
                     <p>Opening hours: {placeDetails.opening_hours.weekday_text?.join(", ")}</p>
                     <p>{placeDetails.opening_hours.isOpen() ? "Открыто" : "Закрыто"}</p>
                   </div>
                 )}
-                <p>Rating: {placeDetails.rating} звезд</p>
-                <button onClick={() => {
-                  if (placeDetails?.geometry?.location 
-                  
-                ){calculateRoute(placeDetails.geometry.location)}}}>Show route</button>
+                <p>Rating: {Array.from({ length: Math.round(placeDetails.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)} {placeDetails.rating} звезд</p>
+                <p>Телефон: {placeDetails.formatted_phone_number || "Не указан"}</p>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                  <a href={placeDetails.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", fontWeight: "bold" }}>
+                    Сайт
+                  </a>
+                  <button onClick={() => {
+                    if (placeDetails?.geometry?.location) {
+                      calculateRoute(placeDetails.geometry.location)
+                    }
+                  }}><MdDirections /> Show route</button>
+                  <button onClick={() => setShowReviews(true)}><MdComment /> Отзывы</button>
+                </div>
               </div>
             </InfoWindow>
           )}
@@ -305,18 +344,37 @@ const MapWrapperTest: React.FC = () => {
           </CloseResultsButtonContainer>
           {places.map((place, idx) => (
             <PlaceItem key={idx} onClick={() => handlePlaceSelect(place)}>
-              <PlacePhoto src={place.photos && place.photos.length > 0 ? place.photos[0].getUrl() : "placeholder.png"} alt={place.name} />
               <PlaceItemContent>
                 <PlaceName>{place.name}</PlaceName>
-                <PlaceInfo>{place.vicinity}</PlaceInfo>
+                <PlaceInfo><MdLocationOn /> {place.vicinity}</PlaceInfo>
                 <PlaceInfo>
-                  Рейтинг: {place.rating} ({place.user_ratings_total} отзывов)
+                  Рейтинг: {Array.from({ length: Math.round(place.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)} {place.rating} ({place.user_ratings_total} отзывов)
                 </PlaceInfo>
                 <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
+              <PlacePhoto>
+                {place.photos && place.photos.length > 0 ? (
+                  <img src={place.photos[0].getUrl()} alt={place.name} />
+                ) : (
+                  getDefaultIcon(place.types ? place.types[0] : "")
+                )}
+              </PlacePhoto>
             </PlaceItem>
           ))}
         </PlacesList>
+      )}
+      {showReviews && (
+        <ReviewsContainer>
+          <button onClick={() => setShowReviews(false)}>Закрыть</button>
+          <h2>Отзывы</h2>
+          {reviews.map((review, idx) => (
+            <ReviewItem key={idx}>
+              <ReviewAuthor>{review.author_name}</ReviewAuthor>
+              <ReviewRating>Рейтинг: {Array.from({ length: Math.round(review.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)}</ReviewRating>
+              <ReviewText>{review.text}</ReviewText>
+            </ReviewItem>
+          ))}
+        </ReviewsContainer>
       )}
     </MapWindowContainer>
   );
