@@ -43,9 +43,9 @@ const UserInfo = () => {
 
   return (
     <>
-      <SelectInput name={insurance} label="Insurance" value={insuranceOptionID} options={insuranceOptions.map(opt => opt.name)} onChange={handleInsuranceChange} />
+      <SelectInput  label="Insurance" value={insurance} options={insuranceOptions.map(opt => opt.name)} onChange={handleInsuranceChange} />
 
-      <SelectInput name="fuelType" label="Fuel Type" value={0} options={fuelTypeOptions} onChange={handleFuelTypeChange} />
+      <SelectInput label="Fuel Type" value={fuelType} options={fuelTypeOptions} onChange={handleFuelTypeChange} />
 
       <DateContainer>
         <label htmlFor="inspectionDate">Inspection Date:</label>

@@ -60,7 +60,7 @@ export const Header = () => {
     <HeaderWpapper>
       <HeaderComponent>
         <HeaderComponentContainer>
-          <HeaderMotto>Nothing unnecessary (instead of a hundred), <br />on the way to your goal.</HeaderMotto>
+          <HeaderMotto>Nothing unnecessary, on the way to your goal.</HeaderMotto>
           <NavMenu>
             <NavMenuButtonContainer>
               <HeaderText onClick={() => scrollToSection("section-map")}>MAP</HeaderText>
