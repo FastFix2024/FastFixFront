@@ -1,5 +1,5 @@
 export interface Place {
-  map(arg0: (place: Place, idx: import("react").Key | null | undefined) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode
+  map(arg0: (place: Place, idx: import("react").Key | null | undefined) => import("react/jsx-runtime").JSX.Element): import("react").ReactNode;
   place_id: string;
   name: string;
   geometry: {
