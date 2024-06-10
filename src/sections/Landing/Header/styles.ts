@@ -26,9 +26,24 @@ export const HeaderComponentContainer = styled.div`
   height: 70px;
 `;
 
-export const HeaderMotto = styled.p`
-  font-size: 30px;
+export const HeaderMotto1 = styled.div`
+  position: absolute;
+  top: 10%;
+  left: 28%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
   color: white;
+  opacity:0.6;
+`;
+export const HeaderMotto2 = styled.div`
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  color: white;
+  opacity:0.6;
+
 `;
 
 export const NavMenu = styled.div`

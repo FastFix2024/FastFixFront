@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Button from "../Button/Button";
-import { EmergencyContainer, GeolocationContainer, GeolocationWrapper, PhoneNuberContainer } from "./styles";
+import { AdacLink, EmergencyButton, EmergencyContainer, GeolocationContainer, GeolocationWrapper, PhoneNumberContainer } from "./styles";
 
 const Emergency = () => {
   const [searchGeolocation, setSearchGeolocation] = useState(false);
@@ -22,20 +22,20 @@ const Emergency = () => {
   return (
     <>
       <EmergencyContainer style={background === true ? {backgroundColor: 'rgba(5, 5, 5, 0.534)'} : {backgroundColor: 'transparent'}}>
-        <PhoneNuberContainer>
-          <Button type="button" onButtonClick={() => {setSearchGeolocation(!searchGeolocation); setBackground(!background)}} name="EMERGENCY" />
+        <PhoneNumberContainer>
+          <EmergencyButton type="button" onClick={() => {setSearchGeolocation(!searchGeolocation); setBackground(!background)}}>EMERGENCY</EmergencyButton>
           {searchGeolocation && (
             <>
-              <p>ADAC International:</p>
+              <AdacLink href="https://www.adac.de/services/pannenhilfe">ADAC International</AdacLink>
               <p style={{margin: '5px'}}>+49 89 222222</p>
             </>
           )}
-        </PhoneNuberContainer>
+        </PhoneNumberContainer>
 
         {searchGeolocation && (
           <GeolocationWrapper>
             <GeolocationContainer>
-              <p>If you are lost, here are your coordinates:</p>
+              <p>YOU ARE HERE</p>
               <p>lat: {positionLatitude}</p>
               <p>long: {positionLongitude}</p>
             </GeolocationContainer>
