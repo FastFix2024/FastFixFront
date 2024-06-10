@@ -64,17 +64,18 @@ export const MissionTitle = styled.p`
 export const MissionInfo = styled.p`
   margin-top: 20px;
   font-size: 16px;
+  width: 1000px;
 `;
 
 export const MiniInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
 `;
 
 export const MiniInfoTextBlock = styled.div`
-  width: 235px;
+  width: 350px;
   margin-left: 30px;
+  margin-right: 30px;
 `;
 
 export const MiniInfoTitel = styled.p`
@@ -89,6 +90,6 @@ export const MiniInfo = styled.p`
 
 export const Border = styled.div`
   background-color: black;
-  height: 150px;
+  height: 300px;
   width: 2px;
 `;
