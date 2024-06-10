@@ -1,4 +1,4 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 export const Container = styled.div`
   display: flex;
@@ -27,7 +27,7 @@ export const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 8px;
-  width: 300px;
+  width: 150px;
 `;
 
 export const Button = styled.button`
@@ -76,7 +76,7 @@ export const UserMarkerToggle = styled.button`
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #091e3f;
   color: #fff;
   cursor: pointer;
   z-index: 1;
@@ -145,12 +145,12 @@ export const RouteButton = styled.button`
   padding: 8px 12px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #091e3f;
   color: #fff;
   cursor: pointer;
   margin-top: 10px;
   width: 100%;
-  max-width: 150px;
+  width: 92px;
   display: flex;
   align-items: center;
 
@@ -171,7 +171,7 @@ export const CloseResultsButton = styled.button`
   padding: 8px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff;
+  background-color: #091e3f;
   color: #fff;
   cursor: pointer;
   font-size: 1rem;
@@ -183,15 +183,18 @@ export const MapWindowContainer = styled.div`
 
 export const ReviewsContainer = styled.div`
   position: absolute;
+  display: flex;
+  flex-direction: column;
   top: -147px;
-  left: calc(10% + 320px);
+  left: calc(10% + 300px);
   width: 300px;
-  height: 800px;
+  height: auto;
   overflow-y: auto;
   background-color: #fff;
   z-index: 1;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  border: solid 1px gray;
   padding: 20px;
 `;
 
@@ -212,3 +215,22 @@ export const ReviewText = styled.p`
   font-size: 0.9rem;
   line-height: 1.4;
 `;
+export const CloseButton = styled.button`
+  position: relative;
+  left: 240px;
+  top: -25px;
+  width: 26px;
+  background-color: transparent;
+  color: grey;
+  border: none;
+  cursor: pointer;
+`;
+export const ServiceInfoWrapper = styled.div`
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap:15px;
+width: 95%;
+
+`

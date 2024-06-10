@@ -34,7 +34,7 @@ const InfoBlock = () => {
       </ImgContainer>
       <InfoWrapper>
         <MissionText>
-          <MissionTitle>Our Company Mission</MissionTitle>
+          <MissionTitle>Mission</MissionTitle>
           <MissionInfo>
           Our company specializes in providing comprehensive services for more convenient maintenance of your vehicle. 
           We focus on high-quality standards and customer satisfaction, 
@@ -65,8 +65,7 @@ const InfoBlock = () => {
           <MiniInfoTextBlock>
             <MiniInfoTitel>Advantages</MiniInfoTitel>
             <MiniInfo>
-              We offer a wide range of services, from basic maintenance to complex repairs, from finding the nearest gas stations to selecting the cheapest fuel.
-              <br />
+              We offer a wide range of services, from finding the nearest gas stations to selecting the cheapest fuel.
               Our service helps you find highly qualified specialists who use modern technology and equipment to provide you with the best service. 
               <br /> <br />
               With us, you won’t forget to change your seasonal tires or to perform mandatory maintenance on time.
