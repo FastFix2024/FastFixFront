@@ -2,7 +2,7 @@ import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { userAreaVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 import { authSlice } from "./redux/authSlice/authSlice";
-import { usersSlice } from './redux/usersSLice/usersSlice'
+import { usersSlice } from './redux/usersSlice/usersSlice'
 import { fuelSlice } from "./redux/fuelSlice/fuelSlice";
 
 // `combineSlices` automatically combines the reducers using

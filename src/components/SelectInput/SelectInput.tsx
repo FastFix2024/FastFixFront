@@ -5,9 +5,9 @@ const SelectInput = ({ name, label, value, options, onChange }: SelectInputProps
     return (
         <SelectContainer>
             <label htmlFor={name}>{label}:</label>
-            <Select value={value} onChange={onChange}>
+            <Select name={name} value={value} onChange={onChange}>
                 {options.map((option: any) => (
-                    <option key={option} value={value}>{name}</option>
+                    <option key={option} value={value}>{option}</option>
                 ))}
             </Select>
         </SelectContainer>

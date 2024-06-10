@@ -1,16 +1,28 @@
+
 import { useEffect, useState } from "react";
 import SelectInput from "../SelectInput/SelectInput";
 import { DateContainer, DateInput } from "./styles";
 import axios from "axios";
-import { InsuranceTypes } from "./types";
+import { useAppDispatch } from '../../store/hooks'
+import { usersSliceActions } from '../../store/redux/usersSlice/usersSlice'
+
+interface InsuranceTypes {
+  id: number,
+  name: string
+}
+
 
 const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("ADAC");
   const [fuelType, setFuelType] = useState<string>("E10");
+
+  const dispatch = useAppDispatch();
+
   const [inspectionDate, setInspectionDate] = useState<string>("2025-06-06");
 
   const [insuranceOptions, setInsuranceOptions] = useState<InsuranceTypes[]>([]);
   const [insuranceOptionID, setInsuranceOptionID] = useState<number>();
+
 
   useEffect(() => {
     axios
@@ -33,9 +45,15 @@ const UserInfo = () => {
   const handleInsuranceChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
       const insuranceName = evt.target.value;
       setInsurance(insuranceName);
-      const insuranceId = insuranceOptions.find(opt => insuranceName === opt.name);
-      if (insuranceId) {
+
+    const insuranceId = insuranceOptions.find(opt => insuranceName === opt.name);
+    console.log('insuranceIdINSIDE',insuranceId)
+    if (insuranceId) {
+
+        dispatch(usersSliceActions.updateUser(insuranceId.id))
         setInsuranceOptionID(insuranceId.id);
+
+        
       }
     };
   const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => setFuelType(evt.target.value);
@@ -43,7 +61,11 @@ const UserInfo = () => {
 
   return (
     <>
-      <SelectInput name={insurance} label="Insurance" value={insuranceOptionID} options={insuranceOptions.map(opt => opt.name)} onChange={handleInsuranceChange} />
+
+        
+
+      <SelectInput name="insurance" label="Insurance" value={insuranceOptionID} options={insuranceOptions.map(opt => opt.name)} onChange={handleInsuranceChange} />
+
 
       <SelectInput name="fuelType" label="Fuel Type" value={0} options={fuelTypeOptions} onChange={handleFuelTypeChange} />
 
@@ -56,5 +78,3 @@ const UserInfo = () => {
 };
 
 export default UserInfo;
-
-///api/car-details/insurance-companies

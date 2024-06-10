@@ -6,7 +6,7 @@ import { authSliceSlectors } from '../../store/redux/authSlice/authSlice'
 import { Footer, FooterIcons, ProfileBackground, ProfileButtons, ProfileContainer, ProfileIcons, Section3Background, SectionContainer, SectionWrapper } from "./styles";
 
 const SectionProfile = () => {
-  const user = useAppSelector(authSliceSlectors.selectCurrentUser);
+  const user = useAppSelector(authSliceSelectors.selectCurrentUser);
 
 
   

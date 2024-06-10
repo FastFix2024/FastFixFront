@@ -77,4 +77,4 @@ export const authSlice = createAppSlice({
 });
 
 export const authSliceActions = authSlice.actions;
-export const authSliceSlectors = authSlice.selectors;
+export const authSliceSelectors = authSlice.selectors;

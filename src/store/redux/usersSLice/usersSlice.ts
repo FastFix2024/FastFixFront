@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createAppSlice } from "../../createAppSlice";
-import { UpdateCredentials, UserCredentials, UsersState } from "./types";
+import { UpdateCredentials, UserCredentials, UsersState } from "./types"
 
 const initialState: UsersState = {
   users: [],
@@ -38,7 +38,7 @@ export const usersSlice = createAppSlice({
     updateUser: create.asyncThunk(
       async (updateCredentials: UpdateCredentials, { rejectWithValue }) => {
         try {
-          const response = await axios.put("api/users/", updateCredentials);
+          const response = await axios.put("api/users/my/profile", updateCredentials);
           return response.data;
         } catch (error: any) {
           return rejectWithValue(error.response.data);
