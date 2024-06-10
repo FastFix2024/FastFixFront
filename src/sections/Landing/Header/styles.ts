@@ -23,7 +23,7 @@ export const HeaderComponentContainer = styled.div`
   justify-content: end;
   gap: 150px;
   width: 80%;
-  height: 60px;
+  height: 70px;
 `;
 
 export const HeaderMotto = styled.p`
@@ -33,9 +33,7 @@ export const HeaderMotto = styled.p`
 
 export const NavMenu = styled.div`
   display: flex;
-  justify-content: end;
-  align-items: center;
-  height: 60px;
+  height: 70px;
   background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 100%, transparent 70%);
   padding: 10px 30px;
   position: relative;
@@ -44,6 +42,7 @@ export const NavMenu = styled.div`
 
 export const NavMenuButtonContainer = styled.div`
   display: flex;
+  align-items: center;
   gap: 50px;
   margin-left: 30px;
 `;

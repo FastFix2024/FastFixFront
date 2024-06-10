@@ -40,8 +40,7 @@ export const YTWrapper = styled.div`
   gap: 100px;
   position: relative;
   left: 50%;
-  transform: translate(-50%, -30%);
+  transform: translate(-55%, -15%);
   width: 80%;
-  padding-bottom: 200px;
   z-index: 1;
 `;

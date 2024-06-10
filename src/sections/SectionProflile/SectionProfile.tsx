@@ -1,4 +1,4 @@
-import { DeleteUser, GitHub, Logout, Mail, Notifications } from "../../assets";
+import { DeleteUser, GitHub, Logout, Mail } from "../../assets";
 import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { useAppDispatch, useAppSelector } from '../../store/hooks'
@@ -21,11 +21,15 @@ const SectionProfile = () => {
       { user && <SectionContainer>
         <Section3Background>
           <ProfileBackground>
-            <ProfileContainer>
-              <UserInfo />
-            </ProfileContainer>
+          <ProfileButtons>
+              <ProfileIcons src={Logout} />
+              <ProfileIcons src={DeleteUser} />
+            </ProfileButtons>
             <ProfileContainer>
               <FuelCard />
+            </ProfileContainer>
+            <ProfileContainer>
+              Здесь контет напоминания
             </ProfileContainer>
             <ProfileContainer>
               <ProfileIcons src={Logout} onClick={logoutHandler}/>
