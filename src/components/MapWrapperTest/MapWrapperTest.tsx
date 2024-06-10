@@ -249,10 +249,12 @@ const MapWrapperTest: React.FC = () => {
           <Autocomplete onLoad={(autocomplete) => (searchRef.current = autocomplete)} onPlaceChanged={handleSearchClick}>
             <InputContainer>
               <Input type="text" placeholder="Введите место" />
-              <Button onClick={handleSearchClick}><MdSearch /></Button>
+             {/* <Button onClick={handleSearchClick}>🔍</Button> */}
+
+
+
               <Button
                 onClick={() => {
-                  searchRef.current.value = "";
                   setSelectedPlace(null);
                   clearRoute();
                 }}
@@ -348,16 +350,7 @@ const MapWrapperTest: React.FC = () => {
                 <PlaceInfo>
                   Рейтинг: {Array.from({ length: Math.round(place.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)} {place.rating} ({place.user_ratings_total} отзывов)
                 </PlaceInfo>
-                <PlaceInfo>{place.opening_hours ? (place.opening_hours.isOpen() ? "Открыто" : "Закрыто") : "Нет данных об открытии"}</PlaceInfo>
-                <PlaceInfo>Телефон: {place.formatted_phone_number !== "No Phone" ? place.formatted_phone_number : "Не указан"}</PlaceInfo>
-                {place.website && (
-                  <PlaceInfo>
-                    <a href={place.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", fontWeight: "bold" }}>
-                      Сайт
-                    </a>
-                  </PlaceInfo>
-                )}
-                <RouteButton onClick={() => calculateRoute(place.geometry.location)}><MdDirections /> Show route</RouteButton>
+                <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
               <PlacePhoto>
                 {place.photos && place.photos.length > 0 ? (

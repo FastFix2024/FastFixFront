@@ -13,9 +13,8 @@ export const usersSlice = createAppSlice({
   reducers: (create) => ({
     getUser: create.asyncThunk(
       async (getUserCredentials: UserCredentials, { rejectWithValue }) => {
-        const { id } = getUserCredentials;
-        try {
-          const response = await axios.get(`api/users/${id}`);
+          try {
+          const response = await axios.get(`api/users/my/profile`);
           return response.data;
         } catch (error: any) {
           if (error.response) {
@@ -36,9 +35,26 @@ export const usersSlice = createAppSlice({
       }
     ),
     updateUser: create.asyncThunk(
-      async (updateCredentials: UpdateCredentials, { rejectWithValue }) => {
+      async (userCredentials : UserCredentials, { rejectWithValue }) => {
         try {
-          const response = await axios.put("api/users/my/profile", updateCredentials);
+          const response = await axios.put("api/users/my/profile", userCredentials);
+          return response.data;
+        } catch (error: any) {
+          return rejectWithValue(error.response.data);
+        }
+      },
+      {
+        pending: (state) => {},
+        fulfilled: (state, action) => {},
+        rejected: (state, action) => {
+          state.errorMessage = "Update error";
+        },
+      }
+    ),
+    logoutUser: create.asyncThunk(
+      async (arg, { rejectWithValue }) => {
+        try {
+          const response = await axios.get("api/auth/logout");
           return response.data;
         } catch (error: any) {
           return rejectWithValue(error.response.data);

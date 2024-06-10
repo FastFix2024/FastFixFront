@@ -14,6 +14,11 @@ export interface UserCredentials {
   active: boolean;
 }
 
+export interface UpdateCredentials{
+carDetails?: CarData[]
+updateErrorMessage?: string
+}
+
 interface CarData {
   id: number;
   fuel_type: string;
@@ -21,7 +26,3 @@ interface CarData {
   insurance_company_id: number;
 }
 
-export interface UpdateCredentials{
-carDetails?: CarData[]
-updateErrorMessage?: string
-}
