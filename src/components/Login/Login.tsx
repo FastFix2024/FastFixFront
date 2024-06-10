@@ -25,6 +25,7 @@ const Login = () => {
     validationSchema: schema,
     validateOnChange: false,
     onSubmit: (values: LoginFormValues) => {
+      console.log('values',values)
       dispatch(authSliceActions.login(values))
       },
   });

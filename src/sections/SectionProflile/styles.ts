@@ -37,7 +37,7 @@ export const ProfileButtons = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: -45%;
+  top: -15%;
   right: 10%;
   margin: 30px;
   gap: 20px;
@@ -48,7 +48,7 @@ export const ProfileBackground = styled.div`
   justify-content: space-evenly;
   align-items: center;
   background-color: lightgrey;
-  height: 640px;
+  height: 450px;
   width: 80%;
   border-radius: 20px;
 `;

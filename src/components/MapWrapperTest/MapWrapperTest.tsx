@@ -223,10 +223,9 @@ const MapWrapperTest: React.FC = () => {
           <Autocomplete onLoad={(autocomplete) => (searchRef.current = autocomplete)} onPlaceChanged={handleSearchClick}>
             <InputContainer>
               <Input type="text" placeholder="Введите место" />
-              <Button onClick={handleSearchClick}>🔍</Button>
+              {/* <Button onClick={handleSearchClick}>🔍</Button> */}
               <Button
                 onClick={() => {
-                  searchRef.current.value = "";
                   setSelectedPlace(null);
                   clearRoute();
                 }}
@@ -313,13 +312,6 @@ const MapWrapperTest: React.FC = () => {
                 <PlaceInfo>
                   Рейтинг: {place.rating} ({place.user_ratings_total} отзывов)
                 </PlaceInfo>
-                <PlaceInfo>{place.opening_hours?.isOpen() ? "Открыто" : "Закрыто"}</PlaceInfo>
-                {place.formatted_phone_number && <PlaceInfo>Телефон: {place.formatted_phone_number}</PlaceInfo>}
-                {place.website && (
-                  <a href={place.website} target="_blank" rel="noopener noreferrer">
-                    Сайт
-                  </a>
-                )}
                 <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
             </PlaceItem>
