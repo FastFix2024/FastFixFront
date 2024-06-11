@@ -13,7 +13,7 @@ const schema = Yup.object().shape({
   [REGISTER_FORM_NAMES.USERNAME]: Yup.string()
     .required("Userame required")
     .min(5, "Username must be at least 5 characters")
-    .max(15, "Username must not exceed 15 characters"),
+    .max(50, "Username must not exceed 50 characters"),
   [REGISTER_FORM_NAMES.EMAIL]: Yup.string()
     .required("email required")
     .email("Invalid email format"),
