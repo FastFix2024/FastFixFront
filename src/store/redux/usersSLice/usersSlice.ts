@@ -59,7 +59,7 @@ export const usersSlice = createAppSlice({
     logoutUser: create.asyncThunk(
       async (arg, { rejectWithValue }) => {
         try {
-          const response = await axios.get("api/auth/logout");
+          const response = await axios.get("/api/auth/logout");
           return response.data;
         } catch (error: any) {
           return rejectWithValue(error.response.data);
