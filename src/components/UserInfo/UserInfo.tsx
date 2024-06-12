@@ -4,7 +4,6 @@ import { DateContainer, DateInput } from "./styles";
 import axios from "axios";
 import { InsuranceTypes } from "./types";
 import { useDispatch } from "react-redux";
-import { usersSliceActions } from "../../store/redux/usersSlice/usersSlice";
 
 const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("");
@@ -13,7 +12,9 @@ const UserInfo = () => {
   
   const [insuranceOptionID, setInsuranceOptionID] = useState<number | undefined>();
   const [fuelType, setFuelType] = useState<string>("");
-  const [inspectionDate, setInspectionDate] = useState<string>("2025-06-06");
+  const [inspectionDate, setInspectionDate] = useState<string>('');
+
+  const [userID, setUserID] = useState<number>();
 
   const dispatch = useDispatch();
   
@@ -23,7 +24,6 @@ const UserInfo = () => {
       .then((res) => {
         const options = res.data.map((opt: { id: number; name: string }) => ({ id: opt.id, name: opt.name }));
         setInsuranceOptions(options);
-        console.log(options);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -32,7 +32,7 @@ const UserInfo = () => {
     axios
       .get("/api/car-details/fuel-types")
       .then((res) => {
-        setFuelOptions(res.data);
+        setFuelOptions(res.data.carDetails.fuelType);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -41,8 +41,10 @@ const UserInfo = () => {
     axios.get("api/users/my/profile")
     .then((res) => {
       const data = res.data;
+      setUserID(data.id);
       setFuelType(data.carDetails.fuelType);
-      setInspectionDate(data.carDetails.lastMaintenanceDate.join('-'));
+      const formattedDate = new Date(data.carDetails.lastMaintenanceDate).toISOString().split('T')[0];
+      setInspectionDate(formattedDate);
       setInsurance(data.carDetails.insuranceCompany.name);
       setInsuranceOptionID(data.carDetails.insuranceCompany.id);
     })
@@ -56,30 +58,56 @@ const UserInfo = () => {
     if (insuranceId) {
       setInsuranceOptionID(insuranceId.id);
     }
-    handleUpdate(insuranceName, fuelType, inspectionDate, insuranceId?.id);
+    handleUpdateInsurance(insuranceId?.id);
   };
 
   const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     const newFuelType = evt.target.value;
     setFuelType(newFuelType);
-    handleUpdate(insurance, newFuelType, inspectionDate, insuranceOptionID);
+    // handleUpdateFuel(newFuelType);
   };
 
   const handleInspectionDateChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const newInspectionDate = evt.target.value;
     setInspectionDate(newInspectionDate);
-    handleUpdate(insurance, fuelType, newInspectionDate, insuranceOptionID);
+    handleUpdateInspectionDate(newInspectionDate);
   };
+  
+  const handleUpdateInsurance = (insuranceOptionID: number | undefined) => {
+  
+  axios.put(`api/car-details/${userID}/insurance-company`, insuranceOptionID, {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  })
+  .then((response) => {
+    console.log("Update successful:", response.data);
+  })
+  .catch((error) => {
+    console.error("Update error:", error);
+  });
+  // dispatch(usersSliceActions.updateUser(insuranceOptionID));
+  };  
+  
+  console.log(inspectionDate);
+  
 
-  const handleUpdate = (insurance: string, fuelType: string, inspectionDate: string, insuranceOptionID: number | undefined) => {
-    const userCredentials2 = {     //добавить всего пользователя
-      carDetails: {
-        fuelType,
-        lastMaintenanceDate: inspectionDate.split('-').map(Number),
-        insuranceCompany: { id: insuranceOptionID, name: insurance }
-      }
-    };
-    dispatch(usersSliceActions.updateUser(userCredentials));
+  const handleUpdateInspectionDate = (newInspectionDate: any) => {
+  
+  axios.put(`api/car-details/${userID}/last-maintenance-date`, newInspectionDate, {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  })
+  .then((response) => {
+    console.log("Update successful:", response.data);
+    console.log(newInspectionDate);
+    
+  })
+  .catch((error) => {
+    console.error("Update error:", error);
+  });
+  // dispatch(usersSliceActions.updateUser(insuranceOptionID));
   };
 
   return (

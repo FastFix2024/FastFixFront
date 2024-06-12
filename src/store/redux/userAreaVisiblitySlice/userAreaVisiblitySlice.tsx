@@ -21,7 +21,6 @@ export const userAreaVisibilityAppSlice = createAppSlice({
         
   }
 })
-console.log('SLICE LOG',userAreaVisibilityState.isVisible)
 
 export const userAreaVisibilitySliceActions = userAreaVisibilityAppSlice.actions
 export const userAreaVisibilitySliceSelectors = userAreaVisibilityAppSlice.selectors

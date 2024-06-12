@@ -26,6 +26,8 @@ import {
   ReviewAuthor,
   ReviewText,
   ReviewRating,
+  CloseButton,
+  ServiceInfoWrapper,
 } from "./styles";
 import { Place, PlaceResultWithGeometry } from "./types";
 
@@ -57,7 +59,7 @@ const MapWrapperTest: React.FC = () => {
   const [selectedMarker, setSelectedMarker] = useState<Place | null>(null);
   const [places, setPlaces] = useState<Place[]>([]);
   const [placeDetails, setPlaceDetails] = useState<google.maps.places.PlaceResult | null>(null);
-  const [filter, setFilter] = useState({ minRating: 0, openNow: "any" });
+  const [filter, setFilter] = useState({ minRating: 3.7, openNow: "any" });
   const [showFilter, setShowFilter] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
@@ -181,7 +183,7 @@ const MapWrapperTest: React.FC = () => {
     placesService.getDetails({ placeId }, (place, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
         setPlaceDetails(place);
-        setReviews(place.reviews || []);
+        setReviews(place?.reviews || []);
       } else {
         console.error("Error fetching place details:", status);
       }
@@ -200,13 +202,13 @@ const MapWrapperTest: React.FC = () => {
     setSelectedPlace(null);
   };
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilter({ ...filter, [e.target.name]: e.target.value });
-  };
+  // const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setFilter({ ...filter, [e.target.name]: e.target.value });
+  // };
 
-  const toggleFilter = () => {
-    setShowFilter(!showFilter);
-  };
+  // const toggleFilter = () => {
+  //   setShowFilter(!showFilter);
+  // };
 
   const handlePlaceSelect = (place: Place) => {
     setSelectedMarker(place);
@@ -246,30 +248,14 @@ const MapWrapperTest: React.FC = () => {
     <MapWindowContainer>
       <Container>
         <SearchContainer id="section-map">
-          <Autocomplete onLoad={(autocomplete) => (searchRef.current = autocomplete)} onPlaceChanged={handleSearchClick}>
-            <InputContainer>
-              <Input type="text" placeholder="Введите место" />
-             {/* <Button onClick={handleSearchClick}>🔍</Button> */}
 
-
-
-              <Button
-                onClick={() => {
-                  setSelectedPlace(null);
-                  clearRoute();
-                }}
-              >
-                <MdClose />
-              </Button>
-            </InputContainer>
-          </Autocomplete>
           <ButtonsContainer>
             <ServiceButton onClick={() => findNearestPlaces("car_repair")}><MdBuild /> Mechanic</ServiceButton>
             <ServiceButton onClick={() => findNearestPlaces("gas_station")}><MdLocalGasStation /> Gas Station</ServiceButton>
             <ServiceButton onClick={() => findNearestPlaces("car_wash")}><MdLocalCarWash /> Car wash</ServiceButton>
             <ServiceButton onClick={() => findNearestPlaces("parking")}><MdLocalParking /> Parking</ServiceButton>
             <ServiceButton onClick={() => findNearestPlaces("restaurant")}><MdRestaurant /> Food Point</ServiceButton>
-            <UserMarkerToggle onClick={handlePanToUserLocation}><MdLocationOn /> Мое местоположение</UserMarkerToggle>
+            <UserMarkerToggle onClick={handlePanToUserLocation}><MdLocationOn /> My location</UserMarkerToggle>
           </ButtonsContainer>
         </SearchContainer>
       </Container>
@@ -300,29 +286,29 @@ const MapWrapperTest: React.FC = () => {
           ))}
           {selectedMarker && placeDetails && (
             <InfoWindow position={selectedMarker.geometry.location} onCloseClick={() => setSelectedMarker(null)}>
-              <div>
+              <ServiceInfoWrapper>
                 <h2>{placeDetails.name}</h2>
                 {placeDetails.photos && placeDetails.photos.length > 0 ? (
                   <img
                     src={placeDetails.photos[0].getUrl()}
                     alt={placeDetails.name}
-                    style={{ width: "200px", height: "200px", objectFit: "cover" }}
+                    style={{ width: "500px", height: "250px", objectFit: "cover" }}
                   />
                 ) : (
                   getDefaultIcon(placeDetails.types ? placeDetails.types[0] : "")
                 )}
                 <p><MdLocationOn /> {placeDetails.formatted_address}</p>
                 {placeDetails.opening_hours && (
-                  <div>
-                    <p>Opening hours: {placeDetails.opening_hours.weekday_text?.join(", ")}</p>
-                    <p>{placeDetails.opening_hours.isOpen() ? "Открыто" : "Закрыто"}</p>
-                  </div>
+                  <ServiceInfoWrapper>
+                    <ServiceInfoWrapper>Opening hours: <br/>{placeDetails.opening_hours.weekday_text?.join()}</ServiceInfoWrapper>
+                    <p>{placeDetails.opening_hours.isOpen() ? "Open" : "Closed"}</p>
+                  </ServiceInfoWrapper>
                 )}
-                <p>Rating: {Array.from({ length: Math.round(placeDetails.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)} {placeDetails.rating} звезд</p>
+                <p>Rating: {Array.from({ length: Math.round(placeDetails.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)} {placeDetails.rating} звезд</p>
                 <p>Телефон: {placeDetails.formatted_phone_number || "Не указан"}</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <a href={placeDetails.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#007bff", fontWeight: "bold" }}>
-                    Сайт
+                  <a href={placeDetails.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#091e3f", fontWeight: "bold" }}>
+                    Website
                   </a>
                   <button onClick={() => {
                     if (placeDetails?.geometry?.location) {
@@ -331,7 +317,7 @@ const MapWrapperTest: React.FC = () => {
                   }}><MdDirections /> Show route</button>
                   <button onClick={() => setShowReviews(true)}><MdComment /> Отзывы</button>
                 </div>
-              </div>
+              </ServiceInfoWrapper>
             </InfoWindow>
           )}
           {directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
@@ -348,7 +334,7 @@ const MapWrapperTest: React.FC = () => {
                 <PlaceName>{place.name}</PlaceName>
                 <PlaceInfo><MdLocationOn /> {place.vicinity}</PlaceInfo>
                 <PlaceInfo>
-                  Рейтинг: {Array.from({ length: Math.round(place.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)} {place.rating} ({place.user_ratings_total} отзывов)
+                  Rating: {place.rating} {Array.from({ length: Math.round(place.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}  <br/>({place.user_ratings_total} reviews)
                 </PlaceInfo>
                 <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
@@ -365,12 +351,13 @@ const MapWrapperTest: React.FC = () => {
       )}
       {showReviews && (
         <ReviewsContainer>
-          <button onClick={() => setShowReviews(false)}>Закрыть</button>
-          <h2>Отзывы</h2>
+          <h2>Client feedback:</h2>
+          <CloseButton onClick={() => setShowReviews(false)}>✕</CloseButton>          
+          <br/>
           {reviews.map((review, idx) => (
             <ReviewItem key={idx}>
               <ReviewAuthor>{review.author_name}</ReviewAuthor>
-              <ReviewRating>Рейтинг: {Array.from({ length: Math.round(review.rating) }, (_, i) => <MdStar key={i} style={{ color: "yellow" }} />)}</ReviewRating>
+              <ReviewRating>{Array.from({ length: Math.round(review.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}</ReviewRating>
               <ReviewText>{review.text}</ReviewText>
             </ReviewItem>
           ))}

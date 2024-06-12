@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 export const InfoAndImgWrapper = styled.div`
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 10px;
   font-family: Arial, Helvetica, sans-serif;
 `;
 
@@ -45,7 +45,7 @@ export const ImgContainer = styled.div`
 
 export const GeoContainer = styled.div`
 position: relative;
-top: 20px;
+top: 35px;
 left: 25%;
   width: 360px;
   height: 100px;
@@ -62,9 +62,11 @@ export const MissionTitle = styled.p`
 `;
 
 export const MissionInfo = styled.p`
+  font-family: Arial, Helvetica, sans-serif;
   margin-top: 20px;
-  font-size: 16px;
-  width: 1000px;
+  font-size: 18px;
+  width: 800px;
+
 `;
 
 export const MiniInfoWrapper = styled.div`
@@ -75,17 +77,17 @@ export const MiniInfoWrapper = styled.div`
 export const MiniInfoTextBlock = styled.div`
   width: 350px;
   margin-left: 30px;
-  margin-right: 30px;
+  margin-right: 100px;
 `;
 
 export const MiniInfoTitel = styled.p`
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
 `;
 
 export const MiniInfo = styled.p`
   margin-top: 10px;
-  font-size: 16px;
+  font-size: 18px;
 `;
 
 export const Border = styled.div`

@@ -5,24 +5,39 @@ export const EmergencyContainer = styled.div`
   border-radius: 10px;
   font-size: 20px;
   color: white;
-  width: 500px;
+  position: absolute;
+  left: -33%;
+  width: fit-content;
 `;
 
 export const GeolocationWrapper = styled.div`
-  padding-left: 20px;
+  padding-left: 5px;
 `;
 
-export const PhoneNuberContainer = styled.div`
+export const PhoneNumberContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 10px;
+  margin: 15px;
 `;
 
 export const GeolocationContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin: 10px;
-  width: 300px;
+  margin: 15px;
 `;
+export const EmergencyButton = styled.button`
+  font-size: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ffc700;
+  padding: 20px;
+  margin-bottom: 15px;
+`;
+export const AdacLink = styled.a`
+  font-size: 24px;
+  color: white;
+  padding-left: 5px;
+`;
+

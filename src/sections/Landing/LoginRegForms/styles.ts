@@ -38,7 +38,7 @@ export const LoginWrapper = styled.div`
   position: relative;
   width: 400px;
   height: 500px;
-  background-color: rgba(0, 123, 175, 1);
+  background-color: rgba(61, 121, 155, 0.8);
   border-radius: 0 0 8px 8px;
   display: flex;
   align-items: center;
@@ -50,7 +50,7 @@ export const StepLoginContainer = styled.button`
   bottom: 100%;
   width: 50%;
   height: 30px;
-  background-color: rgba(0, 123, 175, 1);
+  background-color: rgba(61, 121, 155, 0.6);
   border: 0;
   border-radius: 8px 8px 0 0;
   display: flex;

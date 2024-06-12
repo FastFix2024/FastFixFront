@@ -7,13 +7,15 @@ import {
   HeaderComponentContainer,
   HeaderLogo,
   HeaderLogoContainer,
-  HeaderMotto,
+  
   HeaderText,
   HeaderWpapper,
   NavMenu,
   NavMenuButtonContainer,
   SeparationLine,
   BackToTopButton,
+  HeaderMotto1,
+  HeaderMotto2,
 } from "./styles";
 import { up } from "../../../assets";
 
@@ -60,7 +62,8 @@ export const Header = () => {
     <HeaderWpapper>
       <HeaderComponent>
         <HeaderComponentContainer>
-          <HeaderMotto>Nothing unnecessary, on the way to your goal.</HeaderMotto>
+          <HeaderMotto1>ON YOUR PATH TO SUCCESS </HeaderMotto1>
+          <HeaderMotto2>FASTFIX IS YOUR CONCIERGE</HeaderMotto2>
           <NavMenu>
             <NavMenuButtonContainer>
               <HeaderText onClick={() => scrollToSection("section-map")}>MAP</HeaderText>
