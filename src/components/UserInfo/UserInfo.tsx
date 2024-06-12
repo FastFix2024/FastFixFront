@@ -3,23 +3,24 @@ import SelectInput from "../SelectInput/SelectInput";
 import { DateContainer, DateInput } from "./styles";
 import axios from "axios";
 import { InsuranceTypes } from "./types";
+import { useAppDispatch } from "../../store/hooks";
+
 
 const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("");
   const [fuelOptions, setFuelOptions] = useState<InsuranceTypes[]>([]);
   const [insuranceOptions, setInsuranceOptions] = useState<InsuranceTypes[]>([]);
-  
+
   const [insuranceOptionID, setInsuranceOptionID] = useState<number>();
   const [fuelType, setFuelType] = useState<string>("");
   const [inspectionDate, setInspectionDate] = useState<string>("2025-06-06");
 
-
-  
+  const dispatch = useAppDispatch();
 
   console.log("insuranceOptionID", insuranceOptionID);
   console.log("fuelType", fuelType);
-  console.log('inspectionDate', inspectionDate)
-  
+  console.log("inspectionDate", inspectionDate);
+
   useEffect(() => {
     axios
       .get("/api/car-details/insurance-companies")
@@ -50,34 +51,6 @@ const UserInfo = () => {
     }
   };
 
-  useEffect(() => {
-    axios.get("api/")
-  })
-
-  // {
-  //   "id": 1,
-  //   "username": "Ian",
-  //   "email": "ian.wanderfalke@gmail.com",
-  //   "carDetails": {
-  //     "id": null,
-  //     "fuelType": "e5",
-  //     "lastMaintenanceDate": [
-  //       2024,
-  //       6,
-  //       10
-  //     ],
-  //     "insuranceCompany": {
-  //       "id": 9,
-  //       "name": "HanseMerkur",
-  //       "phoneNumber": "+49 40 4119 0",
-  //       "website": "https://www.hansemerkur.de"
-  //     }
-  //   }
-  // }
-
-
-
-  
 
   const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => setFuelType(evt.target.value);
 

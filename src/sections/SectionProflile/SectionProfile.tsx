@@ -27,7 +27,7 @@ const SectionProfile = () => {
   }
   function deleteHandler() {
   dispatch(authSliceActions.deleteCurrentUser())
-}
+  }
 
   return (
     <SectionWrapper>

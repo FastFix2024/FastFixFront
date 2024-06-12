@@ -3,7 +3,7 @@ import { createAppSlice } from "../../createAppSlice";
 import { AuthState, LoginDto, RegistrationDto, User } from "./types";
 
 const initialState: AuthState = {
-  isAuthenticated: JSON.parse(localStorage.getItem("isAuthenticated") ?? "")
+  isAuthenticated: JSON.parse(localStorage.getItem("isAuthenticated") ?? "false") 
 };
 
 export const authSlice = createAppSlice({
