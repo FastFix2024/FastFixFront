@@ -3,7 +3,7 @@ import { createAppSlice } from "../../createAppSlice";
 import { AuthState, LoginDto, RegistrationDto, User } from "./types";
 
 const initialState: AuthState = {
-  isAuthenticated: false,
+  isAuthenticated: JSON.parse(localStorage.getItem("isAuthenticated") ?? "")
 };
 
 export const authSlice = createAppSlice({
@@ -42,6 +42,7 @@ export const authSlice = createAppSlice({
         pending: (state) => {},
         fulfilled: (state, action) => {
           state.isAuthenticated = true;
+          localStorage.setItem("isAuthenticated", JSON.stringify(true));
         },
         rejected: (state, action) => {
           state.registrationErrorMessage = "Registration error";
@@ -49,7 +50,7 @@ export const authSlice = createAppSlice({
       }
     ),
     currentUser: create.asyncThunk(
-      async (arg: void, { rejectWithValue }) => {
+      async (_, { rejectWithValue }) => {
         try {
           const response = await axios.get<User>("/api/users/my/profile");
 
@@ -65,7 +66,28 @@ export const authSlice = createAppSlice({
         },
         rejected: (state, action) => {
           state.isAuthenticated = false;
+          localStorage.setItem("isAuthenticated", JSON.stringify(false));
         },
+      }
+    ),
+    deleteCurrentUser: create.asyncThunk(
+      async (_, { rejectWithValue }) => {
+        try {
+          const response = await axios.delete("/api/users/my/profile");
+
+          return response.data;
+        } catch (error: any) {
+          return rejectWithValue(error.response.data);
+        }
+      },
+      {
+        pending: (state) => {},
+        fulfilled: (state, action) => {
+          state.user = undefined;
+          state.isAuthenticated = false;
+          localStorage.setItem("isAuthenticated", JSON.stringify(false));
+        },
+        rejected: (state, action) => {},
       }
     ),
   }),
