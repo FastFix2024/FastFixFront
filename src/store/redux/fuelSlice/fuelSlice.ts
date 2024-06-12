@@ -1,25 +1,26 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { createAppSlice } from '../../createAppSlice'
+import axios from 'axios'
 
 interface FuelData {
     id: string;
     name: string;
     street: string;
-    houseNumber: string;
+    houseNumber: string | null;
     postCode: number;
     place: string;
     price: number;
   }
   
  interface FuelState {
-      data: FuelData[],
+      stations: FuelData[],
       error: any
   }
 
 
 
 const fuelInitialState: FuelState = {
-  data: [],
+  stations: [],
   error: undefined,
 };
 
@@ -28,16 +29,17 @@ export const fuelSlice = createAppSlice({
   initialState: fuelInitialState,
   reducers: (create) => ({
     getFuelInfo: create.asyncThunk(async (_, { rejectWithValue }) => {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords
-        
-        const response = await fetch(`/api/car-details/stations?latitude=${latitude}&longitude=123&radius=1`
-        )
-        const result = await response.json()
-        if (!response.ok) {
-          return rejectWithValue(result)
-        } else {
-          return result
+        try {
+          const response = await axios.get(`/api/car-details/stations?latitude=${latitude}&longitude=${longitude}&radius=5`)
+          return response.data;     
+        } catch (error: any) {
+          if (error.response) {
+            return rejectWithValue(error.response.data);
+          } else {
+            return rejectWithValue ({ message : "Network error"})
+          }
         }
       })
     },    
@@ -46,15 +48,19 @@ export const fuelSlice = createAppSlice({
             state.error = undefined
         },
         fulfilled: (state: FuelState, action: PayloadAction<any>) => {
-                state.data = action.payload.stations.map((station: any) => ({
-                  id: station.id,
-                  name: station.name,
-                  street: station.street,
-                  houseNumber: station.houseNumber,
-                  postCode: station.postCode,
-                  place: station.place,
-                  price: station.diesel, 
-                }));
+          if (action.payload && action.payload.stations) {
+            state.stations = action.payload.stations.map((station: any) => ({
+              id: station.id,
+              name: station.name,
+              street: station.street,
+              houseNumber: station.houseNumber,
+              postCode: station.postCode,
+              place: station.place,
+              price: station.diesel, // Assuming you want the diesel price
+            }));
+          } else {
+            state.stations = [];
+          }
         },
         rejected: (state: FuelState, action: PayloadAction<any>) => {
             state.error = action.payload
@@ -69,3 +75,7 @@ export const fuelSlice = createAppSlice({
 
 export const fuelSliceAction = fuelSlice.actions;
 export const fuelSliceSelectors = fuelSlice.selectors;
+
+
+
+//`/api/car-details/stations?latitude=${latitude}&longitude=${longitude}&radius=5`
