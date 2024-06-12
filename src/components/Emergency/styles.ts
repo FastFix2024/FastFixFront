@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 export const EmergencyContainer = styled.div`
   display: flex;
   border-radius: 10px;
+  font-size: 20px;
   color: white;
   position: absolute;
   left: -33%;

@@ -255,7 +255,7 @@ const MapWrapperTest: React.FC = () => {
             <ServiceButton onClick={() => findNearestPlaces("car_wash")}><MdLocalCarWash /> Car wash</ServiceButton>
             <ServiceButton onClick={() => findNearestPlaces("parking")}><MdLocalParking /> Parking</ServiceButton>
             <ServiceButton onClick={() => findNearestPlaces("restaurant")}><MdRestaurant /> Food Point</ServiceButton>
-            <UserMarkerToggle onClick={handlePanToUserLocation}><MdLocationOn /> Мое местоположение</UserMarkerToggle>
+            <UserMarkerToggle onClick={handlePanToUserLocation}><MdLocationOn /> My location</UserMarkerToggle>
           </ButtonsContainer>
         </SearchContainer>
       </Container>
@@ -300,7 +300,7 @@ const MapWrapperTest: React.FC = () => {
                 <p><MdLocationOn /> {placeDetails.formatted_address}</p>
                 {placeDetails.opening_hours && (
                   <ServiceInfoWrapper>
-                    <ServiceInfoWrapper>Opening hours: <br/>{placeDetails.opening_hours.weekday_text?.join('<br/>')}</ServiceInfoWrapper>
+                    <ServiceInfoWrapper>Opening hours: <br/>{placeDetails.opening_hours.weekday_text?.join()}</ServiceInfoWrapper>
                     <p>{placeDetails.opening_hours.isOpen() ? "Open" : "Closed"}</p>
                   </ServiceInfoWrapper>
                 )}

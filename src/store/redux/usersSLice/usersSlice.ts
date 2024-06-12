@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAppSlice } from "../../createAppSlice";
-import { UpdateCredentials, UserCredentials, UsersState } from "./types"
+import { UserCredentials, UsersState } from "./types";
+
 
 const initialState: UsersState = {
   users: [],
@@ -15,6 +16,7 @@ export const usersSlice = createAppSlice({
       async (getUserCredentials: UserCredentials, { rejectWithValue }) => {
           try {
           const response = await axios.get(`api/users/my/profile`);
+          localStorage.setItem('userID', response.data.id);
           return response.data;
         } catch (error: any) {
           if (error.response) {
@@ -35,9 +37,12 @@ export const usersSlice = createAppSlice({
       }
     ),
     updateUser: create.asyncThunk(
-      async (userCredentials : UserCredentials, { rejectWithValue }) => {
+      async (insuranceOptionID : any, { rejectWithValue }) => {
         try {
-          const response = await axios.put("api/users/my/profile", userCredentials);
+          const userID = localStorage.getItem('userID');
+          const response = await axios.put(`api/car-details/${userID}/insurance-company`, insuranceOptionID, {headers: {
+            'Content-Type': 'application/json'
+        }});
           return response.data;
         } catch (error: any) {
           return rejectWithValue(error.response.data);

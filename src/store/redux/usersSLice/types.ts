@@ -1,7 +1,10 @@
+export interface InsuranceCompany {
+  id: number;
+}
 
-export interface UsersState{
-    users: UserCredentials[],
-    errorMessage?: string        
+export interface UsersState {
+  users: UserCredentials[],
+  errorMessage?: string
 }
 
 export interface UserCredentials {
@@ -14,9 +17,9 @@ export interface UserCredentials {
   active: boolean;
 }
 
-export interface UpdateCredentials{
-carDetails?: CarData[]
-updateErrorMessage?: string
+export interface UpdateCredentials {
+  carDetails?: CarData[]
+  updateErrorMessage?: string
 }
 
 interface CarData {
@@ -25,4 +28,3 @@ interface CarData {
   last_maintenance_date: Date;
   insurance_company_id: number;
 }
-
