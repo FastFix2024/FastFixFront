@@ -11,6 +11,7 @@ const UserInfo = () => {
   const [insuranceOptions, setInsuranceOptions] = useState<InsuranceTypes[]>([]);
   
   const [insuranceOptionID, setInsuranceOptionID] = useState<number | undefined>();
+
   const [fuelType, setFuelType] = useState<string>("");
   const [inspectionDate, setInspectionDate] = useState<string>('');
 
@@ -90,7 +91,6 @@ const UserInfo = () => {
   };  
   
   console.log(inspectionDate);
-  
 
   const handleUpdateInspectionDate = (newInspectionDate: any) => {
   
