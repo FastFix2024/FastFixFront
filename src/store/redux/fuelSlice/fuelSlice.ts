@@ -17,6 +17,7 @@ interface FuelData {
   }
 
 
+
 const fuelInitialState: FuelState = {
   data: [],
   error: undefined,
@@ -26,17 +27,21 @@ export const fuelSlice = createAppSlice({
   name: "FUEL",
   initialState: fuelInitialState,
   reducers: (create) => ({
-    getFuelInfo: create.asyncThunk(async (arg, { rejectWithValue }) => {
-      const response = await fetch(
-        "https://creativecommons.tankerkoenig.de/json/list.php?lat=52.521&lng=13.438&rad=1.5&sort=dist&type=all&apikey=0bc4c8ca-21d0-ac93-2a74-4ae2a3afa795"
-      );
-      const result = await response.json();
-      if (!response.ok) {
-        return rejectWithValue(result);
-      } else {
-        return result;
-      }
-    }, {
+    getFuelInfo: create.asyncThunk(async (_, { rejectWithValue }) => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords
+        
+        const response = await fetch(`/api/car-details/stations?latitude=${latitude}&longitude=123&radius=1`
+        )
+        const result = await response.json()
+        if (!response.ok) {
+          return rejectWithValue(result)
+        } else {
+          return result
+        }
+      })
+    },    
+    {
         pending: (state: FuelState) => {
             state.error = undefined
         },

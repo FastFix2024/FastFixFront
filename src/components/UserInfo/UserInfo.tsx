@@ -54,6 +54,26 @@ const UserInfo = () => {
     axios.get("api/")
   })
 
+  // {
+  //   "id": 1,
+  //   "username": "Ian",
+  //   "email": "ian.wanderfalke@gmail.com",
+  //   "carDetails": {
+  //     "id": null,
+  //     "fuelType": "e5",
+  //     "lastMaintenanceDate": [
+  //       2024,
+  //       6,
+  //       10
+  //     ],
+  //     "insuranceCompany": {
+  //       "id": 9,
+  //       "name": "HanseMerkur",
+  //       "phoneNumber": "+49 40 4119 0",
+  //       "website": "https://www.hansemerkur.de"
+  //     }
+  //   }
+  // }
 
 
 
