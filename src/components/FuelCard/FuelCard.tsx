@@ -3,9 +3,26 @@ import axios from "axios";
 import { FuelCardContainer, FuelDetails, FuelDetailsText, Price } from "./styles";
 import { GasStation } from "./type";
 
+
 const FuelCard = () => {
   const [stations, setStations] = useState<GasStation[]>([]);
   const [error, setError] = useState<string | undefined>();
+
+
+  console.table(stations)
+  console.log(stations);
+  
+  // useEffect(() => {
+  //   dispatch(fuelSliceAction.getFuelInfo())
+  //   .then((originalPromiseResult: any) => {
+  //     // handle result here
+  //     console.log(originalPromiseResult);
+      
+  //   })
+  //   .catch((rejectedValueOrSerializedError: any) => {
+  //     // handle error here
+  //   })
+  // }, [])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -55,3 +72,7 @@ const FuelCard = () => {
 };
 
 export default FuelCard;
+// function dispatch(arg0: AsyncThunkAction<void, void, { state?: undefined; dispatch?: undefined; extra?: unknown; rejectValue?: unknown; serializedErrorType?: unknown; pendingMeta?: unknown; fulfilledMeta?: unknown; rejectedMeta?: unknown; }>) {
+//   throw new Error("Function not implemented.");
+// }
+
