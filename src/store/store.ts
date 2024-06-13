@@ -3,7 +3,7 @@ import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { userAreaVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 import { authSlice } from "./redux/authSlice/authSlice";
 import { fuelSlice } from "./redux/fuelSlice/fuelSlice";
-import { usersSlice } from './redux/usersSlice/usersSlice'
+import  usersSlice  from './redux/usersSlice/usersSlice'
 
 
 // `combineSlices` automatically combines the reducers using
