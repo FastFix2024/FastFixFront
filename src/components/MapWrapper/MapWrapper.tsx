@@ -84,7 +84,7 @@ const MapWrapper: React.FC = () => {
   const defaultCenter = { lat: 52.50796391454193, lng: 13.375055429296202 };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
+    googleMapsApiKey: import.meta.env.VITE_MAPS_API,
     libraries: libraries,
   });
 
