@@ -3,7 +3,6 @@ import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { useAppSelector, useAppDispatch } from "../../store/hooks";
 import { authSliceSelectors, authSliceActions } from "../../store/redux/authSlice/authSlice";
-import { usersSliceActions } from "../../store/redux/usersSlice/usersSlice";
 import {
   Footer,
   FooterIcons,
@@ -22,9 +21,9 @@ const SectionProfile = () => {
 
   const dispatch = useAppDispatch();
 
-  function logoutHandler() {
-    dispatch(usersSliceActions.logoutUser());
-  }
+  // function logoutHandler() {
+  //   dispatch(usersSliceActions.logoutUser());
+  // }
   function deleteHandler() {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
     if (isConfirmed) {
@@ -42,7 +41,7 @@ const SectionProfile = () => {
             <ProfileBackground>
               <ProfileButtons>
                 <ProfileIcons src={DeleteUser} onClick={deleteHandler} />
-                <ProfileIcons src={Logout} onClick={logoutHandler} />
+                <ProfileIcons src={Logout} onClick={()=>{}} />
               </ProfileButtons>
               <ProfileContainer>
                 <FuelCard />
