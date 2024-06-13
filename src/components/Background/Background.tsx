@@ -1,5 +1,6 @@
 import { Landing } from "../../sections/Landing/Landing";
 import SectionProfile from "../../sections/SectionProflile/SectionProfile";
+import RandomCarFact from "../CarFacts/CarFacts";
 import MapWrapper from '../MapWrapper/MapWrapper'
 import MapWrapperTest from "../MapWrapper/MapWrapper";
 

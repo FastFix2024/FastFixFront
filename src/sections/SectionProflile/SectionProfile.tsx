@@ -1,9 +1,10 @@
+import { usersSliceActions } from "store/redux/usersSlice/usersSlice";
 import { DeleteUser, GitHub, Logout, Mail } from "../../assets";
 import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { authSliceActions, authSliceSelectors } from "../../store/redux/authSlice/authSlice";
-import { usersSliceActions } from "../../store/redux/usersSlice/usersSlice";
+import { authSliceSelectors, authSliceActions } from "store/redux/authSlice/authSlice";
+
 import {
   Footer,
   FooterIcons,
