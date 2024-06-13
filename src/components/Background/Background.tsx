@@ -1,9 +1,6 @@
-import { Landing } from "../../sections/Landing/Landing";
-import SectionProfile from "../../sections/SectionProflile/SectionProfile";
-import RandomCarFact from "../CarFacts/CarFacts";
-import MapWrapper from '../MapWrapper/MapWrapper'
-import MapWrapperTest from "../MapWrapper/MapWrapper";
-
+import MapWrapper from 'components/MapWrapper/MapWrapper'
+import { Landing } from 'sections/Landing/Landing'
+import SectionProfile from 'sections/SectionProflile/SectionProfile'
 import { Background2, Background2Container, Background3, Backgrund1, ProfileContainer } from "./styles";
 
 const Background = () => {

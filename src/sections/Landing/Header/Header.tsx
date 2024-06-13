@@ -1,23 +1,11 @@
-import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../store/hooks";
-import { userAreaVisibilitySliceActions, userAreaVisibilitySliceSelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
-import Button from "../../../components/Button/Button";
-import {
-  HeaderComponent,
-  HeaderComponentContainer,
-  HeaderLogo,
-  HeaderLogoContainer,
-  
-  HeaderText,
-  HeaderWpapper,
-  NavMenu,
-  NavMenuButtonContainer,
-  SeparationLine,
-  BackToTopButton,
-  HeaderMotto1,
-  HeaderMotto2,
-} from "./styles";
-import { up } from "../../../assets";
+import { up } from 'assets'
+import Button from 'components/Button/Button'
+import { useState, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
+import { userAreaVisibilitySliceSelectors, userAreaVisibilitySliceActions } from 'store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice'
+import { HeaderWpapper, HeaderComponent, HeaderComponentContainer, HeaderMotto1, HeaderMotto2, NavMenu, NavMenuButtonContainer, HeaderText, SeparationLine, HeaderLogoContainer, HeaderLogo, BackToTopButton } from './styles'
+
+
 
 export const Header = () => {
   const dispatch = useAppDispatch();

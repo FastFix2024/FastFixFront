@@ -1,11 +1,11 @@
-import { useFormik } from "formik";
 import * as Yup from "yup";
-import { LoginContent, LoginForm, ButtonsContainer, ButtonWrapper } from "./styles";
-import { LOGIN_FORM_NAMES, LoginFormValues } from "./types";
-import Input from "../Input/Input";
-import Button from '../Button/Button'
-import { useAppDispatch } from '../../store/hooks'
-import { authSlice, authSliceActions } from '../../store/redux/authSlice/authSlice'
+import Button from 'components/Button/Button'
+import Input from 'components/Input/Input'
+import { useFormik } from 'formik'
+import { useAppDispatch } from 'store/hooks'
+import { authSliceActions } from 'store/redux/authSlice/authSlice'
+import { LoginContent, LoginForm, ButtonsContainer, ButtonWrapper } from './styles'
+import { LOGIN_FORM_NAMES, LoginFormValues } from './types'
 
 const schema = Yup.object().shape({
   [LOGIN_FORM_NAMES.EMAIL]: Yup.string().required("email required").email("Invalid email format"),
@@ -51,7 +51,7 @@ const Login = () => {
           error={formik.errors.password}
         />
 
-        <div>Forgot your password?</div>
+        <div>Forgot your password feature is not active yet</div>
         
         <ButtonsContainer>
           <ButtonWrapper>

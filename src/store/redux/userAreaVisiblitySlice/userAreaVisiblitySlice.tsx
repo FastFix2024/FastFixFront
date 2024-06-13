@@ -1,5 +1,6 @@
-import { createAppSlice } from "../../createAppSlice"
-import { userAreaVisibilitySliceState } from "./types"
+import { createAppSlice } from 'store/createAppSlice'
+import { userAreaVisibilitySliceState } from './types'
+
 
 const userAreaVisibilityState: userAreaVisibilitySliceState = {
   isVisible: undefined,

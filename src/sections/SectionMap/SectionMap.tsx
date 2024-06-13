@@ -1,14 +1,13 @@
-import RandomCarFact from "../../components/CarFacts/CarFacts";
-import MapWrapperTest from "../../components/MapWrapper/MapWrapper";
+import MapWrapper from 'components/MapWrapper/MapWrapper'
 import { Section2 } from "./styles";
 
 const SectionMap = () => {
   return (
-    <>
+    
       <Section2>
-        <MapWrapperTest />
+        <MapWrapper />
       </Section2>
-    </>
+    
   );
 };
 

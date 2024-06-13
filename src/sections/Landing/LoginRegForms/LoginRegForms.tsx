@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
-import { LoginWrapper, StepLoginContainer, StepRegisterContainer, RegisterWrapper, UserContainer } from "./styles";
-import Login from "../../../components/Login/Login";
-import Register from "../../../components/Register/Register";
-import { useAppSelector } from "../../../store/hooks";
-import { userAreaVisibilitySliceSelectors } from "../../../store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
+import Login from 'components/Login/Login'
+import Register from 'components/Register/Register'
+import { useState, useEffect } from 'react'
+import { useAppSelector } from 'store/hooks'
+import { userAreaVisibilitySliceSelectors } from 'store/redux/userAreaVisiblitySlice/userAreaVisiblitySlice'
+import { UserContainer, LoginWrapper, StepLoginContainer, StepRegisterContainer, RegisterWrapper } from './styles'
+
 
 const LoginRegForms = () => {
   const [signContent, setSignContent] = useState("login");

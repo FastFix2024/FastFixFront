@@ -9,7 +9,9 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8081',
+        target: 'https://fastfix-app-jcage.ondigitalocean.app',
+        changeOrigin: true,
+        secure: false,
       },
     },
   },

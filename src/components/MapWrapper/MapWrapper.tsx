@@ -1,49 +1,23 @@
-import { useState, useRef, useEffect, useCallback } from "react";
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, InfoWindow, Libraries } from "@react-google-maps/api";
-import { MdSearch, MdClose, MdLocationOn, MdBuild, MdLocalGasStation, MdLocalCarWash, MdLocalParking, MdRestaurant, MdStar, MdDirections, MdComment, MdPlace } from "react-icons/md";
-import {
-  SearchContainer,
-  InputContainer,
-  Input,
-  Button,
-  ButtonsContainer,
-  ServiceButton,
-  MapContainer,
-  UserMarkerToggle,
-  PlacesList,
-  PlaceItem,
-  PlacePhoto,
-  PlaceItemContent,
-  PlaceName,
-  PlaceInfo,
-  RouteButton,
-  CloseResultsButtonContainer,
-  CloseResultsButton,
-  Container,
-  MapWindowContainer,
-  ReviewsContainer,
-  ReviewItem,
-  ReviewAuthor,
-  ReviewText,
-  ReviewRating,
-  CloseButton,
-  ServiceInfoWrapper,
-} from "./styles";
-import { Place, PlaceResultWithGeometry } from "./types";
+import { Libraries, useJsApiLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from '@react-google-maps/api'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { MdRestaurant, MdLocalGasStation, MdLocalCarWash, MdLocalParking, MdBuild, MdPlace, MdLocationOn, MdStar, MdDirections, MdComment } from 'react-icons/md'
+import { MapWindowContainer, Container, SearchContainer, ButtonsContainer, ServiceButton, UserMarkerToggle, MapContainer, ServiceInfoWrapper, PlacesList, CloseResultsButtonContainer, CloseResultsButton, PlaceItem, PlaceItemContent, PlaceName, PlaceInfo, RouteButton, PlacePhoto, ReviewsContainer, CloseButton, ReviewItem, ReviewAuthor, ReviewRating, ReviewText } from './styles'
+import { Place, PlaceResultWithGeometry } from './types'
+
 
 const libraries = ["places"] as Libraries;
 
 const getDefaultIcon = (type: string) => {
   switch (type) {
-    case 'restaurant':
+    case "restaurant":
       return <MdRestaurant style={{ width: "100px", height: "100px" }} />;
-    case 'gas_station':
+    case "gas_station":
       return <MdLocalGasStation style={{ width: "100px", height: "100px" }} />;
-    case 'car_wash':
+    case "car_wash":
       return <MdLocalCarWash style={{ width: "100px", height: "100px" }} />;
-    case 'parking':
+    case "parking":
       return <MdLocalParking style={{ width: "100px", height: "100px" }} />;
-    case 'car_repair':
+    case "car_repair":
       return <MdBuild style={{ width: "100px", height: "100px" }} />;
     default:
       return <MdPlace style={{ width: "100px", height: "100px" }} />;
@@ -71,7 +45,7 @@ const MapWrapper: React.FC = () => {
   const defaultCenter = { lat: 52.50796391454193, lng: 13.375055429296202 };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
+    googleMapsApiKey: import.meta.env.VITE_MAPS_API,
     libraries: libraries,
   });
 
@@ -132,14 +106,14 @@ const MapWrapper: React.FC = () => {
       {
         location: userLocation,
         radius: 5000,
-        type: type === 'waschanlage' ? 'car_wash' : type,
+        type: type === "waschanlage" ? "car_wash" : type,
       },
       (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK && results) {
           const filteredResults = results.filter((place): place is PlaceResultWithGeometry => {
             const meetsRating = place.rating && place.rating >= filter.minRating;
             const isOpenNow = filter.openNow === "any" || place.opening_hours?.isOpen() === (filter.openNow === "true");
-            return !!meetsRating && isOpenNow && place.geometry?.location;
+            return !!(meetsRating && isOpenNow && place.geometry?.location);
           });
 
           const places = filteredResults.map((place) => {
@@ -167,7 +141,7 @@ const MapWrapper: React.FC = () => {
             } as Place;
           });
 
-          console.log('Fetched places:', places); // Debugging line
+          console.log("Fetched places:", places); // Debugging line
 
           setPlaces(places);
           setShowResults(true);
@@ -202,14 +176,6 @@ const MapWrapper: React.FC = () => {
     setSelectedPlace(null);
   };
 
-  // const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setFilter({ ...filter, [e.target.name]: e.target.value });
-  // };
-
-  // const toggleFilter = () => {
-  //   setShowFilter(!showFilter);
-  // };
-
   const handlePlaceSelect = (place: Place) => {
     setSelectedMarker(place);
     mapRef.current!.panTo(place.geometry.location);
@@ -221,7 +187,7 @@ const MapWrapper: React.FC = () => {
     if (place.geometry) {
       setSelectedPlace(place);
       if (place.geometry.location) {
-        mapRef.current!.panTo(place.geometry.location)
+        mapRef.current!.panTo(place.geometry.location);
       }
     } else {
       console.warn("Selected place does not have geometry data");
@@ -236,8 +202,8 @@ const MapWrapper: React.FC = () => {
         map: mapRef.current!,
         title: "Your Location",
         icon: {
-          url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        }
+          url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        },
       });
     }
   };
@@ -248,14 +214,25 @@ const MapWrapper: React.FC = () => {
     <MapWindowContainer>
       <Container>
         <SearchContainer id="section-map">
-
           <ButtonsContainer>
-            <ServiceButton onClick={() => findNearestPlaces("car_repair")}><MdBuild /> Mechanic</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("gas_station")}><MdLocalGasStation /> Gas Station</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("car_wash")}><MdLocalCarWash /> Car wash</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("parking")}><MdLocalParking /> Parking</ServiceButton>
-            <ServiceButton onClick={() => findNearestPlaces("restaurant")}><MdRestaurant /> Food Point</ServiceButton>
-            <UserMarkerToggle onClick={handlePanToUserLocation}><MdLocationOn /> My location</UserMarkerToggle>
+            <ServiceButton onClick={() => findNearestPlaces("car_repair")}>
+              <MdBuild /> Mechanic
+            </ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("gas_station")}>
+              <MdLocalGasStation /> Gas Station
+            </ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("car_wash")}>
+              <MdLocalCarWash /> Car wash
+            </ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("parking")}>
+              <MdLocalParking /> Parking
+            </ServiceButton>
+            <ServiceButton onClick={() => findNearestPlaces("restaurant")}>
+              <MdRestaurant /> Food Point
+            </ServiceButton>
+            <UserMarkerToggle onClick={handlePanToUserLocation}>
+              <MdLocationOn /> My location
+            </UserMarkerToggle>
           </ButtonsContainer>
         </SearchContainer>
       </Container>
@@ -297,25 +274,47 @@ const MapWrapper: React.FC = () => {
                 ) : (
                   getDefaultIcon(placeDetails.types ? placeDetails.types[0] : "")
                 )}
-                <p><MdLocationOn /> {placeDetails.formatted_address}</p>
+                <p>
+                  <MdLocationOn /> {placeDetails.formatted_address}
+                </p>
                 {placeDetails.opening_hours && (
                   <ServiceInfoWrapper>
-                    <ServiceInfoWrapper>Opening hours: <br/>{placeDetails.opening_hours.weekday_text?.join()}</ServiceInfoWrapper>
+                    <ServiceInfoWrapper>
+                      Opening hours: <br />
+                      {placeDetails.opening_hours.weekday_text?.join()}
+                    </ServiceInfoWrapper>
                     <p>{placeDetails.opening_hours.isOpen() ? "Open" : "Closed"}</p>
                   </ServiceInfoWrapper>
                 )}
-                <p>Rating: {Array.from({ length: Math.round(placeDetails.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)} {placeDetails.rating} звезд</p>
+                <p>
+                  Rating:{" "}
+                  {Array.from({ length: Math.round(placeDetails.rating || 0) }, (_, i) => (
+                    <MdStar key={i} style={{ color: "#f59a31" }} />
+                  ))}{" "}
+                  {placeDetails.rating} звезд
+                </p>
                 <p>Телефон: {placeDetails.formatted_phone_number || "Не указан"}</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                  <a href={placeDetails.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#091e3f", fontWeight: "bold" }}>
+                  <a
+                    href={placeDetails.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: "none", color: "#091e3f", fontWeight: "bold" }}
+                  >
                     Website
                   </a>
-                  <button onClick={() => {
-                    if (placeDetails?.geometry?.location) {
-                      calculateRoute(placeDetails.geometry.location)
-                    }
-                  }}><MdDirections /> Show route</button>
-                  <button onClick={() => setShowReviews(true)}><MdComment /> Отзывы</button>
+                  <button
+                    onClick={() => {
+                      if (placeDetails?.geometry?.location) {
+                        calculateRoute({ lng: placeDetails.geometry.location.lng(), lat: placeDetails.geometry.location.lat() });
+                      }
+                    }}
+                  >
+                    <MdDirections /> Show route
+                  </button>
+                  <button onClick={() => setShowReviews(true)}>
+                    <MdComment /> Отзывы
+                  </button>
                 </div>
               </ServiceInfoWrapper>
             </InfoWindow>
@@ -332,9 +331,15 @@ const MapWrapper: React.FC = () => {
             <PlaceItem key={idx} onClick={() => handlePlaceSelect(place)}>
               <PlaceItemContent>
                 <PlaceName>{place.name}</PlaceName>
-                <PlaceInfo><MdLocationOn /> {place.vicinity}</PlaceInfo>
                 <PlaceInfo>
-                  Rating: {place.rating} {Array.from({ length: Math.round(place.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}  <br/>({place.user_ratings_total} reviews)
+                  <MdLocationOn /> {place.vicinity}
+                </PlaceInfo>
+                <PlaceInfo>
+                  Rating: {place.rating}{" "}
+                  {Array.from({ length: Math.round(place.rating || 0) }, (_, i) => (
+                    <MdStar key={i} style={{ color: "#f59a31" }} />
+                  ))}{" "}
+                  <br />({place.user_ratings_total} reviews)
                 </PlaceInfo>
                 <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
@@ -352,12 +357,16 @@ const MapWrapper: React.FC = () => {
       {showReviews && (
         <ReviewsContainer>
           <h2>Client feedback:</h2>
-          <CloseButton onClick={() => setShowReviews(false)}>✕</CloseButton>          
-          <br/>
+          <CloseButton onClick={() => setShowReviews(false)}>✕</CloseButton>
+          <br />
           {reviews.map((review, idx) => (
             <ReviewItem key={idx}>
               <ReviewAuthor>{review.author_name}</ReviewAuthor>
-              <ReviewRating>{Array.from({ length: Math.round(review.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}</ReviewRating>
+              <ReviewRating>
+                {Array.from({ length: Math.round(review.rating || 0) }, (_, i) => (
+                  <MdStar key={i} style={{ color: "#f59a31" }} />
+                ))}
+              </ReviewRating>
               <ReviewText>{review.text}</ReviewText>
             </ReviewItem>
           ))}

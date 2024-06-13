@@ -48,7 +48,7 @@ const FuelCard = () => {
 
   const fuel = stations.slice(0, 4).map((station) => {
     const { diesel, e5, e10, street, name, open } = station;
-    const isOpen = open ? "Open" : "Closed";
+    const isOpen = !open ? "Open" : "Closed";
     const stationName = name.split(" ");
     return (
       <FuelCardContainer key={station.id}>

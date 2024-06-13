@@ -1,22 +1,11 @@
-import { usersSliceActions } from "store/redux/usersSlice/usersSlice";
-import { DeleteUser, GitHub, Logout, Mail } from "../../assets";
-import FuelCard from "../../components/FuelCard/FuelCard";
-import UserInfo from "../../components/UserInfo/UserInfo";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { authSliceSelectors, authSliceActions } from "store/redux/authSlice/authSlice";
 
-import {
-  Footer,
-  FooterIcons,
-  ProfileBackground,
-  ProfileButtons,
-  ProfileContainer,
-  ProfileIcons,
-  ReminderContent,
-  Section3Background,
-  SectionContainer,
-  SectionWrapper,
-} from "./styles";
+import { DeleteUser, Logout, GitHub, Mail } from 'assets'
+import FuelCard from 'components/FuelCard/FuelCard'
+import UserInfo from 'components/UserInfo/UserInfo'
+import { useAppSelector, useAppDispatch } from 'store/hooks'
+import { authSliceSelectors, authSliceActions } from 'store/redux/authSlice/authSlice'
+import { usersSliceActions } from 'store/redux/usersSlice/usersSlice'
+import { SectionWrapper, SectionContainer, Section3Background, ProfileBackground, ProfileButtons, ProfileIcons, ProfileContainer, ReminderContent, Footer, FooterIcons } from './styles'
 
 const SectionProfile = () => {
   const user = useAppSelector(authSliceSelectors.selectCurrentUser);
@@ -29,9 +18,9 @@ const SectionProfile = () => {
   function deleteHandler() {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");
     if (isConfirmed) {
-      dispatch(authSliceActions.deleteCurrentUser())
+      dispatch(authSliceActions.deleteCurrentUser());
     } else {
-      console.log('Account deletion aborted.');
+      console.log("Account deletion aborted.");
     }
   }
 
@@ -50,11 +39,12 @@ const SectionProfile = () => {
               </ProfileContainer>
               <ProfileContainer>
                 <ReminderContent>
-                Dear [Name], <br/>As seasons change, remember to switch your car's tires. German law requires winter tires during icy, snowy, and slushy
-                conditions, typically from autumn to spring. Summer tires are best when temperatures consistently exceed 7°C. Ensure your tires have
-                the correct tread depth: at least 1.6 mm by law, but ideally 3 mm for summer tires and 4 mm for winter tires for optimal safety. Stay
-                safe and enjoy your drive! Best regards, [Your Name/Your Company]
-              </ReminderContent>  
+                  Dear [Name], <br />
+                  As seasons change, remember to switch your car's tires. German law requires winter tires during icy, snowy, and slushy conditions,
+                  typically from autumn to spring. Summer tires are best when temperatures consistently exceed 7°C. Ensure your tires have the correct
+                  tread depth: at least 1.6 mm by law, but ideally 3 mm for summer tires and 4 mm for winter tires for optimal safety. Stay safe and
+                  enjoy your drive! Best regards, [Your Name/Your Company]
+                </ReminderContent>
               </ProfileContainer>
               <ProfileContainer>
                 <UserInfo />
@@ -63,7 +53,7 @@ const SectionProfile = () => {
           </Section3Background>
         </SectionContainer>
       )}
-      <Footer>      
+      <Footer>
         <FooterIcons src={GitHub} />
         <FooterIcons src={Mail} />
       </Footer>
