@@ -2,7 +2,7 @@ import Background from "components/Background/Background";
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "store/hooks";
 import { authSliceSelectors, authSliceActions } from "store/redux/authSlice/authSlice";
-import { Header } from "./sections/Landing/Header/Header";
+import { Header } from "sections/Landing/Header/Header";
 
 const App = () => {
   const isAuthenticated = useAppSelector(authSliceSelectors.selectIsAuthenticated);
