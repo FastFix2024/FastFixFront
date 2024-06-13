@@ -3,7 +3,7 @@ import FuelCard from "../../components/FuelCard/FuelCard";
 import UserInfo from "../../components/UserInfo/UserInfo";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { authSliceActions, authSliceSelectors } from "../../store/redux/authSlice/authSlice";
-import { usersSliceActions } from "../../store/redux/usersSlice/usersSlice";
+// import { usersSliceActions } from "../../store/redux/usersSlice/usersSlice";
 import {
   Footer,
   FooterIcons,
@@ -23,7 +23,7 @@ const SectionProfile = () => {
   const dispatch = useAppDispatch();
 
   function logoutHandler() {
-    dispatch(usersSliceActions.logoutUser());
+    // dispatch(usersSliceActions.logoutUser());
   }
   function deleteHandler() {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");

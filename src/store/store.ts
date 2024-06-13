@@ -2,13 +2,13 @@ import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
 import { userAreaVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
 import { authSlice } from "./redux/authSlice/authSlice";
-import { usersSlice } from "./redux/usersSlice/usersSlice";
+// import { usersSlice } from "./redux/usersSlice/usersSlice";
 import { fuelSlice } from "./redux/fuelSlice/fuelSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 
-const rootReducer = combineSlices(userAreaVisibilityAppSlice, authSlice , usersSlice, fuelSlice);
+const rootReducer = combineSlices(userAreaVisibilityAppSlice, authSlice, fuelSlice);
 
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;
