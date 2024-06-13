@@ -1,6 +1,7 @@
 import { Landing } from "../../sections/Landing/Landing";
 import SectionProfile from "../../sections/SectionProflile/SectionProfile";
-import MapWrapperTest from "../MapWrapperTest/MapWrapperTest";
+import MapWrapper from '../MapWrapper/MapWrapper'
+import MapWrapperTest from "../MapWrapper/MapWrapper";
 
 import { Background2, Background2Container, Background3, Backgrund1, ProfileContainer } from "./styles";
 
@@ -9,7 +10,7 @@ const Background = () => {
     <div>
       <Backgrund1>
         <Landing />
-        <MapWrapperTest />
+        <MapWrapper />
       </Backgrund1>
       <ProfileContainer id="section-profile">
         <Background2Container>
@@ -20,6 +21,6 @@ const Background = () => {
       <Background3 />
     </div>
   );
-}
+};
 
 export default Background;

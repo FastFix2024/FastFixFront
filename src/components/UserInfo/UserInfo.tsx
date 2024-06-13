@@ -112,14 +112,19 @@ const UserInfo = () => {
 
   return (
     <>
-      <SelectInput label="Insurance" value={insurance} options={insuranceOptions.map((opt) => opt.name)} onChange={handleInsuranceChange} />
-
-      <SelectInput label="Fuel type" value={fuelType} options={fuelOptions.map((opt) => opt.name)} onChange={handleFuelTypeChange} />
-
       <DateContainer>
-        <label htmlFor="inspectionDate">Inspection Date:</label>
+        <label htmlFor="inspectionDate">Inspection Date</label>
         <DateInput type="date" id="inspectionDate" value={inspectionDate} onChange={handleInspectionDateChange} />
       </DateContainer>
+
+      <SelectInput label="Fuel type" value={fuelType} options={fuelOptions.map((opt) => opt.name)} onChange={handleFuelTypeChange} />
+      
+      <SelectInput label="Insurance" value={insurance} options={insuranceOptions.map((opt) => opt.name)} onChange={handleInsuranceChange} />
+
+      
+      
+
+      
     </>
   );
 };

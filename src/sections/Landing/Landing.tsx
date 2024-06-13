@@ -16,10 +16,10 @@ export const Landing = () => {
         <InfoBlock />
 
       </LandingComponent>
-
       <YTWrapper>
         <YoutubeEmbed />
       </YTWrapper>
+
     </LandingComponentWrapper>
   );
 };

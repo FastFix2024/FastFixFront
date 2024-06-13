@@ -8,7 +8,7 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'http://localhost:8081',
+        target: 'http://localhost:8080',
       },
     },
   },
@@ -19,3 +19,6 @@ export default defineConfig({
     mockReset: true,
   },
 })
+
+
+//https://fastfix-app-jcage.ondigitalocean.app/api/swagger-ui/index.html#/

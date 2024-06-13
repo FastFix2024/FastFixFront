@@ -9,6 +9,7 @@ export const SelectContainer = styled.div`
 
 export const Select = styled.select`
   height: 30px;
+  width:150px;
   font-size: 16px;
   border-radius: 4px;
   border: 0;

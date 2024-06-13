@@ -50,7 +50,7 @@ const getDefaultIcon = (type: string) => {
   }
 };
 
-const MapWrapperTest: React.FC = () => {
+const MapWrapper: React.FC = () => {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
@@ -367,4 +367,4 @@ const MapWrapperTest: React.FC = () => {
   );
 };
 
-export default MapWrapperTest;
+export default MapWrapper;
