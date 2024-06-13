@@ -1,13 +1,11 @@
-import { useFormik } from "formik";
 import * as Yup from "yup";
-
-import Input from "../Input/Input";
-import { ButtonContainer, Checkbox, CheckboxContainer, CheckboxLabel, RegisterContent, RegisterForm } from "./styles";
-import { REGISTER_FORM_NAMES, RegisterFormValues } from "./types";
-import Button from "../Button/Button";
-import { useAppDispatch } from "../../store/hooks";
-import { authSliceActions } from '../../store/redux/authSlice/authSlice'
-
+import Button from 'components/Button/Button'
+import Input from 'components/Input/Input'
+import { useFormik } from 'formik'
+import { useAppDispatch } from 'store/hooks'
+import { authSliceActions } from 'store/redux/authSlice/authSlice'
+import { RegisterContent, RegisterForm, ButtonContainer, CheckboxContainer, Checkbox, CheckboxLabel } from './styles'
+import { REGISTER_FORM_NAMES, RegisterFormValues } from './types'
 
 const schema = Yup.object().shape({
   [REGISTER_FORM_NAMES.USERNAME]: Yup.string()

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { carFacts } from '../../data/data';
 import { CarFactContainer } from './styles'
+import { carFacts } from 'data/data'
 
 const RandomCarFact = () => {
   const [fact, setFact] = useState('');

@@ -1,6 +1,7 @@
 import axios from "axios";
-import { createAppSlice } from "../../createAppSlice";
-import { UserCredentials, UsersState } from "./types";
+import { createAppSlice } from 'store/createAppSlice'
+import { UsersState, UserCredentials } from './types'
+
 
 
 const initialState: UsersState = {

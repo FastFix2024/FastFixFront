@@ -1,8 +1,9 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit";
 import { combineSlices, configureStore } from "@reduxjs/toolkit";
-import { userAreaVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userAreaVisiblitySlice";
-import { authSlice } from "./redux/authSlice/authSlice";
+import { authSlice } from './redux/authSlice/authSlice'
+import { userAreaVisibilityAppSlice } from './redux/userAreaVisiblitySlice/userAreaVisiblitySlice'
 import usersSlice from './redux/usersSlice/usersSlice'
+
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.

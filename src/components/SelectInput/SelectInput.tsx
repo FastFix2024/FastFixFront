@@ -1,5 +1,6 @@
-import { Select, SelectContainer } from "./styles";
-import { SelectInputProps } from "./type";
+import { SelectContainer, Select } from './styles'
+import { SelectInputProps } from './type'
+
 
 const SelectInput = ({  label, value, options, onChange }: SelectInputProps) => {
     return (
