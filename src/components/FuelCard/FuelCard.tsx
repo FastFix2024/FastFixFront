@@ -11,8 +11,18 @@ const FuelCard = () => {
   const { stations, error } = useAppSelector(fuelSliceSelectors.fuel);
 
   console.table(stations)
+  console.log(stations);
+  
   useEffect(() => {
-    dispatch(fuelSliceAction.getFuelInfo());
+    dispatch(fuelSliceAction.getFuelInfo())
+    .then((originalPromiseResult) => {
+      // handle result here
+      console.log(originalPromiseResult);
+      
+    })
+    .catch((rejectedValueOrSerializedError) => {
+      // handle error here
+    })
   }, [])
 
   const fuel = stations.map((fuelObj: FuelData) => {

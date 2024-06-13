@@ -33,6 +33,7 @@ export const fuelSlice = createAppSlice({
         const { latitude, longitude } = position.coords
         try {
           const response = await axios.get(`/api/car-details/stations?latitude=${latitude}&longitude=${longitude}&radius=5`)
+          console.log(response.data);
           return response.data;     
         } catch (error: any) {
           if (error.response) {
@@ -48,7 +49,7 @@ export const fuelSlice = createAppSlice({
             state.error = undefined
         },
         fulfilled: (state: FuelState, action: PayloadAction<any>) => {
-          if (action.payload && action.payload.stations) {
+        
             state.stations = action.payload.stations.map((station: any) => ({
               id: station.id,
               name: station.name,
@@ -58,9 +59,6 @@ export const fuelSlice = createAppSlice({
               place: station.place,
               price: station.diesel, // Assuming you want the diesel price
             }));
-          } else {
-            state.stations = [];
-          }
         },
         rejected: (state: FuelState, action: PayloadAction<any>) => {
             state.error = action.payload
