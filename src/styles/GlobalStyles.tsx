@@ -11,6 +11,8 @@ const globalStyles = css`
     margin: 0;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
+    
+
   }
 
   h1,
@@ -29,6 +31,7 @@ const globalStyles = css`
     flex-direction: column;
     min-height: 100%;
   }
+
 `
 function GlobalStyles() {
   return <Global styles={globalStyles} />
