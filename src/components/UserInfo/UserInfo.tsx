@@ -10,10 +10,8 @@ const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("");
   const [fuelOptions, setFuelOptions] = useState<InsuranceTypes[]>([]);
   const [insuranceOptions, setInsuranceOptions] = useState<InsuranceTypes[]>([]);
-  
-  const [insuranceOptionID, setInsuranceOptionID] = useState<number | undefined>();
 
-  const [fuelType, setFuelType] = useState<string>("");
+  const [fuelTypeID, setFuelTypeID] = useState<string>("");
   const [inspectionDate, setInspectionDate] = useState<string>('');
 
   const [userID, setUserID] = useState<number>();
@@ -34,7 +32,7 @@ const UserInfo = () => {
     axios
       .get("/api/car-details/fuel-types")
       .then((res) => {
-        setFuelOptions(res.data.carDetails.fuelType);
+        setFuelOptions(res.data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -44,11 +42,10 @@ const UserInfo = () => {
     .then((res) => {
       const data = res.data;
       setUserID(data.id);
-      setFuelType(data.carDetails.fuelType);
-      const formattedDate = new Date(data.carDetails.lastMaintenanceDate).toISOString().split('T')[0];
+      setFuelTypeID(data.carDetails.fuelType);
+      const formattedDate = data.carDetails.lastMaintenanceDate.map((el: number) => el < 10 ? '0' + el : el).join('-');
       setInspectionDate(formattedDate);
       setInsurance(data.carDetails.insuranceCompany.name);
-      setInsuranceOptionID(data.carDetails.insuranceCompany.id);
     })
     .catch((error) => console.error(error));
   }, []);
@@ -57,16 +54,13 @@ const UserInfo = () => {
     const insuranceName = evt.target.value;
     setInsurance(insuranceName);
     const insuranceId = insuranceOptions.find((opt) => insuranceName === opt.name);
-    if (insuranceId) {
-      setInsuranceOptionID(insuranceId.id);
-    }
     handleUpdateInsurance(insuranceId?.id);
   };
 
   const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     const newFuelType = evt.target.value;
-    setFuelType(newFuelType);
-    // handleUpdateFuel(newFuelType);
+    setFuelTypeID(newFuelType);
+    handleUpdateFuel(newFuelType);
   };
 
   const handleInspectionDateChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,10 +82,22 @@ const UserInfo = () => {
   .catch((error) => {
     console.error("Update error:", error);
   });
-  // dispatch(usersSliceActions.updateUser(insuranceOptionID));
   };  
+
+  const handleUpdateFuel = (fuelID: string) => {
   
-  console.log(inspectionDate);
+    axios.put(`api/car-details/${userID}/fuel-type`, fuelID, {
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log("Update successful:", response.data);
+    })
+    .catch((error) => {
+      console.error("Update error:", error);
+    });
+  };
 
   const handleUpdateInspectionDate = (newInspectionDate: any) => {
   
@@ -113,19 +119,16 @@ const UserInfo = () => {
 
   return (
     <>
+
+      <SelectInput label="Insurance" value={insurance} options={insuranceOptions.map((opt) => opt.name)} onChange={handleInsuranceChange} />
+
+      <SelectInput label="Fuel type" value={fuelTypeID} options={fuelOptions} onChange={handleFuelTypeChange} />
+
       <DateContainer>
         <label htmlFor="inspectionDate">Inspection Date</label>
         <DateInput type="date" id="inspectionDate" value={inspectionDate} onChange={handleInspectionDateChange} />
       </DateContainer>
 
-      <SelectInput label="Fuel type" value={fuelType} options={fuelOptions.map((opt) => opt.name)} onChange={handleFuelTypeChange} />
-      
-      <SelectInput label="Insurance" value={insurance} options={insuranceOptions.map((opt) => opt.name)} onChange={handleInsuranceChange} />
-
-      
-      
-
-      
     </>
   );
 };
