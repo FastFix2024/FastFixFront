@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Button from "../Button/Button";
-import { AdacLink, EmergencyButton, EmergencyContainer, GeolocationContainer, GeolocationWrapper, PhoneNumberContainer } from "./styles";
+import { useState } from 'react'
+import { EmergencyContainer, PhoneNumberContainer, EmergencyButton, AdacLink, GeolocationWrapper, GeolocationContainer } from './styles'
+
 
 const Emergency = () => {
   const [searchGeolocation, setSearchGeolocation] = useState(false);
@@ -17,8 +17,7 @@ const Emergency = () => {
   }
 
   return (
-    <>
-      <EmergencyContainer style={background === true ? {backgroundColor: 'rgba(5, 5, 5, 0.534)'} : {backgroundColor: 'transparent'}}>
+    <EmergencyContainer style={background === true ? {backgroundColor: 'rgba(5, 5, 5, 0.534)'} : {backgroundColor: 'transparent'}}>
         <PhoneNumberContainer>
           <EmergencyButton type="button" onClick={() => {setSearchGeolocation(!searchGeolocation); setBackground(!background)}}>EMERGENCY</EmergencyButton>
           {searchGeolocation && (
@@ -39,7 +38,6 @@ const Emergency = () => {
           </GeolocationWrapper>
         )}
       </EmergencyContainer>
-    </>
   );
 };
 export default Emergency;

@@ -1,22 +1,7 @@
-import { InfoImg } from "../../../assets";
-import {
-  InfoImgStyle,
-  InfoAndImgWrapper,
-  MiniInfoTextBlock,
-  MiniInfoTitel,
-  MissionInfo,
-  MissionText,
-  MissionTitle,
-  InfoWrapper,
-  MiniInfo,
-  Border,
-  MiniInfoWrapper,
-  ImgTitleBlock,
-  ImgTitle,
-  ImgContainer,
-  GeoContainer,
-} from "./styles";
-import Emergency from "../../../components/Emergency/Emergency";
+import { InfoImg } from 'assets'
+import Emergency from 'components/Emergency/Emergency'
+import { Border, GeoContainer, ImgContainer, ImgTitle, ImgTitleBlock, InfoAndImgWrapper, InfoImgStyle, InfoWrapper, MiniInfo, MiniInfoTextBlock, MiniInfoTitel, MiniInfoWrapper, MissionInfo, MissionText, MissionTitle } from './styles'
+
 
 const InfoBlock = () => {
   return (

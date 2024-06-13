@@ -1,6 +1,6 @@
 import axios from "axios";
-import { createAppSlice } from "../../createAppSlice";
-import { AuthState, LoginDto, RegistrationDto, User } from "./types";
+import { createAppSlice } from 'store/createAppSlice'
+import { AuthState, RegistrationDto, LoginDto, User } from './types'
 
 const initialState: AuthState = {
   isAuthenticated: JSON.parse(localStorage.getItem("isAuthenticated") ?? "false") 

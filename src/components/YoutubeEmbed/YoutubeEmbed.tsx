@@ -1,4 +1,5 @@
-import { VideoContainer } from "./styles";
+import { VideoContainer } from './styles'
+
 
 const YoutubeEmbed = () => (
   <VideoContainer>

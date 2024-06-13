@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
-import SelectInput from "../SelectInput/SelectInput";
-import { DateContainer, DateInput } from "./styles";
-import axios from "axios";
-import { InsuranceTypes } from "./types";
-import { useDispatch } from "react-redux";
+import axios from 'axios'
+import SelectInput from 'components/SelectInput/SelectInput'
+import { useState, useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { DateContainer, DateInput } from './styles'
+import { InsuranceTypes } from './types'
+
 
 const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("");

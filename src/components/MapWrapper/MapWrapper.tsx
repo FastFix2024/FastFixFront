@@ -1,48 +1,9 @@
-import { useState, useRef, useEffect, useCallback } from "react";
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, InfoWindow, Libraries } from "@react-google-maps/api";
-import {
-  MdSearch,
-  MdClose,
-  MdLocationOn,
-  MdBuild,
-  MdLocalGasStation,
-  MdLocalCarWash,
-  MdLocalParking,
-  MdRestaurant,
-  MdStar,
-  MdDirections,
-  MdComment,
-  MdPlace,
-} from "react-icons/md";
-import {
-  SearchContainer,
-  InputContainer,
-  Input,
-  Button,
-  ButtonsContainer,
-  ServiceButton,
-  MapContainer,
-  UserMarkerToggle,
-  PlacesList,
-  PlaceItem,
-  PlacePhoto,
-  PlaceItemContent,
-  PlaceName,
-  PlaceInfo,
-  RouteButton,
-  CloseResultsButtonContainer,
-  CloseResultsButton,
-  Container,
-  MapWindowContainer,
-  ReviewsContainer,
-  ReviewItem,
-  ReviewAuthor,
-  ReviewText,
-  ReviewRating,
-  CloseButton,
-  ServiceInfoWrapper,
-} from "./styles";
-import { Place, PlaceResultWithGeometry } from "./types";
+import { Libraries, useJsApiLoader, GoogleMap, Marker, InfoWindow, DirectionsRenderer } from '@react-google-maps/api'
+import { useState, useRef, useEffect, useCallback } from 'react'
+import { MdRestaurant, MdLocalGasStation, MdLocalCarWash, MdLocalParking, MdBuild, MdPlace, MdLocationOn, MdStar, MdDirections, MdComment } from 'react-icons/md'
+import { MapWindowContainer, Container, SearchContainer, ButtonsContainer, ServiceButton, UserMarkerToggle, MapContainer, ServiceInfoWrapper, PlacesList, CloseResultsButtonContainer, CloseResultsButton, PlaceItem, PlaceItemContent, PlaceName, PlaceInfo, RouteButton, PlacePhoto, ReviewsContainer, CloseButton, ReviewItem, ReviewAuthor, ReviewRating, ReviewText } from './styles'
+import { Place, PlaceResultWithGeometry } from './types'
+
 
 const libraries = ["places"] as Libraries;
 
@@ -84,7 +45,7 @@ const MapWrapper: React.FC = () => {
   const defaultCenter = { lat: 52.50796391454193, lng: 13.375055429296202 };
 
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API,
+    googleMapsApiKey: import.meta.env.VITE_MAPS_API,
     libraries: libraries,
   });
 
