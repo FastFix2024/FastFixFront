@@ -1,11 +1,23 @@
 
-import { DeleteUser, Logout, GitHub, Mail } from 'assets'
-import FuelCard from 'components/FuelCard/FuelCard'
-import UserInfo from 'components/UserInfo/UserInfo'
-import { useAppSelector, useAppDispatch } from 'store/hooks'
-import { authSliceSelectors, authSliceActions } from 'store/redux/authSlice/authSlice'
-import { usersSliceActions } from 'store/redux/usersSlice/usersSlice'
-import { SectionWrapper, SectionContainer, Section3Background, ProfileBackground, ProfileButtons, ProfileIcons, ProfileContainer, ReminderContent, Footer, FooterIcons } from './styles'
+import { DeleteUser, Logout, GitHub, Mail } from "assets";
+import FuelCard from "components/FuelCard/FuelCard";
+import UserInfo from "components/UserInfo/UserInfo";
+import { useAppSelector, useAppDispatch } from "store/hooks";
+import { authSliceSelectors, authSliceActions } from "store/redux/authSlice/authSlice";
+import { usersSLiceActions } from 'store/redux/usersSLice/temp';
+import {
+  SectionWrapper,
+  SectionContainer,
+  Section3Background,
+  ProfileBackground,
+  ProfileButtons,
+  ProfileIcons,
+  ProfileContainer,
+  ReminderContent,
+  Footer,
+  FooterIcons,
+} from "./styles";
+
 
 const SectionProfile = () => {
   const user = useAppSelector(authSliceSelectors.selectCurrentUser);
@@ -13,7 +25,7 @@ const SectionProfile = () => {
   const dispatch = useAppDispatch();
 
   function logoutHandler() {
-    dispatch(usersSliceActions.logoutUser());
+    dispatch(usersSLiceActions.logoutUser());
   }
   function deleteHandler() {
     const isConfirmed = window.confirm("Are you sure you want to delete your account? This action cannot be undone.");

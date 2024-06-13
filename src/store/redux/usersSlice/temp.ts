@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createAppSlice } from 'store/createAppSlice'
-import { UsersState, UserCredentials } from './types'
+import { UserCredentials, UsersState } from './types'
+
 
 
 
@@ -9,7 +10,7 @@ const initialState: UsersState = {
   errorMessage: undefined,
 };
 
-const usersSlice = createAppSlice({
+export const usersSLice = createAppSlice({
   name: "USERS_SLICE",
   initialState: initialState,
   reducers: (create) => ({
@@ -105,7 +106,5 @@ const usersSlice = createAppSlice({
   },
 });
 
-export const usersSliceActions = usersSlice.actions;
-export const usersSliceSelectors = usersSlice.selectors;
-
-export default usersSlice
+export const usersSLiceActions = usersSLice.actions;
+export const usersSLiceSelectors = usersSLice.selectors;
