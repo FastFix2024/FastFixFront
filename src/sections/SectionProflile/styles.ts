@@ -22,7 +22,7 @@ export const Section3Background = styled.div`
 `;
 
 export const ProfileIcons = styled.img`
-  width: 50px;
+  width: 40px;
   cursor: pointer;
 `;
 
@@ -30,24 +30,24 @@ export const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 30px;
-  gap: 30px;
+  gap: 10px;
 `;
 
 export const ProfileButtons = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   position: absolute;
   top: -15%;
   right: 10%;
-  margin: 30px;
+  margin: 10px;
   gap: 20px;
 `;
 
 export const ProfileBackground = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  background-color: lightgrey;
+  background-color: #9fb2be;
   height: 450px;
   width: 80%;
   border-radius: 20px;
@@ -62,6 +62,8 @@ export const FooterIcons = styled.img`
 
 export const Footer = styled.footer`
   position: relative;
+  display: flex;
+  justify-content: space-between;
   bottom: 0;
   height: 445;
   width: 100%;
@@ -70,3 +72,8 @@ export const Footer = styled.footer`
   padding-right: 100px;
   gap: 20px;
 `;
+
+export const ReminderContent = styled.div`
+max-width: 250px;
+
+`

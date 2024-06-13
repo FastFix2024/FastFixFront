@@ -31,6 +31,10 @@ export const fuelSlice = createAppSlice({
     getFuelInfo: create.asyncThunk(async (_, { rejectWithValue }) => {
       navigator.geolocation.getCurrentPosition(async (position) => {
         const { latitude, longitude } = position.coords
+        
+        console.log('position.coords', position.coords)
+        console.log('latitude as asasasasasasaasa',latitude)
+
         try {
           const response = await axios.get(`/api/car-details/stations?latitude=${latitude}&longitude=${longitude}&radius=5`)
           return response.data;     

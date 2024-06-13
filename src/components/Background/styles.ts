@@ -27,7 +27,7 @@ export const Background2 = styled.div`
     background-image: url('${Sections2Bg}');
     background-repeat: no-repeat;
     width: 655px;
-    height: 690px;
+    height: 990px;
     position: absolute;
     right: 0;
 `;

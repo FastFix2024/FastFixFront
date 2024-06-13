@@ -31,7 +31,7 @@ export const EmergencyButton = styled.button`
   font-size: 30px;
   border: none;
   border-radius: 5px;
-  background-color: #ffc700;
+  background-color: #ffa500;
   padding: 20px;
   margin-bottom: 15px;
 `;

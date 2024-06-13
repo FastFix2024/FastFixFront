@@ -1,3 +1,8 @@
+export interface FuelSliceState {
+  stations: FuelData[];
+  error: any;
+}
+
 export interface FuelData {
   id: string;
   name: string;
@@ -6,13 +11,5 @@ export interface FuelData {
   postCode: number;
   place: string;
   price: number;
-}
-
-export interface FuelState {
-    FuelData: any
-    price: any
-    street: any
-    houseNumber: any
-    data: FuelData[],
-    error: any
+  fuel: string;
 }
