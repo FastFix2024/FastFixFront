@@ -79,7 +79,3 @@ export const fuelSlice = createAppSlice({
 
 export const fuelSliceAction = fuelSlice.actions;
 export const fuelSliceSelectors = fuelSlice.selectors;
-
-
-
-//`/api/car-details/stations?latitude=${latitude}&longitude=${longitude}&radius=5`
