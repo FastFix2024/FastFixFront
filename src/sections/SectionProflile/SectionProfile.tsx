@@ -1,3 +1,4 @@
+
 import { DeleteUser, Logout, GitHub, Mail } from "assets";
 import FuelCard from "components/FuelCard/FuelCard";
 import UserInfo from "components/UserInfo/UserInfo";
@@ -16,6 +17,7 @@ import {
   Footer,
   FooterIcons,
 } from "./styles";
+
 
 const SectionProfile = () => {
   const user = useAppSelector(authSliceSelectors.selectCurrentUser);
