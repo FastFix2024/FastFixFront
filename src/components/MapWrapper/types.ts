@@ -16,6 +16,7 @@ export interface Place {
   };
   formatted_phone_number?: string;
   website?: string;
+  types?: any[]
 }
 
 export type PlaceResultWithGeometry = google.maps.places.PlaceResult & {

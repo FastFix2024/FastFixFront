@@ -51,7 +51,7 @@ const Login = () => {
           error={formik.errors.password}
         />
 
-        <div>Forgot your password?</div>
+        <div>Forgot your password feature is not active yet</div>
         
         <ButtonsContainer>
           <ButtonWrapper>
