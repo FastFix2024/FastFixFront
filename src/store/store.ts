@@ -4,11 +4,12 @@ import { userAreaVisibilityAppSlice } from "./redux/userAreaVisiblitySlice/userA
 import { authSlice } from "./redux/authSlice/authSlice";
 // import { usersSlice } from "./redux/usersSlice/usersSlice";
 import { fuelSlice } from "./redux/fuelSlice/fuelSlice";
+import { usersSlice } from "./redux/usersSLice/usersSlice";
 
 // `combineSlices` automatically combines the reducers using
 // their `reducerPath`s, therefore we no longer need to call `combineReducers`.
 
-const rootReducer = combineSlices(userAreaVisibilityAppSlice, authSlice, fuelSlice);
+const rootReducer = combineSlices(userAreaVisibilityAppSlice, authSlice, fuelSlice, usersSlice);
 
 // Infer the `RootState` type from the root reducer
 export type RootState = ReturnType<typeof rootReducer>;

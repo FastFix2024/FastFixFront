@@ -1,11 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useJsApiLoader, GoogleMap, Marker, Autocomplete, DirectionsRenderer, InfoWindow, Libraries } from "@react-google-maps/api";
-import { MdSearch, MdClose, MdLocationOn, MdBuild, MdLocalGasStation, MdLocalCarWash, MdLocalParking, MdRestaurant, MdStar, MdDirections, MdComment, MdPlace } from "react-icons/md";
+import { useJsApiLoader, GoogleMap, Marker, DirectionsRenderer, InfoWindow, Libraries } from "@react-google-maps/api";
+import { MdLocationOn, MdBuild, MdLocalGasStation, MdLocalCarWash, MdLocalParking, MdRestaurant, MdStar, MdDirections, MdComment, MdPlace } from "react-icons/md";
 import {
   SearchContainer,
-  InputContainer,
-  Input,
-  Button,
   ButtonsContainer,
   ServiceButton,
   MapContainer,
@@ -139,7 +136,7 @@ const MapWrapper: React.FC = () => {
           const filteredResults = results.filter((place): place is PlaceResultWithGeometry => {
             const meetsRating = place.rating && place.rating >= filter.minRating;
             const isOpenNow = filter.openNow === "any" || place.opening_hours?.isOpen() === (filter.openNow === "true");
-            return !!meetsRating && isOpenNow && place.geometry?.location;
+            return !!(meetsRating && isOpenNow && place.geometry?.location);
           });
 
           const places = filteredResults.map((place) => {
@@ -304,7 +301,7 @@ const MapWrapper: React.FC = () => {
                     <p>{placeDetails.opening_hours.isOpen() ? "Open" : "Closed"}</p>
                   </ServiceInfoWrapper>
                 )}
-                <p>Rating: {Array.from({ length: Math.round(placeDetails.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)} {placeDetails.rating} звезд</p>
+                <p>Rating: {Array.from({ length: Math.round(placeDetails.rating || 0) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)} {placeDetails.rating} звезд</p>
                 <p>Телефон: {placeDetails.formatted_phone_number || "Не указан"}</p>
                 <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                   <a href={placeDetails.website} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "#091e3f", fontWeight: "bold" }}>
@@ -312,7 +309,7 @@ const MapWrapper: React.FC = () => {
                   </a>
                   <button onClick={() => {
                     if (placeDetails?.geometry?.location) {
-                      calculateRoute(placeDetails.geometry.location)
+                      calculateRoute({ lng: placeDetails.geometry.location.lng(), lat: placeDetails.geometry.location.lat() });
                     }
                   }}><MdDirections /> Show route</button>
                   <button onClick={() => setShowReviews(true)}><MdComment /> Отзывы</button>
@@ -334,7 +331,7 @@ const MapWrapper: React.FC = () => {
                 <PlaceName>{place.name}</PlaceName>
                 <PlaceInfo><MdLocationOn /> {place.vicinity}</PlaceInfo>
                 <PlaceInfo>
-                  Rating: {place.rating} {Array.from({ length: Math.round(place.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}  <br/>({place.user_ratings_total} reviews)
+                  Rating: {place.rating} {Array.from({ length: Math.round(place.rating || 0) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}  <br/>({place.user_ratings_total} reviews)
                 </PlaceInfo>
                 <RouteButton onClick={() => calculateRoute(place.geometry.location)}>Show route</RouteButton>
               </PlaceItemContent>
@@ -357,7 +354,7 @@ const MapWrapper: React.FC = () => {
           {reviews.map((review, idx) => (
             <ReviewItem key={idx}>
               <ReviewAuthor>{review.author_name}</ReviewAuthor>
-              <ReviewRating>{Array.from({ length: Math.round(review.rating) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}</ReviewRating>
+              <ReviewRating>{Array.from({ length: Math.round(review.rating || 0) }, (_, i) => <MdStar key={i} style={{ color: "#f59a31" }} />)}</ReviewRating>
               <ReviewText>{review.text}</ReviewText>
             </ReviewItem>
           ))}

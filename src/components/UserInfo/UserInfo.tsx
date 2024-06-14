@@ -16,7 +16,7 @@ const UserInfo = () => {
   const [userID, setUserID] = useState<number>();
 
   // const dispatch = useDispatch();
-  
+
   useEffect(() => {
     axios
       .get("/api/car-details/insurance-companies")
@@ -31,8 +31,8 @@ const UserInfo = () => {
     axios
       .get("/api/car-details/fuel-types")
       .then((res) => {
-        setFuelOptions(res.data.carDetails.fuelType);
-        console.log(res.data.carDetails.fuelType);
+        const options = res.data.map((opt: { id: number; name: string }) => ({ id: opt.id, name: opt.name }));
+        setFuelOptions(options);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -42,10 +42,9 @@ const UserInfo = () => {
     .then((res) => {
       const data = res.data;
       setUserID(data.id);
-      setFuelType(data.carDetails.fuelType);
-      console.log(data.carDetails.fuelType);
       const formattedDate = data.carDetails.lastMaintenanceDate.map((el: number) => el < 10 ? '0' + el : el).join('-');
       setInspectionDate(formattedDate);
+      setFuelType(data.carDetails.fuelType.name);
       setInsurance(data.carDetails.insuranceCompany.name);
     })
     .catch((error) => console.error(error));
@@ -61,7 +60,8 @@ const UserInfo = () => {
   const handleFuelTypeChange = (evt: React.ChangeEvent<HTMLSelectElement>) => {
     const newFuelType = evt.target.value;
     setFuelType(newFuelType);
-    // handleUpdateFuel(newFuelType);
+    const fuelId = fuelOptions.find((opt) => newFuelType === opt.name);
+    handleUpdateFuel(fuelId?.id);
   };
 
   const handleInspectionDateChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,36 +69,16 @@ const UserInfo = () => {
     setInspectionDate(newInspectionDate);
     handleUpdateInspectionDate(newInspectionDate);
   };
-  
-  const handleUpdateInsurance = (insuranceOptionID: number | undefined) => {
-  
-  axios.put(`api/car-details/${userID}/insurance-company`, insuranceOptionID, {
-    headers: {
-        'Content-Type': 'application/json'
-    }
-  })
-  .then((response) => {
-    console.log("Update successful:", response.data);
-  })
-  .catch((error) => {
-    console.error("Update error:", error);
-  });
-  // dispatch(usersSliceActions.updateUser(insuranceOptionID));
-  };  
-  
-  console.log(inspectionDate);
 
-  const handleUpdateInspectionDate = (newInspectionDate: any) => {
-  
-  axios.put(`api/car-details/${userID}/last-maintenance-date`, newInspectionDate, {
+  const handleUpdateInsurance = (insuranceOptionID: number | undefined) => {
+  axios
+    .put(`api/car-details/${userID}/insurance-company`, insuranceOptionID, {
     headers: {
         'Content-Type': 'application/json'
     }
   })
   .then((response) => {
     console.log("Update successful:", response.data);
-    console.log(newInspectionDate);
-    
   })
   .catch((error) => {
     console.error("Update error:", error);
@@ -106,6 +86,39 @@ const UserInfo = () => {
   // dispatch(usersSliceActions.updateUser(insuranceOptionID));
   };
 
+  const handleUpdateFuel = (fuelTypeId: number | undefined) => {
+    axios
+      .put(`api/car-details/${userID}/fuel-type`, fuelTypeId, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log("Update successful:", response.data);
+    })
+      .catch((error) => {
+        console.error("Update error:", error);
+      });
+  }
+
+  const handleUpdateInspectionDate = (newInspectionDate: any) => {
+  axios
+    .put(`api/car-details/${userID}/last-maintenance-date`, newInspectionDate, {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+  })
+  .then((response) => {
+    console.log("Update successful:", response.data);
+    console.log(newInspectionDate);
+
+  })
+  .catch((error) => {
+    console.error("Update error:", error);
+  });
+  };
+
+  console.log(fuelType);
   return (
     <>
       <DateContainer>
@@ -114,7 +127,7 @@ const UserInfo = () => {
       </DateContainer>
 
       <SelectInput label="Fuel type" value={fuelType} options={fuelOptions.map((opt) => opt.name)} onChange={handleFuelTypeChange} />
-      
+
       <SelectInput label="Insurance" value={insurance} options={insuranceOptions.map((opt) => opt.name)} onChange={handleInsuranceChange} />
     </>
   );
