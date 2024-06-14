@@ -3,21 +3,19 @@ import SelectInput from "../SelectInput/SelectInput";
 import { DateContainer, DateInput } from "./styles";
 import axios from "axios";
 import { InsuranceTypes } from "./types";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
 const UserInfo = () => {
   const [insurance, setInsurance] = useState<string>("");
   const [fuelOptions, setFuelOptions] = useState<InsuranceTypes[]>([]);
   const [insuranceOptions, setInsuranceOptions] = useState<InsuranceTypes[]>([]);
-  
-  const [insuranceOptionID, setInsuranceOptionID] = useState<number | undefined>();
 
-  const [fuelType, setFuelType] = useState<string>("");
+  const [fuelType, setFuelType] = useState<any>();
   const [inspectionDate, setInspectionDate] = useState<string>('');
 
   const [userID, setUserID] = useState<number>();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   
   useEffect(() => {
     axios
@@ -34,6 +32,7 @@ const UserInfo = () => {
       .get("/api/car-details/fuel-types")
       .then((res) => {
         setFuelOptions(res.data.carDetails.fuelType);
+        console.log(res.data.carDetails.fuelType);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -44,10 +43,10 @@ const UserInfo = () => {
       const data = res.data;
       setUserID(data.id);
       setFuelType(data.carDetails.fuelType);
-      const formattedDate = new Date(data.carDetails.lastMaintenanceDate).toISOString().split('T')[0];
+      console.log(data.carDetails.fuelType);
+      const formattedDate = data.carDetails.lastMaintenanceDate.map((el: number) => el < 10 ? '0' + el : el).join('-');
       setInspectionDate(formattedDate);
       setInsurance(data.carDetails.insuranceCompany.name);
-      setInsuranceOptionID(data.carDetails.insuranceCompany.id);
     })
     .catch((error) => console.error(error));
   }, []);
@@ -56,9 +55,6 @@ const UserInfo = () => {
     const insuranceName = evt.target.value;
     setInsurance(insuranceName);
     const insuranceId = insuranceOptions.find((opt) => insuranceName === opt.name);
-    if (insuranceId) {
-      setInsuranceOptionID(insuranceId.id);
-    }
     handleUpdateInsurance(insuranceId?.id);
   };
 
@@ -120,11 +116,6 @@ const UserInfo = () => {
       <SelectInput label="Fuel type" value={fuelType} options={fuelOptions.map((opt) => opt.name)} onChange={handleFuelTypeChange} />
       
       <SelectInput label="Insurance" value={insurance} options={insuranceOptions.map((opt) => opt.name)} onChange={handleInsuranceChange} />
-
-      
-      
-
-      
     </>
   );
 };

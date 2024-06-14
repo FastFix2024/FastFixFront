@@ -32,7 +32,7 @@ export const authSlice = createAppSlice({
       async (loginDto: LoginDto, { rejectWithValue }) => {
         try {
           const response = await axios.post("/api/auth/login", loginDto);
-
+          console.log(response.data);
           return response.data;
         } catch (error: any) {
           return rejectWithValue(error.response.data);
